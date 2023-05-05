@@ -2,11 +2,13 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
+import com.example.onlineStore.entity.User;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,19 +32,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto getById(Long id) {
-        Optional<Product> product = Optional.of(productRepository.findById(id).orElse(new Product()));
-        return mapToDto(product.get());
+        Product product = productRepository.findByIdAndRdtIsNull(id);
+        return mapToDto(product);
     }
 
     @Override
     public Product getByIdEntity(Long id) {
-        Product product = productRepository.findById(id).get();
-        return product;
+        return productRepository.findByIdAndRdtIsNull(id);
     }
 
     @Override
     public List<ProductDto> getAll() {
-        List<Product> productList = productRepository.findAll();
+        List<Product> productList = productRepository.findAllByRdtIsNull();
         List<ProductDto> productDtoList = new ArrayList<>();
         for (Product product:productList) {
             productDtoList.add(mapToDto(product));
@@ -56,12 +57,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto update(Product product) {
+    public ProductDto update(Long id,ProductDto dto) {
+        Product product = getByIdEntity(id);
+        if(dto.getName()!=null){
+            product.setName(dto.getName());
+        }
+        if(dto.getPrice()!=null){
+            product.setPrice(dto.getPrice());
+        }
+        if(dto.getSize()!=null){
+            product.setSize(dto.getSize());
+        }
+        if(dto.getMaterial()!=null){
+            product.setMaterial(dto.getMaterial());
+        }
+        if(dto.getCategory()!=null){
+            product.setCategory(dto.getCategory());
+        }
         return mapToDto(productRepository.save(product));
     }
 
     @Override
     public String deleteById(Long id) {
-        return null;
+        Product product = getByIdEntity(id);
+        product.setRdt(LocalDate.now());
+        productRepository.save(product);
+        return "Продукт с id: "+id+" был удален.";
     }
 }

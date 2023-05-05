@@ -16,7 +16,7 @@ public interface CartService {
 
     CartDto create(Cart cart);
 
-    CartDto update(Cart cart);
+    CartDto update(Long id,CartDto dto);
 
     String deleteById(Long id);
 

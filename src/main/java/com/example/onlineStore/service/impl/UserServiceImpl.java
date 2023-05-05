@@ -7,6 +7,7 @@ import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,25 +25,24 @@ public class UserServiceImpl implements UserService {
                 user.getPassword(),
                 user.getPhoto(),
                 user.getRole(),
-                user.getGender()
-        );
+                user.getGender());
     }
 
     @Override
     public UserDto getById(Long id) {
-        Optional<User> user = Optional.of(userRepository.findById(id).orElse(new User()));
-        return mapToDto(user.get());
+        User user = userRepository.findByIdAndRdtIsNull(id);
+        return mapToDto(user);
     }
 
     @Override
     public User getByIdEntity(Long id) {
-        User user = userRepository.findById(id).get();
+        User user = userRepository.findByIdAndRdtIsNull(id);
         return user;
     }
 
     @Override
     public List<UserDto> getAll() {
-        List<User> userList = userRepository.findAll();
+        List<User> userList = userRepository.findAllByRdtIsNull();
         List<UserDto> userDtoList = new ArrayList<>();
         for (User user:userList) {
             userDtoList.add(mapToDto(user));
@@ -55,13 +55,39 @@ public class UserServiceImpl implements UserService {
         return mapToDto(userRepository.save(user));
     }
 
+
     @Override
-    public UserDto update(User user) {
+    public UserDto update(Long id, UserDto dto) {
+        User user = getByIdEntity(id);
+
+        if(dto.getName()!=null){
+            user.setName(dto.getName());
+        }
+        if(dto.getSurname()!=null){
+            user.setSurname(dto.getSurname());
+        }
+        if(dto.getEmail()!=null){
+            user.setEmail(dto.getEmail());
+        }
+        if(dto.getPassword()!=null){
+            user.setPassword(dto.getPassword());
+        }
+        if(dto.getRole()!=null){
+            user.setRole(dto.getRole());
+        }
+        if(dto.getGender()!=null){
+            user.setGender(dto.getGender());
+        }
+
         return mapToDto(userRepository.save(user));
     }
 
     @Override
     public String deleteById(Long id) {
-        return null;
+        User user = getByIdEntity(id);
+        user.setRdt(LocalDate.now());
+        userRepository.save(user);
+        return "Пользователь с id: "+id+" был удален.";
+
     }
 }

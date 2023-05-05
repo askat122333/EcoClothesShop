@@ -16,7 +16,7 @@ public interface UserService {
 
     UserDto create(User user);
 
-    UserDto update(User user);
+    UserDto update(Long id,UserDto dto);
 
     String deleteById(Long id);
 

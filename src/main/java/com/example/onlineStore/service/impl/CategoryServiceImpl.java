@@ -2,11 +2,13 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.CategoryDto;
 import com.example.onlineStore.entity.Category;
+import com.example.onlineStore.entity.User;
 import com.example.onlineStore.repository.CategoryRepository;
 import com.example.onlineStore.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,19 +27,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto getById(Long id) {
-       Optional<Category> category = Optional.of(categoryRepository.findById(id).orElse(new Category()));
-            return mapToDto(category.get());
+       Category category = categoryRepository.findByIdAndRdtIsNull(id);
+            return mapToDto(category);
     }
 
     @Override
     public Category getByIdEntity(Long id) {
-        Category category = categoryRepository.findById(id).get();
-        return category;
+        return categoryRepository.findByIdAndRdtIsNull(id);
     }
 
     @Override
     public List<CategoryDto> getAll() {
-        List<Category> categoryList = categoryRepository.findAll();
+        List<Category> categoryList = categoryRepository.findAllByRdtIsNull();
         List<CategoryDto> categoryDtoList = new ArrayList<>();
         for (Category category:categoryList ) {
             categoryDtoList.add(mapToDto(category));
@@ -51,12 +52,22 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto update(Category category) {
+    public CategoryDto update(Long id,CategoryDto dto) {
+        Category category = getByIdEntity(id);
+        if(dto.getName()!=null){
+            category.setName(dto.getName());
+        }
+        if(dto.getProducts()!=null){
+            category.setProducts(dto.getProducts());
+        }
         return mapToDto(categoryRepository.save(category));
     }
 
     @Override
     public String deleteById(Long id) {
-        return null;
+        Category category = getByIdEntity(id);
+        category.setRdt(LocalDate.now());
+        categoryRepository.save(category);
+        return "Категория с id: "+id+" была удалена.";
     }
 }

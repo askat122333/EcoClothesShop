@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -23,5 +24,7 @@ public class Order {
     @OneToOne
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private Cart cart;
+
+    private LocalDate rdt;
 
 }

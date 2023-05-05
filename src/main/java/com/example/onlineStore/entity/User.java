@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -28,5 +29,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    private LocalDate rdt;
 
 }

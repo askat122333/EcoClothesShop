@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -20,4 +21,6 @@ public class Category {
     @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<Product> products;
+
+    private LocalDate rdt;
 }
