@@ -1,0 +1,23 @@
+package com.example.onlineStore.service;
+
+import com.example.onlineStore.dto.CartDto;
+import com.example.onlineStore.entity.Cart;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public interface CartService {
+    CartDto getById(Long id);
+
+    Cart getByIdEntity(Long id);
+
+    List<CartDto> getAll();
+
+    CartDto create(Cart cart);
+
+    CartDto update(Cart cart);
+
+    String deleteById(Long id);
+
+}
