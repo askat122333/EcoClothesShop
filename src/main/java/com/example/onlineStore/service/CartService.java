@@ -20,7 +20,7 @@ public interface CartService {
 
     String deleteById(Long id);
     //TODO
-    CartDto addNewProduct(Long cartId,Long productId);
+    CartDto addNewProduct(Long userId,Long productId);
     //TODO
     CartDto removeProduct(Long cartId, Long productId);
 }

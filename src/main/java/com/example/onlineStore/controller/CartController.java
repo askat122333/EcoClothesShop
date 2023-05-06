@@ -36,9 +36,9 @@ public class CartController {
     }
     //TODO
     @PutMapping("/addNewProduct")
-    public CartDto addNewProduct(@RequestParam Long cartId ,
-                                 @RequestParam Long productId){
-        return cartService.addNewProduct(cartId,productId);
+    public CartDto addNewProduct(@RequestParam("userId")Long userId,
+                                 @RequestParam("productId")Long productId){
+        return cartService.addNewProduct(userId,productId);
     }
     //TODO
     @PutMapping("/removeProduct")

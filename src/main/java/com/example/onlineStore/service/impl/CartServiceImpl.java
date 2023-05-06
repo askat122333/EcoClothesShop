@@ -2,8 +2,10 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.CartDto;
 import com.example.onlineStore.entity.Cart;
+import com.example.onlineStore.entity.User;
 import com.example.onlineStore.repository.CartRepository;
 import com.example.onlineStore.service.CartService;
+import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.List;
 public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final ProductServiceImpl productService;
+    private final UserService userService;
     private CartDto mapToDto(Cart cart){
         return new CartDto(
           cart.getId(),
@@ -76,8 +79,9 @@ public class CartServiceImpl implements CartService {
 
     //TODO
     @Override
-    public CartDto addNewProduct(Long cartId,Long productId) {
-        Cart cart = getByIdEntity(cartId);
+    public CartDto addNewProduct(Long userId,Long productId) {
+        Cart cart = new Cart();
+        cart.setUser(userService.getByIdEntity(userId));
         cart.setProduct(productService.getByIdEntity(productId));
         cartRepository.save(cart);
         return mapToDto(cart);
