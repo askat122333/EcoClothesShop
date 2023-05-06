@@ -2,7 +2,6 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.OrderDto;
 import com.example.onlineStore.entity.Order;
-import com.example.onlineStore.entity.User;
 import com.example.onlineStore.repository.OrderRepository;
 import com.example.onlineStore.service.OrderService;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor

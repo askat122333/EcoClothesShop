@@ -2,7 +2,6 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
-import com.example.onlineStore.entity.User;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -83,5 +81,16 @@ public class ProductServiceImpl implements ProductService {
         product.setRdt(LocalDate.now());
         productRepository.save(product);
         return "Продукт с id: "+id+" был удален.";
+    }
+
+    //TODO
+    @Override
+    public List<ProductDto> getAllByCategory(Long categoryId) {
+        List<Product> productList = productRepository.findAllByCategoryAndRdtIsNull(categoryId);
+        List<ProductDto> productDtoList = new ArrayList<>();
+        for (Product product:productList) {
+            productDtoList.add(mapToDto(product));
+        }
+        return productDtoList;
     }
 }

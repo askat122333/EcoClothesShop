@@ -2,7 +2,6 @@ package com.example.onlineStore.service;
 
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
-import com.example.onlineStore.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,4 +20,6 @@ public interface ProductService {
 
     String deleteById(Long id);
 
+    //TODO
+    List<ProductDto> getAllByCategory(Long categoryId);
 }

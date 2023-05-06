@@ -3,6 +3,7 @@ package com.example.onlineStore.controller;
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.service.ProductService;
+import com.sun.xml.bind.v2.TODO;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +34,11 @@ public class ProductController {
                               @RequestBody ProductDto dto){
         return productService.update(id,dto);
 
+    }
+    //TODO
+    @GetMapping("/category/{categoryId}")
+    public List<ProductDto> getAllByCategory(@PathVariable Long categoryId) {
+        return productService.getAllByCategory(categoryId);
     }
     @DeleteMapping("/delete/{id}")
     public String deleteById(@PathVariable Long id){

@@ -2,7 +2,6 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.CartDto;
 import com.example.onlineStore.entity.Cart;
-import com.example.onlineStore.entity.Order;
 import com.example.onlineStore.repository.CartRepository;
 import com.example.onlineStore.service.CartService;
 import lombok.AllArgsConstructor;
@@ -11,12 +10,12 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
+    private final ProductServiceImpl productService;
     private CartDto mapToDto(Cart cart){
         return new CartDto(
           cart.getId(),
@@ -73,5 +72,22 @@ public class CartServiceImpl implements CartService {
         cart.setRdt(LocalDate.now());
         cartRepository.save(cart);
         return "Корзина с id: "+id+" была удалена.";
+    }
+
+    //TODO
+    @Override
+    public CartDto addNewProduct(Long cartId,Long productId) {
+        Cart cart = getByIdEntity(cartId);
+        cart.setProduct(productService.getByIdEntity(productId));
+        cartRepository.save(cart);
+        return mapToDto(cart);
+    }
+    //TODO
+    @Override
+    public CartDto removeProduct(Long cartId, Long productId) {
+        Cart cart = cartRepository.findByIdAndProductAndRdtIsNull(cartId,productId);
+        cart.setProduct(null);
+        cartRepository.save(cart);
+        return mapToDto(cart);
     }
 }

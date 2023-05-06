@@ -34,6 +34,18 @@ public class CartController {
                                       @RequestBody CartDto dto){
         return cartService.update(id,dto);
     }
+    //TODO
+    @PutMapping("/addNewProduct")
+    public CartDto addNewProduct(@RequestParam Long cartId ,
+                                 @RequestParam Long productId){
+        return cartService.addNewProduct(cartId,productId);
+    }
+    //TODO
+    @PutMapping("/removeProduct")
+    public CartDto removeProduct(@RequestParam Long cartId ,
+                                 @RequestParam Long productId){
+        return cartService.removeProduct(cartId,productId);
+    }
 
     @DeleteMapping("/delete/{id}")
     public String deleteById(@PathVariable Long id){

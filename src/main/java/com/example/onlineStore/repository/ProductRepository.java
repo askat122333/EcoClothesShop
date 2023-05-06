@@ -12,4 +12,6 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     Product findByIdAndRdtIsNull(Long id);
 
     List<Product> findAllByRdtIsNull();
+    //TODO
+    List<Product> findAllByCategoryAndRdtIsNull(Long categoryId);
 }
