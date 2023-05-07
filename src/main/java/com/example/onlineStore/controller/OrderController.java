@@ -2,7 +2,7 @@ package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.OrderDto;
 import com.example.onlineStore.entity.Order;
-import com.example.onlineStore.service.OrderService;
+import com.example.onlineStore.service.OOrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,30 +13,31 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
 
-    private final OrderService orderService;
+    private final OOrderService orderService;
+
     @GetMapping("/{id}")
     public OrderDto getById(@PathVariable Long id) {
         return orderService.getById(id);
     }
 
     @GetMapping("/all")
-    public List<OrderDto> getAll(){
+    public List<OrderDto> getAll() {
         return orderService.getAll();
     }
-
+//TODO
     @PostMapping("/create")
-    public OrderDto addNewOrder(@RequestBody Order order){
-        return orderService.create(order);
+    public OrderDto addNewOrder(@RequestParam Long userId) {
+        return orderService.create(userId);
     }
 
     @PutMapping("/update/{id}")
     public OrderDto updateOrder(@PathVariable Long id,
-                                 @RequestBody OrderDto dto){
-        return orderService.update(id,dto);
+                                @RequestBody OrderDto dto) {
+        return orderService.update(id, dto);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteById(@PathVariable Long id){
+    public String deleteById(@PathVariable Long id) {
         return orderService.deleteById(id);
     }
 }

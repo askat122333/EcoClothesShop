@@ -7,14 +7,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface OrderService {
+public interface OOrderService {
     OrderDto getById(Long id);
 
     Order getByIdEntity(Long id);
 
     List<OrderDto> getAll();
-
-    OrderDto create(Order order);
+//TODO
+    OrderDto create(Long userId);
 
     OrderDto update(Long id,OrderDto dto);
 

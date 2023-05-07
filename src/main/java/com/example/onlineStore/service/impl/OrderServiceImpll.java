@@ -2,8 +2,11 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.OrderDto;
 import com.example.onlineStore.entity.Order;
+import com.example.onlineStore.entity.User;
+import com.example.onlineStore.repository.CartRepository;
 import com.example.onlineStore.repository.OrderRepository;
-import com.example.onlineStore.service.OrderService;
+import com.example.onlineStore.repository.UserRepository;
+import com.example.onlineStore.service.OOrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +16,11 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceImpll implements OOrderService {
     private final OrderRepository orderRepository;
-    private OrderDto mapToDto(Order order) {
+    private final UserRepository userRepository;
+    private final CartRepository cartRepository;
+    public OrderDto mapToDto(Order order) {
         return new OrderDto(
                 order.getId(),
                 order.getUser(),
@@ -42,10 +47,12 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderDtoList;
     }
-
+//TODO
     @Override
-    public OrderDto create(Order order) {
-
+    public OrderDto create(Long userId) {
+        Order order = new Order();
+        order.setUser(userRepository.findByIdAndRdtIsNull(userId));
+        order.setCart(cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId)));
         return mapToDto(orderRepository.save(order));
     }
 

@@ -53,7 +53,6 @@ public class CartServiceImplTest {
         Product product = new Product(1l,"product",123d,null, Size.XL,"material",
                 null,null );
         Cart cart = new Cart(null,user,null,product,null);
-        CartDto cartDto = cartService.mapToDto(cart);
         Mockito.when(cartRepository.save(cart)).thenReturn(cart);
         Mockito.when(cartRepository.findByUserAndRdtIsNull(user)).thenReturn(cart);
         Mockito.when(userRepository.findByIdAndRdtIsNull(user.getId())).thenReturn(user);
