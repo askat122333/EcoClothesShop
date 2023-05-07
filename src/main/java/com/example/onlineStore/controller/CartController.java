@@ -42,9 +42,9 @@ public class CartController {
     }
     //TODO
     @PutMapping("/removeProduct")
-    public CartDto removeProduct(@RequestParam Long cartId ,
+    public CartDto removeProduct(@RequestParam Long userId ,
                                  @RequestParam Long productId){
-        return cartService.removeProduct(cartId,productId);
+        return cartService.removeProduct(userId,productId);
     }
 
     @DeleteMapping("/delete/{id}")

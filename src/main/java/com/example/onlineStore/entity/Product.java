@@ -13,6 +13,8 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "product")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

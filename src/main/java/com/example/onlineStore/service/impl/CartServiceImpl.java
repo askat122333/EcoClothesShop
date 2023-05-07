@@ -4,6 +4,8 @@ import com.example.onlineStore.dto.CartDto;
 import com.example.onlineStore.entity.Cart;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.repository.CartRepository;
+import com.example.onlineStore.repository.ProductRepository;
+import com.example.onlineStore.repository.UserRepository;
 import com.example.onlineStore.service.CartService;
 import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
@@ -17,9 +19,10 @@ import java.util.List;
 @AllArgsConstructor
 public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
-    private final ProductServiceImpl productService;
-    private final UserService userService;
-    private CartDto mapToDto(Cart cart){
+    private final UserRepository userRepository;
+    private final ProductRepository productRepository;
+
+    public CartDto mapToDto(Cart cart){
         return new CartDto(
           cart.getId(),
           cart.getUser(),
@@ -81,17 +84,19 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartDto addNewProduct(Long userId,Long productId) {
         Cart cart = new Cart();
-        cart.setUser(userService.getByIdEntity(userId));
-        cart.setProduct(productService.getByIdEntity(productId));
+        cart.setUser(userRepository.findById(userId).get());
+        cart.setProduct(productRepository.findById(productId).get());
         cartRepository.save(cart);
         return mapToDto(cart);
     }
     //TODO
     @Override
-    public CartDto removeProduct(Long cartId, Long productId) {
-        Cart cart = cartRepository.findByIdAndProductAndRdtIsNull(cartId,productId);
-        cart.setProduct(null);
-        cartRepository.save(cart);
+    public CartDto removeProduct(Long userId, Long productId) {
+        Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
+        if (cart.getProduct() == productRepository.findByIdAndRdtIsNull(productId)) {
+            cart.setProduct(null);
+            cartRepository.save(cart);
+        }
         return mapToDto(cart);
     }
 }

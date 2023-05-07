@@ -12,6 +12,8 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "cart")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

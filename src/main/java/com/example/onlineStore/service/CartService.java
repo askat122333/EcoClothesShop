@@ -22,5 +22,5 @@ public interface CartService {
     //TODO
     CartDto addNewProduct(Long userId,Long productId);
     //TODO
-    CartDto removeProduct(Long cartId, Long productId);
+    CartDto removeProduct(Long userId, Long productId);
 }
