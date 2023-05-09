@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,6 +19,6 @@ public class CartDto {
     private User user;
     private Order order;
 
-    private Product product;
+    private List<Product> product;
 
 }

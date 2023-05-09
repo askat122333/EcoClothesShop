@@ -19,16 +19,16 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @JsonIgnore
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     @JsonIgnore
     @OneToOne(mappedBy = "cart")
     private Order order;
     @JsonIgnore
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private Product product;
+    private List<Product> product;
 
     private LocalDate rdt;
 }

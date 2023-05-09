@@ -17,15 +17,12 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private Cart cart;
+    @Column(name = "order_time")
+    private LocalDate orderTime;
 
     private LocalDate rdt;
 

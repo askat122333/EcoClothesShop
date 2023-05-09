@@ -15,7 +15,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class OrderDto {
     private Long id;
-    private User user;
     private Cart cart;
+    private LocalDate orderTime;
+
+    private LocalDate rdt;
 
 }

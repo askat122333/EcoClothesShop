@@ -23,8 +23,10 @@ public class OrderServiceImpll implements OOrderService {
     public OrderDto mapToDto(Order order) {
         return new OrderDto(
                 order.getId(),
-                order.getUser(),
-                order.getCart());
+                order.getCart(),
+                order.getOrderTime(),
+                order.getRdt()
+        );
     }
 
     @Override
@@ -51,17 +53,14 @@ public class OrderServiceImpll implements OOrderService {
     @Override
     public OrderDto create(Long userId) {
         Order order = new Order();
-        order.setUser(userRepository.findByIdAndRdtIsNull(userId));
         order.setCart(cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId)));
+        order.setOrderTime(LocalDate.now());
         return mapToDto(orderRepository.save(order));
     }
 
     @Override
     public OrderDto update(Long id,OrderDto dto) {
         Order order = getByIdEntity(id);
-        if(dto.getUser()!=null){
-            order.setUser(dto.getUser());
-        }
         if(dto.getCart()!=null){
             order.setCart(dto.getCart());
         }

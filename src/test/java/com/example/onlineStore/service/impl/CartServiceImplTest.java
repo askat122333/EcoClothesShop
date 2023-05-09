@@ -17,7 +17,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 @RunWith(MockitoJUnitRunner.class)
@@ -37,11 +38,13 @@ public class CartServiceImplTest {
                 Gender.UNKNOWN,null);
         Product product = new Product(1l,"product",123d,null, Size.XL,"material",
                null,null );
-        Cart cart = new Cart(null,user,null,product,null);
+        List<Product> products = new ArrayList<>();
+        products.add(product);
+        Cart cart = new Cart(null,user,null,products,null);
         CartDto cartDto = cartService.mapToDto(cart);
         Mockito.when(cartRepository.save(cart)).thenReturn(cart);
-        Mockito.when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-        Mockito.when(productRepository.findById(product.getId())).thenReturn(Optional.of(product));
+        Mockito.when(userRepository.findByIdAndRdtIsNull(user.getId())).thenReturn(user);
+        Mockito.when(productRepository.findByIdAndRdtIsNull(product.getId())).thenReturn(product);
         assertEquals(cartDto.getProduct(),cartService.addNewProduct(user.getId(),product.getId()).getProduct());
 
     }
@@ -52,11 +55,18 @@ public class CartServiceImplTest {
                 Gender.UNKNOWN,null);
         Product product = new Product(1l,"product",123d,null, Size.XL,"material",
                 null,null );
-        Cart cart = new Cart(null,user,null,product,null);
+        List<Product> products = new ArrayList<>();
+        products.add(product);
+        Cart cart = new Cart(null,user,null,products,null);
         Mockito.when(cartRepository.save(cart)).thenReturn(cart);
         Mockito.when(cartRepository.findByUserAndRdtIsNull(user)).thenReturn(cart);
         Mockito.when(userRepository.findByIdAndRdtIsNull(user.getId())).thenReturn(user);
         Mockito.when(productRepository.findByIdAndRdtIsNull(product.getId())).thenReturn(product);
-        assertEquals(null,cartService.removeProduct(user.getId(),product.getId()).getProduct());
+        boolean isTrue = false;
+        CartDto cartDto = cartService.removeProduct(1l,1l);
+        if (cartDto.getProduct().isEmpty()) {
+            isTrue = true;
+        }
+        assertEquals(true,isTrue);
     }
 }

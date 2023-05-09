@@ -2,6 +2,7 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.CartDto;
 import com.example.onlineStore.entity.Cart;
+import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.repository.CartRepository;
 import com.example.onlineStore.repository.ProductRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -83,9 +85,16 @@ public class CartServiceImpl implements CartService {
     //TODO
     @Override
     public CartDto addNewProduct(Long userId,Long productId) {
-        Cart cart = new Cart();
-        cart.setUser(userRepository.findById(userId).get());
-        cart.setProduct(productRepository.findById(productId).get());
+       Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
+       Product product = productRepository.findByIdAndRdtIsNull(productId);
+        if (cart == null) {
+            Cart newCart = new Cart();
+            newCart.setUser(userRepository.findByIdAndRdtIsNull(userId));
+            newCart.setProduct(List.of(product));
+            cartRepository.save(newCart);
+            return mapToDto(newCart);
+        }else
+            cart.getProduct().add(product);
         cartRepository.save(cart);
         return mapToDto(cart);
     }
@@ -93,10 +102,8 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartDto removeProduct(Long userId, Long productId) {
         Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
-        if (cart.getProduct() == productRepository.findByIdAndRdtIsNull(productId)) {
-            cart.setProduct(null);
-            cartRepository.save(cart);
-        }
+       cart.getProduct().removeIf(product -> product.getId() == productId);
+        cartRepository.save(cart);
         return mapToDto(cart);
     }
 }
