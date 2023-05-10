@@ -18,9 +18,7 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryDto mapToDto(Category category) {
         return new CategoryDto(
                 category.getId(),
-                category.getName(),
-                category.getProducts()
-        );
+                category.getName());
     }
 
     @Override
@@ -54,9 +52,6 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = getByIdEntity(id);
         if(dto.getName()!=null){
             category.setName(dto.getName());
-        }
-        if(dto.getProducts()!=null){
-            category.setProducts(dto.getProducts());
         }
         return mapToDto(categoryRepository.save(category));
     }

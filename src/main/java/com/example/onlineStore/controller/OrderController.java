@@ -1,7 +1,6 @@
 package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.OrderDto;
-import com.example.onlineStore.entity.Order;
 import com.example.onlineStore.service.OOrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

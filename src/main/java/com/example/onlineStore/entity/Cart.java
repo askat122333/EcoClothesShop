@@ -27,7 +27,7 @@ public class Cart {
     private Order order;
     @JsonIgnore
     @OneToMany
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private List<Product> product;
 
     private LocalDate rdt;
