@@ -23,5 +23,6 @@ public class ProductDto {
     private String material;
 
     private Category category;
+    private LocalDate rdt;
 
 }

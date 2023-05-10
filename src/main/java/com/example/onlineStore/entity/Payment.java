@@ -1,5 +1,6 @@
 package com.example.onlineStore.entity;
 
+import com.example.onlineStore.enums.PaymentStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,26 +8,26 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Entity
-@Table(name = "cart")
+@Table(name = "payment")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart {
+public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
     private Double sum;
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus status;
+    @Column(name = "payment_time")
+    private LocalDate paymentTime;
+    @Column(name = "card_num")
+    private Integer cardNum;
     @JsonIgnore
-    @OneToMany
-    @JoinColumn(name = "cart_id", referencedColumnName = "id")
-    private List<Product> products;
-
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User user;
     private LocalDate rdt;
 }

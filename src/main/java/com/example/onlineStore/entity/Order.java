@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,10 +18,17 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @ManyToOne
+    private User user;
+    @OneToMany
+    private List<Product> products;
+    private String address;
     @JsonIgnore
     @OneToOne
-    @JoinColumn(name = "cart_id", referencedColumnName = "id")
-    private Cart cart;
+    @JoinColumn(name = "payment_id",referencedColumnName = "id")
+    private Payment payment;
+    private Double sum;
+
     @Column(name = "order_time")
     private LocalDate orderTime;
 

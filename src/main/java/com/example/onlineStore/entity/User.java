@@ -30,6 +30,15 @@ public class User {
     private Roles role;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    private String phone;
+
+    @Column(name = "payment_card")
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "card_id",referencedColumnName = "id")
+    private PaymentCard paymentCard;
+    @OneToMany(mappedBy = "user")
+    private List<Payment> payments;
 
     private LocalDate rdt;
 

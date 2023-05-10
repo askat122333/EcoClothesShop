@@ -7,26 +7,22 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Entity
-@Table(name = "cart")
+@Table(name = "payment_card")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart {
+public class PaymentCard {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "card_num")
+    private Integer cardNum;
+    private Double balance;
+    private LocalDate rdt;
     @JsonIgnore
     @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
-    private Double sum;
-    @JsonIgnore
-    @OneToMany
-    @JoinColumn(name = "cart_id", referencedColumnName = "id")
-    private List<Product> products;
-
-    private LocalDate rdt;
 }
