@@ -32,7 +32,6 @@ public class User {
     private Gender gender;
     private String phone;
 
-    @Column(name = "payment_card")
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "card_id",referencedColumnName = "id")

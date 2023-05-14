@@ -34,8 +34,9 @@ public class CartServiceImplTest {
 
     @Test
   public   void addNewProduct() {
-        User user = new User(1l,"name","surname","email","password",null, Roles.USER,
-                Gender.UNKNOWN,null);
+        User user = new User(1l,"name","surname",
+                "email","password",null,Roles.USER,Gender.UNKNOWN,"phone"
+        ,null,null,null);
         Product product = new Product(1l,"product",123d,null, Size.XL,"material",
                null,null );
         List<Product> products = new ArrayList<>();
@@ -45,14 +46,15 @@ public class CartServiceImplTest {
         Mockito.when(cartRepository.save(cart)).thenReturn(cart);
         Mockito.when(userRepository.findByIdAndRdtIsNull(user.getId())).thenReturn(user);
         Mockito.when(productRepository.findByIdAndRdtIsNull(product.getId())).thenReturn(product);
-        assertEquals(cartDto.getProduct(),cartService.addNewProduct(user.getId(),product.getId()).getProduct());
+        assertEquals(cartDto.getProducts(),cartService.addNewProduct(user.getId(),product.getId()).getProducts());
 
     }
 
     @Test
     public void removeProduct() {
-        User user = new User(1l,"name","surname","email","password",null, Roles.USER,
-                Gender.UNKNOWN,null);
+        User user = new User(1l,"name","surname",
+                "email","password",null,Roles.USER,Gender.UNKNOWN,"phone"
+                ,null,null,null);
         Product product = new Product(1l,"product",123d,null, Size.XL,"material",
                 null,null );
         List<Product> products = new ArrayList<>();
@@ -64,7 +66,7 @@ public class CartServiceImplTest {
         Mockito.when(productRepository.findByIdAndRdtIsNull(product.getId())).thenReturn(product);
         boolean isTrue = false;
         CartDto cartDto = cartService.removeProduct(1l,1l);
-        if (cartDto.getProduct().isEmpty()) {
+        if (cartDto.getProducts().isEmpty()) {
             isTrue = true;
         }
         assertEquals(true,isTrue);

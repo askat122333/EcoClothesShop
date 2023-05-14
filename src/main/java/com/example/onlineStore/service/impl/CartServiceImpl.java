@@ -3,18 +3,15 @@ package com.example.onlineStore.service.impl;
 import com.example.onlineStore.dto.CartDto;
 import com.example.onlineStore.entity.Cart;
 import com.example.onlineStore.entity.Product;
-import com.example.onlineStore.entity.User;
 import com.example.onlineStore.repository.CartRepository;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.repository.UserRepository;
 import com.example.onlineStore.service.CartService;
-import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -26,10 +23,11 @@ public class CartServiceImpl implements CartService {
 
     public CartDto mapToDto(Cart cart){
         return new CartDto(
-          cart.getId(),
-          cart.getUser(),
-          cart.getOrder(),
-          cart.getProduct()
+                cart.getId(),
+                cart.getUser(),
+                cart.getSum(),
+                cart.getProducts(),
+                cart.getRdt()
         );
     }
 
@@ -65,11 +63,11 @@ public class CartServiceImpl implements CartService {
         if(dto.getUser()!=null){
             cart.setUser(dto.getUser());
         }
-        if(dto.getOrder()!=null){
-            cart.setOrder(dto.getOrder());
+        if(cart.getSum()!=null){
+            cart.setSum(dto.getSum());
         }
-        if(dto.getProduct()!=null){
-            cart.setProduct(dto.getProduct());
+        if(dto.getProducts()!=null){
+            cart.setProducts(dto.getProducts());
         }
         return mapToDto(cartRepository.save(cart));
     }
@@ -82,6 +80,7 @@ public class CartServiceImpl implements CartService {
         return "Корзина с id: "+id+" была удалена.";
     }
 
+
     //TODO
     @Override
     public CartDto addNewProduct(Long userId,Long productId) {
@@ -90,11 +89,11 @@ public class CartServiceImpl implements CartService {
         if (cart == null) {
             Cart newCart = new Cart();
             newCart.setUser(userRepository.findByIdAndRdtIsNull(userId));
-            newCart.setProduct(List.of(product));
+            newCart.getProducts().add(product);
             cartRepository.save(newCart);
             return mapToDto(newCart);
         }else
-            cart.getProduct().add(product);
+            cart.getProducts().add(product);
         cartRepository.save(cart);
         return mapToDto(cart);
     }
@@ -102,7 +101,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartDto removeProduct(Long userId, Long productId) {
         Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
-       cart.getProduct().removeIf(product -> product.getId() == productId);
+       cart.getProducts().removeIf(product -> product.getId() == productId);
         cartRepository.save(cart);
         return mapToDto(cart);
     }

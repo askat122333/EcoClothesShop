@@ -24,7 +24,12 @@ public class UserServiceImpl implements UserService {
                 user.getPassword(),
                 user.getPhoto(),
                 user.getRole(),
-                user.getGender());
+                user.getGender(),
+                user.getPhone(),
+                user.getPaymentCard(),
+                user.getPayments(),
+                user.getRdt()
+        );
     }
 
     @Override
@@ -71,11 +76,23 @@ public class UserServiceImpl implements UserService {
         if(dto.getPassword()!=null){
             user.setPassword(dto.getPassword());
         }
+        if(dto.getPhoto()!=null){
+            user.setPhoto(dto.getPhoto());
+        }
         if(dto.getRole()!=null){
             user.setRole(dto.getRole());
         }
         if(dto.getGender()!=null){
             user.setGender(dto.getGender());
+        }
+        if(dto.getPhone()!=null){
+            user.setPhone(dto.getPhone());
+        }
+        if(dto.getPaymentCard()!=null){
+            user.setPaymentCard(dto.getPaymentCard());
+        }
+        if(dto.getPayments()!=null){
+            user.setPayments(dto.getPayments());
         }
 
         return mapToDto(userRepository.save(user));

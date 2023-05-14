@@ -2,7 +2,6 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.OrderDto;
 import com.example.onlineStore.entity.Order;
-import com.example.onlineStore.entity.User;
 import com.example.onlineStore.repository.CartRepository;
 import com.example.onlineStore.repository.OrderRepository;
 import com.example.onlineStore.repository.UserRepository;
@@ -23,7 +22,11 @@ public class OrderServiceImpll implements OOrderService {
     public OrderDto mapToDto(Order order) {
         return new OrderDto(
                 order.getId(),
-                order.getCart(),
+                order.getUser(),
+                order.getProducts(),
+                order.getAddress(),
+                order.getPayment(),
+                order.getSum(),
                 order.getOrderTime(),
                 order.getRdt()
         );
@@ -52,18 +55,35 @@ public class OrderServiceImpll implements OOrderService {
 //TODO
     @Override
     public OrderDto create(Long userId) {
-        Order order = new Order();
+      /*  Order order = new Order();
         order.setCart(cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId)));
         order.setOrderTime(LocalDate.now());
-        return mapToDto(orderRepository.save(order));
+        return mapToDto(orderRepository.save(order));*/
+        return null;
     }
 
     @Override
     public OrderDto update(Long id,OrderDto dto) {
         Order order = getByIdEntity(id);
-        if(dto.getCart()!=null){
-            order.setCart(dto.getCart());
+        if(dto.getUser()!=null){
+            order.setUser(dto.getUser());
         }
+        if(dto.getProducts()!=null){
+            order.setProducts(dto.getProducts());
+        }
+        if(dto.getAddress()!=null){
+            order.setAddress(dto.getAddress());
+        }
+        if(dto.getPayment()!=null){
+            order.setPayment(dto.getPayment());
+        }
+        if(dto.getSum()!=null){
+            order.setSum(dto.getSum());
+        }
+        if(dto.getOrderTime()!=null){
+            order.setOrderTime(dto.getOrderTime());
+        }
+
         return mapToDto(orderRepository.save(order));
     }
 

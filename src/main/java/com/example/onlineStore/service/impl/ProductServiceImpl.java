@@ -24,7 +24,8 @@ public class ProductServiceImpl implements ProductService {
                 product.getPhoto(),
                 product.getSize(),
                 product.getMaterial(),
-                product.getCategory()
+                product.getCategory(),
+                product.getRdt()
         );
     }
 
@@ -71,6 +72,9 @@ public class ProductServiceImpl implements ProductService {
         }
         if(dto.getCategory()!=null){
             product.setCategory(dto.getCategory());
+        }
+        if(dto.getPhoto()!=null){
+            product.setPhoto(dto.getPhoto());
         }
         return mapToDto(productRepository.save(product));
     }
