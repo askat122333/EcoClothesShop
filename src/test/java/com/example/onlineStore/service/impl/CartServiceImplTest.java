@@ -34,9 +34,8 @@ public class CartServiceImplTest {
 
     @Test
   public   void addNewProduct() {
-        User user = new User(1l,"name","surname",
-                "email","password",null,Roles.USER,Gender.UNKNOWN,"phone"
-        ,null,null,null);
+        User user = new User();
+        user.setId(1l);
         Product product = new Product(1l,"product",123d,null, Size.XL,"material",
                null,null );
         List<Product> products = new ArrayList<>();
@@ -47,14 +46,14 @@ public class CartServiceImplTest {
         Mockito.when(userRepository.findByIdAndRdtIsNull(user.getId())).thenReturn(user);
         Mockito.when(productRepository.findByIdAndRdtIsNull(product.getId())).thenReturn(product);
         assertEquals(cartDto.getProducts(),cartService.addNewProduct(user.getId(),product.getId()).getProducts());
+        assertEquals(123d,cartService.addNewProduct(user.getId(),product.getId()).getSum());
 
     }
 
     @Test
     public void removeProduct() {
-        User user = new User(1l,"name","surname",
-                "email","password",null,Roles.USER,Gender.UNKNOWN,"phone"
-                ,null,null,null);
+        User user = new User();
+        user.setId(1l);
         Product product = new Product(1l,"product",123d,null, Size.XL,"material",
                 null,null );
         List<Product> products = new ArrayList<>();

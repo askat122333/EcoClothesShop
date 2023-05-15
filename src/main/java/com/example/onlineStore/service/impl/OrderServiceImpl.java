@@ -1,11 +1,10 @@
 package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.OrderDto;
-import com.example.onlineStore.entity.Order;
-import com.example.onlineStore.repository.CartRepository;
-import com.example.onlineStore.repository.OrderRepository;
-import com.example.onlineStore.repository.UserRepository;
-import com.example.onlineStore.service.OOrderService;
+import com.example.onlineStore.entity.*;
+import com.example.onlineStore.enums.PaymentStatus;
+import com.example.onlineStore.repository.*;
+import com.example.onlineStore.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +14,12 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class OrderServiceImpll implements OOrderService {
+public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
+    private final ProductRepository productRepository;
+    private final PaymentRepository paymentRepository;
     public OrderDto mapToDto(Order order) {
         return new OrderDto(
                 order.getId(),
@@ -38,6 +39,7 @@ public class OrderServiceImpll implements OOrderService {
         return mapToDto(order);
     }
 
+
     @Override
     public Order getByIdEntity(Long id) {
         return orderRepository.findByIdAndRdtIsNull(id);
@@ -52,14 +54,24 @@ public class OrderServiceImpll implements OOrderService {
         }
         return orderDtoList;
     }
-//TODO
+
     @Override
-    public OrderDto create(Long userId) {
-      /*  Order order = new Order();
-        order.setCart(cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId)));
+    public OrderDto create(Long userId, String address) {
+        Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
+        Order order = new Order();
+        order.setUser(userRepository.findByIdAndRdtIsNull(userId));
+        List<Product> products = new ArrayList<>();
+        products.addAll(cart.getProducts());
+        order.setProducts(products);
+        order.setAddress(address);
+        order.setSum(cart.getSum());
+        Payment payment = new Payment();
+        payment.setStatus(PaymentStatus.PENDING);
+        paymentRepository.save(payment);
+        order.setPayment(payment);
         order.setOrderTime(LocalDate.now());
-        return mapToDto(orderRepository.save(order));*/
-        return null;
+        orderRepository.save(order);
+        return mapToDto(order);
     }
 
     @Override
@@ -93,5 +105,18 @@ public class OrderServiceImpll implements OOrderService {
         order.setRdt(LocalDate.now());
         orderRepository.save(order);
         return "Заказ с id: "+id+" был удален.";
+    }
+
+    @Override
+    public OrderDto quickCreate(Long userId, Long productId, String address) {
+        Order order = new Order();
+        order.setUser(userRepository.findByIdAndRdtIsNull(userId));
+        Product product = productRepository.findByIdAndRdtIsNull(productId);
+        order.setProducts(List.of(product));
+        order.setAddress(address);
+        order.setSum(product.getPrice());
+        order.setOrderTime(LocalDate.now());
+        orderRepository.save(order);
+        return mapToDto(order);
     }
 }

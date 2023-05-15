@@ -1,7 +1,7 @@
 package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.OrderDto;
-import com.example.onlineStore.service.OOrderService;
+import com.example.onlineStore.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/order")
 public class OrderController {
 
-    private final OOrderService orderService;
+    private final OrderService orderService;
 
     @GetMapping("/{id}")
     public OrderDto getById(@PathVariable Long id) {
@@ -25,8 +25,9 @@ public class OrderController {
     }
 //TODO
     @PostMapping("/create")
-    public OrderDto addNewOrder(@RequestParam Long userId) {
-        return orderService.create(userId);
+    public OrderDto addNewOrder(@RequestParam("userId") Long userId,
+                                @RequestParam("address")String address) {
+        return orderService.create(userId,address);
     }
 
     @PutMapping("/update/{id}")

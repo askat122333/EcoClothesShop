@@ -16,7 +16,7 @@ public class PaymentCardDto {
 
     private Long id;
 
-    private Integer cardNum;
+    private String cardNum;
     private Double balance;
     private LocalDate rdt;
 

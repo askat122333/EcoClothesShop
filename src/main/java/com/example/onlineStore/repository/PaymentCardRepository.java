@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface PaymentCardRepository extends JpaRepository<PaymentCard,Long> {
     PaymentCard findByIdAndRdtIsNull(Long id);
+    PaymentCard findByUserAndRdtIsNull(Long userId);
 
     List<PaymentCard> findAllByRdtIsNull();
 }

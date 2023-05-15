@@ -3,6 +3,7 @@ package com.example.onlineStore.service.impl;
 import com.example.onlineStore.dto.CartDto;
 import com.example.onlineStore.entity.Cart;
 import com.example.onlineStore.entity.Product;
+import com.example.onlineStore.entity.User;
 import com.example.onlineStore.repository.CartRepository;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.repository.UserRepository;
@@ -84,24 +85,35 @@ public class CartServiceImpl implements CartService {
     //TODO
     @Override
     public CartDto addNewProduct(Long userId,Long productId) {
-       Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
+        User user  = userRepository.findByIdAndRdtIsNull(userId);
+       Cart cart = cartRepository.findByUserAndRdtIsNull(user);
        Product product = productRepository.findByIdAndRdtIsNull(productId);
         if (cart == null) {
             Cart newCart = new Cart();
-            newCart.setUser(userRepository.findByIdAndRdtIsNull(userId));
-            newCart.getProducts().add(product);
+            newCart.setUser(user);
+            newCart.setProducts(List.of(product));
+            newCart.setSum(getSum(List.of(product)));
             cartRepository.save(newCart);
             return mapToDto(newCart);
         }else
             cart.getProducts().add(product);
+        cart.setSum(getSum(cart.getProducts()));
         cartRepository.save(cart);
         return mapToDto(cart);
+    }
+    private Double getSum(List<Product> products){
+        Double sum = 0d;
+        for (int i = 0; i <products.size() ; i++) {
+            sum += products.get(i).getPrice();
+        }
+        return sum;
     }
     //TODO
     @Override
     public CartDto removeProduct(Long userId, Long productId) {
         Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
        cart.getProducts().removeIf(product -> product.getId() == productId);
+       cart.setSum(getSum(cart.getProducts()));
         cartRepository.save(cart);
         return mapToDto(cart);
     }

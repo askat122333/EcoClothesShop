@@ -1,22 +1,12 @@
 package com.example.onlineStore.service.impl;
 
-import com.example.onlineStore.dto.OrderDto;
-import com.example.onlineStore.entity.Cart;
-import com.example.onlineStore.entity.Order;
-import com.example.onlineStore.entity.Product;
-import com.example.onlineStore.entity.User;
-import com.example.onlineStore.enums.Gender;
-import com.example.onlineStore.enums.Roles;
-import com.example.onlineStore.enums.Size;
 import com.example.onlineStore.repository.CartRepository;
 import com.example.onlineStore.repository.OrderRepository;
 import com.example.onlineStore.repository.UserRepository;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 
@@ -31,7 +21,7 @@ public class OrderServiceImplTest {
     @Mock
     private CartRepository cartRepository;
     @InjectMocks
-    private OrderServiceImpll orderServices;
+    private OrderServiceImpl orderServices;
 
 /*    @Test
     public void create() {

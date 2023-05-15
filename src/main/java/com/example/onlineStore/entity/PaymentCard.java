@@ -18,7 +18,7 @@ public class PaymentCard {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "card_num")
-    private Integer cardNum;
+    private String cardNum;
     private Double balance;
     private LocalDate rdt;
     @JsonIgnore

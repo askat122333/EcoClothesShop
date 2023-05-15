@@ -24,7 +24,7 @@ public class Payment {
     @Column(name = "payment_time")
     private LocalDate paymentTime;
     @Column(name = "card_num")
-    private Integer cardNum;
+    private String cardNum;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id")

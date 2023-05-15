@@ -22,7 +22,7 @@ public class PaymentDto {
 
     private LocalDate paymentTime;
 
-    private Integer cardNum;
+    private String cardNum;
 
     private User user;
     private LocalDate rdt;

@@ -1,8 +1,15 @@
 package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.PaymentDto;
+import com.example.onlineStore.entity.Order;
 import com.example.onlineStore.entity.Payment;
+import com.example.onlineStore.entity.PaymentCard;
+import com.example.onlineStore.entity.User;
+import com.example.onlineStore.enums.PaymentStatus;
+import com.example.onlineStore.repository.OrderRepository;
+import com.example.onlineStore.repository.PaymentCardRepository;
 import com.example.onlineStore.repository.PaymentRepository;
+import com.example.onlineStore.repository.UserRepository;
 import com.example.onlineStore.service.PaymentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +21,8 @@ import java.util.List;
 @AllArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
+    private final UserRepository userRepository;
+    private final PaymentCardRepository paymentCardRepository;
 
     private PaymentDto mapToDto (Payment payment){
         return new PaymentDto(
@@ -49,6 +58,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentDto create(Payment payment) {
+
         return mapToDto(paymentRepository.save(payment));
     }
 
@@ -78,5 +88,34 @@ public class PaymentServiceImpl implements PaymentService {
         payment.setRdt(LocalDate.now());
         paymentRepository.save(payment);
         return "Платежь с id: "+id+" была удален.";
+    }
+
+    @Override
+    public String makePayment(Long userId , Long orderId) {
+        User user = userRepository.findByIdAndRdtIsNull(userId);
+        Order order = null;
+        for (Order desiredOrder:user.getOrder()) {
+            if (desiredOrder.getId() == orderId) {
+                order = desiredOrder;
+            }
+        }
+
+        Payment payment = order.getPayment();
+        PaymentCard paymentCard = paymentCardRepository.findByUserAndRdtIsNull(userId);
+        Double balance = paymentCard.getBalance();
+        Double orderSum = order.getSum();
+        if (balance>=orderSum) {
+           paymentCard.setBalance(balance-orderSum);
+           paymentCardRepository.save(paymentCard);
+           payment.setSum(orderSum);
+            payment.setUser(user);
+            payment.setPaymentTime(LocalDate.now());
+            payment.setStatus(PaymentStatus.PAID);
+            paymentRepository.save(payment);
+
+        }else {
+            return "Не достаточно средств.";
+        }
+        return "Оплата прошла успешно!";
     }
 }

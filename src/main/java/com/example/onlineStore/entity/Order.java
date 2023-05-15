@@ -18,9 +18,11 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-    @OneToMany
+    @ManyToMany
     private List<Product> products;
     private String address;
     @JsonIgnore

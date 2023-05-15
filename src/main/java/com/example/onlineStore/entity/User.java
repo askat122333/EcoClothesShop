@@ -31,6 +31,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private String phone;
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Order> order;
 
     @JsonIgnore
     @OneToOne
