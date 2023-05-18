@@ -14,7 +14,7 @@ public interface OrderService {
     Order getByIdEntity(Long id);
 
     List<OrderDto> getAll();
-//TODO
+
 
     OrderDto create(Long userId, String address);
 

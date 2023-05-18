@@ -19,8 +19,6 @@ public interface CartService {
     CartDto update(Long id,CartDto dto);
 
     String deleteById(Long id);
-    //TODO
-    CartDto addNewProduct(Long userId,Long productId);
-    //TODO
+     CartDto addNewProduct(Long userId,Long productId);
     CartDto removeProduct(Long userId, Long productId);
 }

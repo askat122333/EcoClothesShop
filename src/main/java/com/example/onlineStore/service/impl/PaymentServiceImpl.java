@@ -9,7 +9,6 @@ import com.example.onlineStore.enums.PaymentStatus;
 import com.example.onlineStore.repository.OrderRepository;
 import com.example.onlineStore.repository.PaymentCardRepository;
 import com.example.onlineStore.repository.PaymentRepository;
-import com.example.onlineStore.repository.UserRepository;
 import com.example.onlineStore.service.PaymentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
-    private final UserRepository userRepository;
+    private final OrderRepository orderRepository;
     private final PaymentCardRepository paymentCardRepository;
 
     private PaymentDto mapToDto (Payment payment){
@@ -91,31 +90,30 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public String makePayment(Long userId , Long orderId) {
-        User user = userRepository.findByIdAndRdtIsNull(userId);
-        Order order = null;
-        for (Order desiredOrder:user.getOrder()) {
-            if (desiredOrder.getId() == orderId) {
-                order = desiredOrder;
-            }
-        }
-
+    public String makePayment( Long orderId) {
+        Order order = orderRepository.findByIdAndRdtIsNull(orderId);
+        User user = order.getUser();
         Payment payment = order.getPayment();
-        PaymentCard paymentCard = paymentCardRepository.findByUserAndRdtIsNull(userId);
+        PaymentCard paymentCard = paymentCardRepository.findByUserAndRdtIsNull(user);
         Double balance = paymentCard.getBalance();
         Double orderSum = order.getSum();
-        if (balance>=orderSum) {
-           paymentCard.setBalance(balance-orderSum);
-           paymentCardRepository.save(paymentCard);
-           payment.setSum(orderSum);
+        if (!payment.getCardNum().isEmpty()) {
+
+            return "Заказ уже оформлен";
+
+        } else if (payment.getCardNum().isEmpty() && balance>=orderSum) {
+            paymentCard.setBalance(balance-orderSum);
+            paymentCardRepository.save(paymentCard);
+            payment.setSum(orderSum);
             payment.setUser(user);
             payment.setPaymentTime(LocalDate.now());
             payment.setStatus(PaymentStatus.PAID);
+            String num = paymentCard.getCardNum().substring(8);
+            payment.setCardNum(num);
             paymentRepository.save(payment);
-
-        }else {
+            return "Оплата прошла успешно!";
+        } else {
             return "Не достаточно средств.";
         }
-        return "Оплата прошла успешно!";
     }
 }

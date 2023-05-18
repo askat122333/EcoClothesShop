@@ -35,7 +35,7 @@ public class ProductController {
         return productService.update(id,dto);
 
     }
-    //TODO
+
     @GetMapping("/category/{categoryId}")
     public List<ProductDto> getAllByCategory(@PathVariable Long categoryId) {
         return productService.getAllByCategory(categoryId);

@@ -14,8 +14,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("/makePayment")
-    public String makePayment(@RequestParam("userId")Long userId ,
-                              @RequestParam("orderId")Long orderId){
-        return paymentService.makePayment(userId, orderId);
+    public String makePayment(@RequestParam("orderId")Long orderId){
+        return paymentService.makePayment(orderId);
     }
 }

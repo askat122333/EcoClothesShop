@@ -87,7 +87,6 @@ public class ProductServiceImpl implements ProductService {
         return "Продукт с id: "+id+" был удален.";
     }
 
-    //TODO
     @Override
     public List<ProductDto> getAllByCategory(Long categoryId) {
         List<Product> productList = productRepository.findAllByCategoryAndRdtIsNull(categoryId);

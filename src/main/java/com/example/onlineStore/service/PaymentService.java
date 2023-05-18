@@ -19,6 +19,6 @@ public interface PaymentService {
     PaymentDto update(Long id,PaymentDto dto);
 
     String deleteById(Long id);
-    String makePayment(Long userId,Long orderId);
+    String makePayment(Long orderId);
 
 }

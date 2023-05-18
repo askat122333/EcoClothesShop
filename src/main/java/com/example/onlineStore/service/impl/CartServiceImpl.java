@@ -82,7 +82,6 @@ public class CartServiceImpl implements CartService {
     }
 
 
-    //TODO
     @Override
     public CartDto addNewProduct(Long userId,Long productId) {
         User user  = userRepository.findByIdAndRdtIsNull(userId);
@@ -108,7 +107,7 @@ public class CartServiceImpl implements CartService {
         }
         return sum;
     }
-    //TODO
+
     @Override
     public CartDto removeProduct(Long userId, Long productId) {
         Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));

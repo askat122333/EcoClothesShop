@@ -20,6 +20,5 @@ public interface ProductService {
 
     String deleteById(Long id);
 
-    //TODO
     List<ProductDto> getAllByCategory(Long categoryId);
 }
