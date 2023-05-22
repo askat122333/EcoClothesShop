@@ -2,6 +2,7 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.CategoryDto;
 import com.example.onlineStore.entity.Category;
+import com.example.onlineStore.exceptions.CategoryNotFoundException;
 import com.example.onlineStore.repository.CategoryRepository;
 import com.example.onlineStore.service.CategoryService;
 import lombok.AllArgsConstructor;
@@ -25,9 +26,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto getById(Long id) {
-       Category category = categoryRepository.findByIdAndRdtIsNull(id);
+    public CategoryDto getById(Long id) throws CategoryNotFoundException {
+        try {
+            Category category = categoryRepository.findByIdAndRdtIsNull(id);
             return mapToDto(category);
+        }catch (NullPointerException e){
+            throw new CategoryNotFoundException("Категория с id "+id+" не найдена.");
+        }
+
     }
 
     @Override
@@ -36,8 +42,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDto> getAll() {
+    public List<CategoryDto> getAll() throws CategoryNotFoundException {
         List<Category> categoryList = categoryRepository.findAllByRdtIsNull();
+        if(categoryList.isEmpty()){
+            throw new CategoryNotFoundException("В базе нет категорий.");
+        }
         List<CategoryDto> categoryDtoList = new ArrayList<>();
         for (Category category:categoryList ) {
             categoryDtoList.add(mapToDto(category));
@@ -51,8 +60,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto update(Long id,CategoryDto dto) {
+    public CategoryDto update(Long id,CategoryDto dto) throws CategoryNotFoundException {
         Category category = getByIdEntity(id);
+        if(category==null){
+            throw new CategoryNotFoundException("Категория с id "+id+" не найдена.");
+        }
         if(dto.getName()!=null){
             category.setName(dto.getName());
         }
@@ -63,10 +75,15 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public String deleteById(Long id) {
-        Category category = getByIdEntity(id);
-        category.setRdt(LocalDate.now());
-        categoryRepository.save(category);
-        return "Категория с id: "+id+" была удалена.";
+    public String deleteById(Long id) throws CategoryNotFoundException {
+        try {
+            Category category = getByIdEntity(id);
+            category.setRdt(LocalDate.now());
+            categoryRepository.save(category);
+            return "Категория с id: "+id+" была удалена.";
+        }catch (NullPointerException e){
+            throw new CategoryNotFoundException("Категория с id "+id+" не найдена.");
+        }
+
     }
 }

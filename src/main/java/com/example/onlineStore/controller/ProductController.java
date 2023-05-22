@@ -63,7 +63,7 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public List<ProductDto> getAll(){
+    public List<ProductDto> getAll() throws ProductNotFoundException {
         return productService.getAll();
     }
 
@@ -72,17 +72,6 @@ public class ProductController {
         return productService.create(product);
     }
 
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<?> updateUser(@PathVariable Long id,
-//                              @RequestBody ProductDto dto){
-//        try {
-//            ProductDto productDto = productService.update(id,dto);
-//            return ResponseEntity.status(HttpStatus.OK).body(productDto);
-//        } catch (NullPointerException e) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(e.getMessage());
-//        } catch (ProductNotFoundException e) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND.value()).body(e.getMessage());
-//        }
     @PutMapping("/update/{id}")
     public ProductDto updateProduct(@PathVariable Long id,
                                  @RequestBody ProductDto dto) throws ProductNotFoundException {
@@ -90,7 +79,7 @@ public class ProductController {
     }
 
     @GetMapping("/category/{categoryId}")
-    public List<ProductDto> getAllByCategory(@PathVariable Long categoryId) {
+    public List<ProductDto> getAllByCategory(@PathVariable Long categoryId) throws ProductNotFoundException {
         return productService.getAllByCategory(categoryId);
     }
     @DeleteMapping("/delete/{id}")

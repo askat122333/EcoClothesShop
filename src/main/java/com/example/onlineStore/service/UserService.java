@@ -15,12 +15,12 @@ public interface UserService {
 
     List<UserDto> getAll() throws UserNotFoundException;
 
-    UserDto create(User user);
+    UserDto create(User user) throws UserNotFoundException;
 
     UserDto update(Long id,UserDto dto) throws UserNotFoundException;
 
-    String deleteById(Long id);
+    String deleteById(Long id) throws UserNotFoundException;
     String setNewPassword(Long id,String token, String password) throws UserNotFoundException;
-    String resetPassword(String email);
+    String resetPassword(String email) throws UserNotFoundException;
 
 }

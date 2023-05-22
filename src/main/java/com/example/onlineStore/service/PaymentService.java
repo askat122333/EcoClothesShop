@@ -2,23 +2,27 @@ package com.example.onlineStore.service;
 
 import com.example.onlineStore.dto.PaymentDto;
 import com.example.onlineStore.entity.Payment;
+import com.example.onlineStore.exceptions.OrderNotFoundException;
+import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
+import com.example.onlineStore.exceptions.PaymentNotFoundException;
+import com.example.onlineStore.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public interface PaymentService {
-    PaymentDto getById(Long id);
+    PaymentDto getById(Long id) throws PaymentNotFoundException;
 
     Payment getByIdEntity(Long id);
 
-    List<PaymentDto> getAll();
+    List<PaymentDto> getAll() throws PaymentNotFoundException;
 
     PaymentDto create(Payment payment);
 
-    PaymentDto update(Long id,PaymentDto dto);
+    PaymentDto update(Long id,PaymentDto dto) throws PaymentNotFoundException;
 
-    String deleteById(Long id);
-    String makePayment(Long orderId);
+    String deleteById(Long id) throws PaymentNotFoundException;
+    String makePayment(Long orderId) throws OrderNotFoundException, UserNotFoundException, PaymentCardNotFoundException;
 
 }

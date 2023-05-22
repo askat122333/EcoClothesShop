@@ -7,6 +7,8 @@ import com.example.onlineStore.entity.User;
 import com.example.onlineStore.enums.Gender;
 import com.example.onlineStore.enums.Roles;
 import com.example.onlineStore.enums.Size;
+import com.example.onlineStore.exceptions.CartNotFoundException;
+import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.repository.CartRepository;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.repository.UserRepository;
@@ -33,10 +35,10 @@ public class CartServiceImplTest {
     private CartServiceImpl cartService;
 
     @Test
-  public   void addNewProduct() {
+  public   void addNewProduct() throws UserNotFoundException, CartNotFoundException {
         User user = new User();
         user.setId(1l);
-        Product product = new Product(1l,"product",123d,null, Size.XL,"material",
+        Product product = new Product(1l,"product",123d,Size.XL,"material" ,null,
                null,null );
         List<Product> products = new ArrayList<>();
         products.add(product);
@@ -51,10 +53,10 @@ public class CartServiceImplTest {
     }
 
     @Test
-    public void removeProduct() {
+    public void removeProduct() throws CartNotFoundException {
         User user = new User();
         user.setId(1l);
-        Product product = new Product(1l,"product",123d,null, Size.XL,"material",
+        Product product = new Product(1l,"product",123d,Size.XL,"material" ,null,
                 null,null );
         List<Product> products = new ArrayList<>();
         products.add(product);

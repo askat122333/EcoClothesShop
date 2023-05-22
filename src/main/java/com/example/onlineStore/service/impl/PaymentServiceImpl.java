@@ -6,6 +6,10 @@ import com.example.onlineStore.entity.Payment;
 import com.example.onlineStore.entity.PaymentCard;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.enums.PaymentStatus;
+import com.example.onlineStore.exceptions.OrderNotFoundException;
+import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
+import com.example.onlineStore.exceptions.PaymentNotFoundException;
+import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.repository.OrderRepository;
 import com.example.onlineStore.repository.PaymentCardRepository;
 import com.example.onlineStore.repository.PaymentRepository;
@@ -35,9 +39,14 @@ public class PaymentServiceImpl implements PaymentService {
         );
     }
     @Override
-    public PaymentDto getById(Long id) {
-        Payment payment = paymentRepository.findByIdAndRdtIsNull(id);
-        return mapToDto(payment);
+    public PaymentDto getById(Long id) throws PaymentNotFoundException {
+        try{
+            Payment payment = paymentRepository.findByIdAndRdtIsNull(id);
+            return mapToDto(payment);
+        }catch (NullPointerException e){
+            throw new PaymentNotFoundException("Платеж с таким id "+id+" не найден.");
+        }
+
     }
 
     @Override
@@ -46,8 +55,11 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public List<PaymentDto> getAll() {
+    public List<PaymentDto> getAll() throws PaymentNotFoundException {
       List<Payment> paymentList = paymentRepository.findAllByRdtIsNull();
+      if(paymentList.isEmpty()){
+          throw new PaymentNotFoundException("В базе нет платежей.");
+      }
       List<PaymentDto> paymentDtoList = new ArrayList<>();
         for (Payment payment:paymentList) {
             paymentDtoList.add(mapToDto(payment));
@@ -62,39 +74,59 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentDto update(Long id, PaymentDto dto) {
-        Payment payment = getByIdEntity(id);
-        if (dto.getSum() != null) {
-            payment.setSum(dto.getSum());
-        }
-        if (dto.getStatus() != null) {
-            payment.setStatus(dto.getStatus());
-        }
-        if (dto.getPaymentTime() != null) {
-            payment.setPaymentTime(dto.getPaymentTime());
-        }
-        if (dto.getCardNum() != null) {
-            payment.setCardNum(dto.getCardNum());
-        }
-        if (dto.getUser() != null) {
-            payment.setUser(dto.getUser());
-        }
-        return mapToDto(payment);
+    public PaymentDto update(Long id, PaymentDto dto) throws PaymentNotFoundException {
+
+            Payment payment = getByIdEntity(id);
+            if(payment==null){
+                throw new PaymentNotFoundException("Платеж с таким id "+id+" не найден.");
+            }
+            if (dto.getSum() != null) {
+                payment.setSum(dto.getSum());
+            }
+            if (dto.getStatus() != null) {
+                payment.setStatus(dto.getStatus());
+            }
+            if (dto.getPaymentTime() != null) {
+                payment.setPaymentTime(dto.getPaymentTime());
+            }
+            if (dto.getCardNum() != null) {
+                payment.setCardNum(dto.getCardNum());
+            }
+            if (dto.getUser() != null) {
+                payment.setUser(dto.getUser());
+            }
+            return mapToDto(payment);
+
+
     }
     @Override
-    public String deleteById(Long id) {
-        Payment payment = getByIdEntity(id);
-        payment.setRdt(LocalDate.now());
-        paymentRepository.save(payment);
-        return "Платежь с id: "+id+" была удален.";
+    public String deleteById(Long id) throws PaymentNotFoundException {
+        try{
+            Payment payment = getByIdEntity(id);
+            payment.setRdt(LocalDate.now());
+            paymentRepository.save(payment);
+            return "Платеж с id: "+id+" был удален.";
+        }catch (NullPointerException e){
+            throw new PaymentNotFoundException("Платеж с таким id "+id+" не найден.");
+        }
+
     }
 
     @Override
-    public String makePayment( Long orderId) {
+    public String makePayment( Long orderId) throws OrderNotFoundException, UserNotFoundException, PaymentCardNotFoundException {
         Order order = orderRepository.findByIdAndRdtIsNull(orderId);
+        if(order==null){
+            throw new OrderNotFoundException("Заказ с id "+orderId+" не найден.");
+        }
         User user = order.getUser();
+        if(user==null){
+            throw new UserNotFoundException("У данного заказа отсутствует пользователь.");
+        }
         Payment payment = order.getPayment();
         PaymentCard paymentCard = paymentCardRepository.findByUserAndRdtIsNull(user);
+        if(paymentCard==null){
+            throw new PaymentCardNotFoundException("У данного пользователя отсутствует карта оплаты.");
+        }
         Double balance = paymentCard.getBalance();
         Double orderSum = order.getSum();
         if (!payment.getCardNum().isEmpty()) {

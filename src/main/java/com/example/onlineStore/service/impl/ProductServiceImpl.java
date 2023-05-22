@@ -2,11 +2,14 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
+import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
             Product product = productRepository.findByIdAndRdtIsNull(id);
             return mapToDto(product);
         }catch (NullPointerException e){
-            throw new ProductNotFoundException("Продукт с таким id не найден.");
+            throw new ProductNotFoundException("Продукт с id "+id+" не найден.");
         }
 
 
@@ -46,13 +49,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDto> getAll() {
-        List<Product> productList = productRepository.findAllByRdtIsNull();
-        List<ProductDto> productDtoList = new ArrayList<>();
-        for (Product product:productList) {
-            productDtoList.add(mapToDto(product));
-        }
-        return productDtoList;
+    public List<ProductDto> getAll() throws ProductNotFoundException {
+
+            List<Product> productList = productRepository.findAllByRdtIsNull();
+            if (productList.isEmpty()) {
+                throw new ProductNotFoundException("В базе нет товаров.");
+            }
+            List<ProductDto> productDtoList = new ArrayList<>();
+            for (Product product:productList) {
+                productDtoList.add(mapToDto(product));
+            }
+            return productDtoList;
+
     }
 
     @Override
@@ -62,8 +70,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto update(Long id,ProductDto dto) throws ProductNotFoundException {
-        try {
+
             Product  product = getByIdEntity(id);
+            if(product==null){
+                throw  new ProductNotFoundException("Продукт с id "+id+" не найден.");
+            }
 
             if(dto.getName()!=null){
                 product.setName(dto.getName());
@@ -81,9 +92,6 @@ public class ProductServiceImpl implements ProductService {
             product.setCategory(dto.getCategory());
         }
         return mapToDto(productRepository.save(product));
-        }catch (NullPointerException e){
-            throw  new ProductNotFoundException("Продукт с id "+id+" не найден.");
-        }
     }
 
     @Override
@@ -101,8 +109,11 @@ public class ProductServiceImpl implements ProductService {
 
     //TODO
     @Override
-    public List<ProductDto> getAllByCategory(Long categoryId) {
+    public List<ProductDto> getAllByCategory(Long categoryId) throws ProductNotFoundException {
         List<Product> productList = productRepository.findAllByCategoryAndRdtIsNull(categoryId);
+        if (productList.isEmpty()) {
+            throw new ProductNotFoundException("В базе нет товаров.");
+        }
         List<ProductDto> productDtoList = new ArrayList<>();
         for (Product product:productList) {
             productDtoList.add(mapToDto(product));
@@ -129,8 +140,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    public  byte[] getImageById(Long id) {
-        Product product = getByIdEntity(id);
-        return product.getImage();
+    public  byte[] getImageById(Long id) throws ProductNotFoundException {
+        try {
+            Product product = getByIdEntity(id);
+            return product.getImage();
+        }catch (NullPointerException e){
+            throw new ProductNotFoundException("Продукт с id "+id+" не найден.");
+        }
+
     }
 }

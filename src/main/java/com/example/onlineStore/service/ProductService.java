@@ -15,7 +15,7 @@ public interface ProductService {
 
     Product getByIdEntity(Long id);
 
-    List<ProductDto> getAll();
+    List<ProductDto> getAll() throws ProductNotFoundException;
 
     ProductDto create(Product product);
 
@@ -23,7 +23,7 @@ public interface ProductService {
 
     String deleteById(Long id) throws ProductNotFoundException;
 
-    List<ProductDto> getAllByCategory(Long categoryId);
+    List<ProductDto> getAllByCategory(Long categoryId) throws ProductNotFoundException;
 
     String uploadImage(Long productId, MultipartFile file) throws IOException, ProductNotFoundException;
     byte[] getImageById(Long id) throws Exception;

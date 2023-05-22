@@ -23,7 +23,7 @@ public class UserController {
         return userService.getAll();
     }
     @PostMapping("/create")
-    public UserDto addNewUser(@RequestBody User user){
+    public UserDto addNewUser(@RequestBody User user) throws UserNotFoundException {
         return userService.create(user);
     }
     @PutMapping("/update/{id}")
@@ -32,7 +32,7 @@ public class UserController {
         return userService.update(id,dto);
     }
     @DeleteMapping("/delete/{id}")
-    public String deleteById(@PathVariable Long id){
+    public String deleteById(@PathVariable Long id) throws UserNotFoundException {
         return userService.deleteById(id);
     }
 
@@ -43,7 +43,7 @@ public class UserController {
         return userService.setNewPassword(id,token,password);
     }
     @PutMapping("/resetPassword")
-    public String resetPassword(@RequestParam("email") String email){
+    public String resetPassword(@RequestParam("email") String email) throws UserNotFoundException {
         return userService.resetPassword(email);
     }
 }
