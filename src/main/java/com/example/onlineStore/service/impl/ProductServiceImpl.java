@@ -2,11 +2,14 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
+import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
                 product.getId(),
                 product.getName(),
                 product.getPrice(),
-                product.getPhoto(),
+
                 product.getSize(),
                 product.getMaterial(),
                 product.getCategory()
@@ -29,9 +32,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto getById(Long id) {
-        Product product = productRepository.findByIdAndRdtIsNull(id);
-        return mapToDto(product);
+    public ProductDto getById(Long id) throws ProductNotFoundException {
+        try {
+            Product product = productRepository.findByIdAndRdtIsNull(id);
+            return mapToDto(product);
+        }catch (NullPointerException e){
+            throw new ProductNotFoundException("Продукт с таким id не найден.");
+        }
+
+
     }
 
     @Override
@@ -55,12 +64,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto update(Long id,ProductDto dto) {
-        Product product = getByIdEntity(id);
-        if(dto.getName()!=null){
-            product.setName(dto.getName());
-        }
-        if(dto.getPrice()!=null){
+    public ProductDto update(Long id,ProductDto dto) throws ProductNotFoundException {
+        try {
+            Product  product = getByIdEntity(id);
+
+            if(dto.getName()!=null){
+                product.setName(dto.getName());
+            }
+            if(dto.getPrice()!=null){
             product.setPrice(dto.getPrice());
         }
         if(dto.getSize()!=null){
@@ -72,15 +83,24 @@ public class ProductServiceImpl implements ProductService {
         if(dto.getCategory()!=null){
             product.setCategory(dto.getCategory());
         }
+
         return mapToDto(productRepository.save(product));
+        }catch (NullPointerException e){
+            throw  new ProductNotFoundException("Продукт с id "+id+" не найден.");
+        }
     }
 
     @Override
-    public String deleteById(Long id) {
-        Product product = getByIdEntity(id);
-        product.setRdt(LocalDate.now());
-        productRepository.save(product);
-        return "Продукт с id: "+id+" был удален.";
+    public String deleteById(Long id) throws ProductNotFoundException {
+        try{
+            Product product = getByIdEntity(id);
+            product.setRdt(LocalDate.now());
+            productRepository.save(product);
+            return "Продукт с id: "+id+" был удален.";
+        }catch (NullPointerException e){
+            throw new ProductNotFoundException("Продукт с id "+id+" не найден.");
+        }
+
     }
 
     //TODO
@@ -92,5 +112,29 @@ public class ProductServiceImpl implements ProductService {
             productDtoList.add(mapToDto(product));
         }
         return productDtoList;
+    }
+
+
+
+    public String uploadImage(Long productId, MultipartFile file) throws ProductNotFoundException {
+        try {
+
+            Product product = getByIdEntity(productId);
+            try {
+                product.setImage(file.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            productRepository.save(product);
+            return "Image saved to database successfully!";
+        }catch (NullPointerException e){
+            throw new ProductNotFoundException("Продукт с id "+productId+" не найден.");
+        }
+    }
+
+
+    public  byte[] getImageById(Long id) {
+        Product product = getByIdEntity(id);
+        return product.getImage();
     }
 }

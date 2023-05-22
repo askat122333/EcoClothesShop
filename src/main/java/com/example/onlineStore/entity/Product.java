@@ -19,10 +19,10 @@ public class Product {
     private Long id;
     private String name;
     private Double price;
-    private Byte[] photo;
     @Enumerated(EnumType.STRING)
     private Size size;
     private String material;
+    private byte[] image;
 
     @JsonIgnore
     @ManyToOne

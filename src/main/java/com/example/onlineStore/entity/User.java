@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -28,6 +29,9 @@ public class User {
     private Roles role;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    private String token;
+    private LocalDateTime tokenExpiry;
 
     private LocalDate rdt;
 
