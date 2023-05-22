@@ -13,7 +13,6 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     Product findByIdAndRdtIsNull(Long id);
 
     List<Product> findAllByRdtIsNull();
-    //TODO
     @Query(value = "select * from product where category_id = ?1", nativeQuery = true)
     List<Product> findAllByCategoryAndRdtIsNull(Long categoryId);
 }

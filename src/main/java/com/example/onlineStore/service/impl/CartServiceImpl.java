@@ -2,10 +2,12 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.CartDto;
 import com.example.onlineStore.entity.Cart;
+import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.repository.CartRepository;
+import com.example.onlineStore.repository.ProductRepository;
+import com.example.onlineStore.repository.UserRepository;
 import com.example.onlineStore.service.CartService;
-import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +19,16 @@ import java.util.List;
 @AllArgsConstructor
 public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
-    private final ProductServiceImpl productService;
-    private final UserService userService;
-    private CartDto mapToDto(Cart cart){
+    private final UserRepository userRepository;
+    private final ProductRepository productRepository;
+
+    public CartDto mapToDto(Cart cart){
         return new CartDto(
-          cart.getId(),
-          cart.getUser(),
-          cart.getOrder(),
-          cart.getProduct()
+                cart.getId(),
+                cart.getUser(),
+                cart.getSum(),
+                cart.getProducts(),
+                cart.getRdt()
         );
     }
 
@@ -60,11 +64,11 @@ public class CartServiceImpl implements CartService {
         if(dto.getUser()!=null){
             cart.setUser(dto.getUser());
         }
-        if(dto.getOrder()!=null){
-            cart.setOrder(dto.getOrder());
+        if(cart.getSum()!=null){
+            cart.setSum(dto.getSum());
         }
-        if(dto.getProduct()!=null){
-            cart.setProduct(dto.getProduct());
+        if(dto.getProducts()!=null){
+            cart.setProducts(dto.getProducts());
         }
         return mapToDto(cartRepository.save(cart));
     }
@@ -77,20 +81,38 @@ public class CartServiceImpl implements CartService {
         return "Корзина с id: "+id+" была удалена.";
     }
 
-    //TODO
+
     @Override
     public CartDto addNewProduct(Long userId,Long productId) {
-        Cart cart = new Cart();
-        cart.setUser(userService.getByIdEntity(userId));
-        cart.setProduct(productService.getByIdEntity(productId));
+        User user  = userRepository.findByIdAndRdtIsNull(userId);
+       Cart cart = cartRepository.findByUserAndRdtIsNull(user);
+       Product product = productRepository.findByIdAndRdtIsNull(productId);
+        if (cart == null) {
+            Cart newCart = new Cart();
+            newCart.setUser(user);
+            newCart.setProducts(List.of(product));
+            newCart.setSum(getSum(List.of(product)));
+            cartRepository.save(newCart);
+            return mapToDto(newCart);
+        }else
+            cart.getProducts().add(product);
+        cart.setSum(getSum(cart.getProducts()));
         cartRepository.save(cart);
         return mapToDto(cart);
     }
-    //TODO
+    private Double getSum(List<Product> products){
+        Double sum = 0d;
+        for (int i = 0; i <products.size() ; i++) {
+            sum += products.get(i).getPrice();
+        }
+        return sum;
+    }
+
     @Override
-    public CartDto removeProduct(Long cartId, Long productId) {
-        Cart cart = cartRepository.findByIdAndProductAndRdtIsNull(cartId,productId);
-        cart.setProduct(null);
+    public CartDto removeProduct(Long userId, Long productId) {
+        Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
+       cart.getProducts().removeIf(product -> product.getId() == productId);
+       cart.setSum(getSum(cart.getProducts()));
         cartRepository.save(cart);
         return mapToDto(cart);
     }

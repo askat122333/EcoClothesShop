@@ -19,8 +19,9 @@ public class CategoryServiceImpl implements CategoryService {
         return new CategoryDto(
                 category.getId(),
                 category.getName(),
-                category.getProducts()
-        );
+                category.getProducts(),
+                category.getRdt()
+                );
     }
 
     @Override

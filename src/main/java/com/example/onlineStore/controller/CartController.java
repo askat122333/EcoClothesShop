@@ -34,17 +34,16 @@ public class CartController {
                                       @RequestBody CartDto dto){
         return cartService.update(id,dto);
     }
-    //TODO
     @PutMapping("/addNewProduct")
     public CartDto addNewProduct(@RequestParam("userId")Long userId,
                                  @RequestParam("productId")Long productId){
         return cartService.addNewProduct(userId,productId);
     }
-    //TODO
+
     @PutMapping("/removeProduct")
-    public CartDto removeProduct(@RequestParam Long cartId ,
+    public CartDto removeProduct(@RequestParam Long userId ,
                                  @RequestParam Long productId){
-        return cartService.removeProduct(cartId,productId);
+        return cartService.removeProduct(userId,productId);
     }
 
     @DeleteMapping("/delete/{id}")

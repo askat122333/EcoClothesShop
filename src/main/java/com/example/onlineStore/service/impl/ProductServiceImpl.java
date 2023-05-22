@@ -2,14 +2,11 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
-import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +80,6 @@ public class ProductServiceImpl implements ProductService {
         if(dto.getCategory()!=null){
             product.setCategory(dto.getCategory());
         }
-
         return mapToDto(productRepository.save(product));
         }catch (NullPointerException e){
             throw  new ProductNotFoundException("Продукт с id "+id+" не найден.");

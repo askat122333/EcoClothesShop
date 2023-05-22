@@ -1,8 +1,9 @@
 package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.OrderDto;
-import com.example.onlineStore.entity.Order;
-import com.example.onlineStore.repository.OrderRepository;
+import com.example.onlineStore.entity.*;
+import com.example.onlineStore.enums.PaymentStatus;
+import com.example.onlineStore.repository.*;
 import com.example.onlineStore.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,21 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private OrderDto mapToDto(Order order) {
+    private final UserRepository userRepository;
+    private final CartRepository cartRepository;
+    private final ProductRepository productRepository;
+    private final PaymentRepository paymentRepository;
+    public OrderDto mapToDto(Order order) {
         return new OrderDto(
                 order.getId(),
                 order.getUser(),
-                order.getCart());
+                order.getProducts(),
+                order.getAddress(),
+                order.getPayment(),
+                order.getSum(),
+                order.getOrderTime(),
+                order.getRdt()
+        );
     }
 
     @Override
@@ -27,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findByIdAndRdtIsNull(id);
         return mapToDto(order);
     }
+
 
     @Override
     public Order getByIdEntity(Long id) {
@@ -44,8 +56,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto create(Order order) {
-        return mapToDto(orderRepository.save(order));
+    public OrderDto create(Long userId, String address) {
+        Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
+        Order order = new Order();
+        order.setUser(userRepository.findByIdAndRdtIsNull(userId));
+        List<Product> products = new ArrayList<>();
+        products.addAll(cart.getProducts());
+        order.setProducts(products);
+        order.setAddress(address);
+        order.setSum(cart.getSum());
+        Payment payment = new Payment();
+        payment.setStatus(PaymentStatus.PENDING);
+        paymentRepository.save(payment);
+        order.setPayment(payment);
+        order.setOrderTime(LocalDate.now());
+        orderRepository.save(order);
+        return mapToDto(order);
     }
 
     @Override
@@ -54,9 +80,22 @@ public class OrderServiceImpl implements OrderService {
         if(dto.getUser()!=null){
             order.setUser(dto.getUser());
         }
-        if(dto.getCart()!=null){
-            order.setCart(dto.getCart());
+        if(dto.getProducts()!=null){
+            order.setProducts(dto.getProducts());
         }
+        if(dto.getAddress()!=null){
+            order.setAddress(dto.getAddress());
+        }
+        if(dto.getPayment()!=null){
+            order.setPayment(dto.getPayment());
+        }
+        if(dto.getSum()!=null){
+            order.setSum(dto.getSum());
+        }
+        if(dto.getOrderTime()!=null){
+            order.setOrderTime(dto.getOrderTime());
+        }
+
         return mapToDto(orderRepository.save(order));
     }
 
@@ -66,5 +105,18 @@ public class OrderServiceImpl implements OrderService {
         order.setRdt(LocalDate.now());
         orderRepository.save(order);
         return "Заказ с id: "+id+" был удален.";
+    }
+
+    @Override
+    public OrderDto quickCreate(Long userId, Long productId, String address) {
+        Order order = new Order();
+        order.setUser(userRepository.findByIdAndRdtIsNull(userId));
+        Product product = productRepository.findByIdAndRdtIsNull(productId);
+        order.setProducts(List.of(product));
+        order.setAddress(address);
+        order.setSum(product.getPrice());
+        order.setOrderTime(LocalDate.now());
+        orderRepository.save(order);
+        return mapToDto(order);
     }
 }

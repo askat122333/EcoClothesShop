@@ -88,7 +88,7 @@ public class ProductController {
                                  @RequestBody ProductDto dto) throws ProductNotFoundException {
         return productService.update(id,dto);
     }
-    //TODO
+
     @GetMapping("/category/{categoryId}")
     public List<ProductDto> getAllByCategory(@PathVariable Long categoryId) {
         return productService.getAllByCategory(categoryId);

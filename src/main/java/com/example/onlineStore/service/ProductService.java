@@ -23,7 +23,6 @@ public interface ProductService {
 
     String deleteById(Long id) throws ProductNotFoundException;
 
-    //TODO
     List<ProductDto> getAllByCategory(Long categoryId);
 
     String uploadImage(Long productId, MultipartFile file) throws IOException, ProductNotFoundException;

@@ -16,6 +16,8 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "user_table")
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +31,17 @@ public class User {
     private Roles role;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    private String phone;
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Order> order;
+
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "card_id",referencedColumnName = "id")
+    private PaymentCard paymentCard;
+    @OneToMany(mappedBy = "user")
+    private List<Payment> payments;
 
     private String token;
     private LocalDateTime tokenExpiry;

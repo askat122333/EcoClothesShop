@@ -27,6 +27,7 @@ public class ProductDto {
     private String img;
 
     private Category category;
+    private LocalDate rdt;
 
     public ProductDto(Long id, String name, Double price,  Size size, String material, Category category) {
         this.id = id;
