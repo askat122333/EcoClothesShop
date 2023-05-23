@@ -1,5 +1,6 @@
 package com.example.onlineStore.entity;
 
+import com.example.onlineStore.enums.ProductType;
 import com.example.onlineStore.enums.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,15 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Size size;
     private String material;
-
+    @Column(name = "product_type")
+    @Enumerated(EnumType.STRING)
+    private ProductType productType;
+    @Column(name = "date_added")
+    private LocalDate dateAdded;
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "discount_id",referencedColumnName = "id")
+    private Discounts discount;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
