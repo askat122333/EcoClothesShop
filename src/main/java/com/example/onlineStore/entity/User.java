@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -41,6 +42,9 @@ public class User {
     private PaymentCard paymentCard;
     @OneToMany(mappedBy = "user")
     private List<Payment> payments;
+
+    private String token;
+    private LocalDateTime tokenExpiry;
 
     private LocalDate rdt;
 

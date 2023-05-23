@@ -2,6 +2,7 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.PaymentCardDto;
 import com.example.onlineStore.entity.PaymentCard;
+import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
 import com.example.onlineStore.repository.PaymentCardRepository;
 import com.example.onlineStore.service.PaymentCardService;
 import lombok.AllArgsConstructor;
@@ -25,9 +26,14 @@ public class PaymentCardServiceImpl implements PaymentCardService {
         );
     }
     @Override
-    public PaymentCardDto getById(Long id) {
-        PaymentCard paymentCard = paymentCardRepository.findByIdAndRdtIsNull(id);
-        return mapToDto(paymentCard);
+    public PaymentCardDto getById(Long id) throws PaymentCardNotFoundException {
+        try {
+            PaymentCard paymentCard = paymentCardRepository.findByIdAndRdtIsNull(id);
+            return mapToDto(paymentCard);
+        }catch (NullPointerException e){
+            throw new PaymentCardNotFoundException("Карта с id "+id+" не найдена.");
+        }
+
     }
 
     @Override
@@ -36,8 +42,11 @@ public class PaymentCardServiceImpl implements PaymentCardService {
     }
 
     @Override
-    public List<PaymentCardDto> getAll() {
+    public List<PaymentCardDto> getAll() throws PaymentCardNotFoundException {
         List<PaymentCard> paymentCardList = paymentCardRepository.findAllByRdtIsNull();
+        if(paymentCardList.isEmpty()){
+            throw new PaymentCardNotFoundException("В базе нет платежных карт.");
+        }
         List<PaymentCardDto> paymentCardDtoList = new ArrayList<>();
         for (PaymentCard paymentCard:paymentCardList) {
             paymentCardDtoList.add(mapToDto(paymentCard));
@@ -51,8 +60,11 @@ public class PaymentCardServiceImpl implements PaymentCardService {
     }
 
     @Override
-    public PaymentCardDto update(Long id, PaymentCardDto dto) {
+    public PaymentCardDto update(Long id, PaymentCardDto dto) throws PaymentCardNotFoundException {
         PaymentCard paymentCard = getByIdEntity(id);
+        if(paymentCard==null){
+            throw new PaymentCardNotFoundException("Карта с id "+id+" не найдена.");
+        }
         if (dto.getCardNum() != null) {
             paymentCard.setCardNum(dto.getCardNum());
         }
@@ -68,11 +80,16 @@ public class PaymentCardServiceImpl implements PaymentCardService {
     }
 
     @Override
-    public String deleteById(Long id) {
-        PaymentCard paymentCard = getByIdEntity(id);
-        paymentCard.setRdt(LocalDate.now());
-        paymentCardRepository.save(paymentCard);
-        return "Платежная карта с id: "+id+" была удалена.";
+    public String deleteById(Long id) throws PaymentCardNotFoundException {
+        try {
+            PaymentCard paymentCard = getByIdEntity(id);
+            paymentCard.setRdt(LocalDate.now());
+            paymentCardRepository.save(paymentCard);
+            return "Платежная карта с id: "+id+" была удалена.";
+        }catch (NullPointerException e){
+            throw new PaymentCardNotFoundException("Карта с id "+id+" не найдена.");
+        }
+
 
     }
 }

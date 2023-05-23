@@ -1,6 +1,8 @@
 package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.OrderDto;
+import com.example.onlineStore.exceptions.CartNotFoundException;
+import com.example.onlineStore.exceptions.OrderNotFoundException;
 import com.example.onlineStore.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,29 +17,29 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping("/{id}")
-    public OrderDto getById(@PathVariable Long id) {
+    public OrderDto getById(@PathVariable Long id) throws OrderNotFoundException {
         return orderService.getById(id);
     }
 
     @GetMapping("/all")
-    public List<OrderDto> getAll() {
+    public List<OrderDto> getAll() throws OrderNotFoundException {
         return orderService.getAll();
     }
 //TODO
     @PostMapping("/create")
     public OrderDto addNewOrder(@RequestParam("userId") Long userId,
-                                @RequestParam("address")String address) {
+                                @RequestParam("address")String address) throws CartNotFoundException {
         return orderService.create(userId,address);
     }
 
     @PutMapping("/update/{id}")
     public OrderDto updateOrder(@PathVariable Long id,
-                                @RequestBody OrderDto dto) {
+                                @RequestBody OrderDto dto) throws OrderNotFoundException {
         return orderService.update(id, dto);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteById(@PathVariable Long id) {
+    public String deleteById(@PathVariable Long id) throws OrderNotFoundException {
         return orderService.deleteById(id);
     }
 }

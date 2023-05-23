@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 
 @Getter
@@ -17,12 +18,24 @@ public class ProductDto {
     private Long id;
     private String name;
     private Double price;
-    private Byte[] photo;
 
+    private byte[] image;
     private Size size;
+
     private String material;
+
+    private String img;
 
     private Category category;
     private LocalDate rdt;
 
+    public ProductDto(Long id, String name, Double price,  Size size, String material, Category category) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+
+        this.size = size;
+        this.material = material;
+        this.category = category;
+    }
 }

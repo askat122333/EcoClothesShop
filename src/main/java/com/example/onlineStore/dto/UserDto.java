@@ -34,4 +34,15 @@ public class UserDto {
     private List<Payment> payments;
 
     private LocalDate rdt;
+
+    public UserDto(Long id, String name, String surname, String email, String password, Byte[] photo, Roles role, Gender gender) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.photo = photo;
+        this.role = role;
+        this.gender = gender;
+    }
 }
