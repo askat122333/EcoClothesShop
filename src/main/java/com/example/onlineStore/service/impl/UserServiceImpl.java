@@ -8,6 +8,7 @@ import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -65,18 +66,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(User user) throws UserNotFoundException {
-//        try {
-//            if(user==null);
-//
-//
-//        }catch (NullPointerException e){
-//            throw new UserNotFoundException("Пользователь не может быть без полей.");
-//        }
         return mapToDto(userRepository.save(user));
     }
 
 
     @Override
+    @Transactional
     public UserDto update(Long id, UserDto dto) throws UserNotFoundException {
 
             User user = getByIdEntity(id);
