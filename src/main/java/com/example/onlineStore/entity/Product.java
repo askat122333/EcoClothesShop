@@ -34,7 +34,7 @@ public class Product {
     @JsonIgnore
     @OneToOne
     @JoinColumn(name = "discount_id",referencedColumnName = "id")
-    private Discounts discount;
+    private Discount discount;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")

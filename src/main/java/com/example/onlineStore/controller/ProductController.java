@@ -66,6 +66,10 @@ public class ProductController {
     public List<ProductDto> getAll() throws ProductNotFoundException {
         return productService.getAll();
     }
+    @GetMapping("/getNew")
+    public List<ProductDto> getAllByType() throws ProductNotFoundException{
+        return productService.getAllByType();
+    }
 
     @PostMapping("/create")
     public ProductDto addNewProduct(@RequestBody Product product){

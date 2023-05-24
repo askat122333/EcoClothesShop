@@ -5,16 +5,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name = "discounts")
+@Table(name = "discount")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Discounts {
+public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private Double discount;
+    private LocalDate rdt;
 }

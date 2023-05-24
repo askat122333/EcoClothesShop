@@ -17,7 +17,8 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping("/makePayment")
-    public String makePayment(@RequestParam("orderId")Long orderId) throws OrderNotFoundException, UserNotFoundException, PaymentCardNotFoundException {
+    public String makePayment(@RequestParam("orderId")Long orderId)
+            throws OrderNotFoundException, UserNotFoundException, PaymentCardNotFoundException {
         return paymentService.makePayment(orderId);
     }
 }

@@ -1,10 +1,7 @@
 package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.PaymentDto;
-import com.example.onlineStore.entity.Order;
-import com.example.onlineStore.entity.Payment;
-import com.example.onlineStore.entity.PaymentCard;
-import com.example.onlineStore.entity.User;
+import com.example.onlineStore.entity.*;
 import com.example.onlineStore.enums.PaymentStatus;
 import com.example.onlineStore.exceptions.OrderNotFoundException;
 import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
@@ -128,12 +125,8 @@ public class PaymentServiceImpl implements PaymentService {
             throw new PaymentCardNotFoundException("У данного пользователя отсутствует карта оплаты.");
         }
         Double balance = paymentCard.getBalance();
-        Double orderSum = order.getSum();
-        if (!payment.getCardNum().isEmpty()) {
-
-            return "Заказ уже оформлен";
-
-        } else if (payment.getCardNum().isEmpty() && balance>=orderSum) {
+        Double orderSum = isHaveDiscount(order.getProducts());
+        if (payment.getCardNum() == null && balance>=orderSum) {
             paymentCard.setBalance(balance-orderSum);
             paymentCardRepository.save(paymentCard);
             payment.setSum(orderSum);
@@ -144,8 +137,26 @@ public class PaymentServiceImpl implements PaymentService {
             payment.setCardNum(num);
             paymentRepository.save(payment);
             return "Оплата прошла успешно!";
+
+
+        } else if ( !payment.getCardNum().isEmpty()) {
+
+            return "Заказ уже оформлен";
         } else {
             return "Не достаточно средств.";
         }
     }
+    public Double isHaveDiscount(List<Product> products){
+        double discountSum= 0d;
+        for (Product product : products) {
+            if (product.getDiscount() != null) {
+                discountSum += (product.getPrice()
+                        - (product.getPrice() * product.getDiscount().getDiscount()));
+            }else {
+                discountSum += product.getPrice();
+            }
+        }
+        return discountSum;
+    }
+
 }
