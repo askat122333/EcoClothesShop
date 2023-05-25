@@ -138,12 +138,14 @@ public class PaymentServiceImpl implements PaymentService {
             paymentRepository.save(payment);
             return "Оплата прошла успешно!";
 
-
         } else if ( !payment.getCardNum().isEmpty()) {
 
             return "Заказ уже оформлен";
+
         } else {
+
             return "Не достаточно средств.";
+
         }
     }
     public Double isHaveDiscount(List<Product> products){
