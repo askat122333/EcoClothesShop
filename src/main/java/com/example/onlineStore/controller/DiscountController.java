@@ -7,6 +7,7 @@ import com.example.onlineStore.service.DiscountService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
@@ -15,7 +16,7 @@ import java.util.List;
 public class DiscountController {
     private final DiscountService discountService;
     @GetMapping("/{id}")
-    public DiscountDto getById(@PathVariable Long id)throws DiscountNotFoundException {
+    public DiscountDto getById(@PathVariable @Min(1) Long id)throws DiscountNotFoundException {
         return discountService.getById(id);
     }
     @GetMapping("/all")
@@ -23,8 +24,8 @@ public class DiscountController {
         return discountService.getAll();
     }
     @PostMapping("/create")
-    public DiscountDto addNewDiscount(Discount discount){
-        return discountService.create(discount);
+    public DiscountDto addNewDiscount(DiscountDto dto){
+        return discountService.create(dto);
     }
 
     @PutMapping("/update/{id}")

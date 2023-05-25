@@ -28,8 +28,8 @@ public class CategoryController {
     }
 
     @PostMapping("/create")
-    public CategoryDto addNewCategory(@RequestBody Category category){
-        return categoryService.create(category);
+    public CategoryDto addNewCategory(@RequestBody CategoryDto dto){
+        return categoryService.create(dto);
     }
 
     @PutMapping("/update/{id}")

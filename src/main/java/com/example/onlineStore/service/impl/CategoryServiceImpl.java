@@ -8,6 +8,7 @@ import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.CategoryRepository;
 import com.example.onlineStore.service.CategoryService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.validation.*;
@@ -18,6 +19,7 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private CategoryDto mapToDto(Category category) {
@@ -35,6 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
             Category category = categoryRepository.findByIdAndRdtIsNull(id);
             return mapToDto(category);
         }catch (NullPointerException e){
+            log.error("Метод getById(Category), Exception: Категория с id "+id+" не найдена.");
             throw new CategoryNotFoundException("Категория с id "+id+" не найдена.");
         }
 
@@ -49,6 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryDto> getAll() throws CategoryNotFoundException {
         List<Category> categoryList = categoryRepository.findAllByRdtIsNull();
         if(categoryList.isEmpty()){
+            log.error("Метод getAll(Category), Exception: В базе нет категорий.");
             throw new CategoryNotFoundException("В базе нет категорий.");
         }
         List<CategoryDto> categoryDtoList = new ArrayList<>();
@@ -59,7 +63,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto create(@Valid Category category) {
+    public CategoryDto create(@Valid CategoryDto dto) {
+        Category category = Category.builder()
+                .name(dto.getName())
+                .products(dto.getProducts())
+                .build();
+
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Category>> violations = validator.validate(category);
@@ -69,6 +78,7 @@ public class CategoryServiceImpl implements CategoryService {
             List<String> errorMessages = new ArrayList<>();
             for (ConstraintViolation<Category> violation : violations) {
                 errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+                log.warn("Метод create(Category): "+errorMessages);
             }
             throw new ValidException(errorMessages);
         }
@@ -79,6 +89,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto update(Long id,@Valid CategoryDto dto) throws CategoryNotFoundException {
         Category category = getByIdEntity(id);
         if(category==null){
+            log.error("Метод update(Category), Exception: Категория с id "+id+" не найдена.");
             throw new CategoryNotFoundException("Категория с id "+id+" не найдена.");
         }
         if(dto.getName()!=null){
@@ -96,6 +107,7 @@ public class CategoryServiceImpl implements CategoryService {
             List<String> errorMessages = new ArrayList<>();
             for (ConstraintViolation<Category> violation : violations) {
                 errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+                log.warn("Метод update(Category): "+errorMessages);
             }
             throw new ValidException(errorMessages);
         }
@@ -111,6 +123,7 @@ public class CategoryServiceImpl implements CategoryService {
             categoryRepository.save(category);
             return "Категория с id: "+id+" была удалена.";
         }catch (NullPointerException e){
+            log.error("Метод deleteById(Category), Exception: Категория с id "+id+" не найдена.");
             throw new CategoryNotFoundException("Категория с id "+id+" не найдена.");
         }
 

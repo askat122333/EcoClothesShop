@@ -25,8 +25,8 @@ public class UserController {
         return userService.getAll();
     }
     @PostMapping("/create")
-    public UserDto addNewUser(@RequestBody User user) throws UserNotFoundException {
-        return userService.create(user);
+    public UserDto addNewUser(@RequestBody UserDto dto) throws UserNotFoundException {
+        return userService.create(dto);
     }
     @PutMapping("/update/{id}")
     public UserDto updateUser(@PathVariable Long id,

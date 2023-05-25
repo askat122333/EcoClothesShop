@@ -6,17 +6,22 @@ import com.example.onlineStore.enums.PaymentStatus;
 import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.OrderNotFoundException;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
+import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.*;
 import com.example.onlineStore.service.OrderService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.validation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
@@ -42,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
             Order order = orderRepository.findByIdAndRdtIsNull(id);
             return mapToDto(order);
         }catch (NullPointerException e){
+            log.error("Метод getById(Order), Exception: Заказ с id "+id+" не найден.");
             throw new OrderNotFoundException("Заказ с id "+id+" не найден.");
         }
 
@@ -57,6 +63,7 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDto> getAll() throws OrderNotFoundException {
         List<Order> orderList = orderRepository.findAllByRdtIsNull();
         if(orderList.isEmpty()){
+            log.error("Метод getAll(Order), Exception: В базе нет заказов.");
             throw new OrderNotFoundException("В базе нет заказов.");
         }
         List<OrderDto> orderDtoList = new ArrayList<>();
@@ -70,6 +77,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto create(Long userId, String address) throws CartNotFoundException {
         Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
         if (cart==null){
+            log.error("Метод create(Order), Exception: У данного пользователя нет корзины с товарами.");
             throw new CartNotFoundException("У данного пользователя нет корзины с товарами.");
         }
         Order order = new Order();
@@ -89,9 +97,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto update(Long id,OrderDto dto) throws OrderNotFoundException {
+    public OrderDto update(Long id,@Valid OrderDto dto) throws OrderNotFoundException {
         Order order = getByIdEntity(id);
         if(order==null){
+            log.error("Метод update(Order), Exception: Заказ с id "+id+" не найден.");
             throw new OrderNotFoundException("Заказ с id "+id+" не найден.");
         }
         if(dto.getUser()!=null){
@@ -112,6 +121,19 @@ public class OrderServiceImpl implements OrderService {
         if(dto.getOrderTime()!=null){
             order.setOrderTime(dto.getOrderTime());
         }
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Order>> violations = validator.validate(order);
+
+        if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<Order> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+                log.warn("Метод update(Order): "+errorMessages);
+            }
+            throw new ValidException(errorMessages);
+        }
 
         return mapToDto(orderRepository.save(order));
     }
@@ -124,6 +146,7 @@ public class OrderServiceImpl implements OrderService {
             orderRepository.save(order);
             return "Заказ с id: "+id+" был удален.";
         }catch (NullPointerException e){
+            log.error("Метод deleteById(Order), Exception: Заказ с id "+id+" не найден.");
             throw new OrderNotFoundException("Заказ с id "+id+" не найден.");
         }
 
@@ -135,6 +158,7 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(userRepository.findByIdAndRdtIsNull(userId));
         Product product = productRepository.findByIdAndRdtIsNull(productId);
         if(product==null){
+            log.error("Метод quickCreate(Order), Exception: Продукт с таким id "+productId+" не найден в базе.");
             throw new ProductNotFoundException("Продукт с таким id "+productId+" не найден в базе.");
         }
         order.setProducts(List.of(product));

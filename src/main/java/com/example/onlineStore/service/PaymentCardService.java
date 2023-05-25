@@ -15,7 +15,7 @@ public interface PaymentCardService {
 
     List<PaymentCardDto> getAll() throws PaymentCardNotFoundException;
 
-    PaymentCardDto create(PaymentCard paymentCard);
+    PaymentCardDto create(PaymentCardDto dto);
 
     PaymentCardDto update(Long id,PaymentCardDto dto) throws PaymentCardNotFoundException;
 

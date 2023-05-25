@@ -2,6 +2,7 @@ package com.example.onlineStore.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @Table(name = "cart")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

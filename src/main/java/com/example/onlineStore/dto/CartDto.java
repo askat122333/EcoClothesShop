@@ -4,6 +4,7 @@ import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.entity.User;
 import lombok.*;
 
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class CartDto {
     private Long id;
 
     private User user;
+
     private Double sum;
 
     private List<Product> products;

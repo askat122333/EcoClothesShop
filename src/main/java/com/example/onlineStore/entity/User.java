@@ -4,6 +4,7 @@ import com.example.onlineStore.enums.Gender;
 import com.example.onlineStore.enums.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -23,6 +24,7 @@ import java.util.List;
 @Table(name = "user_table")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,9 +42,7 @@ public class User {
     private Roles role;
     @Enumerated(EnumType.STRING)
     private Gender gender;
-
-//    @Size(min = 9,message = "Должно содержать 9 или 10 символов.")
-    @Length(min = 9,max = 10,message = "Должно быть девятизначным.")
+    @Size(min = 9, max = 10, message = "Должно содержать 9 или 10 символов.")
     private String phone;
     @JsonIgnore
     @OneToMany(mappedBy = "user")
@@ -50,7 +50,7 @@ public class User {
 
     @JsonIgnore
     @OneToOne
-    @JoinColumn(name = "card_id",referencedColumnName = "id")
+    @JoinColumn(name = "card_id", referencedColumnName = "id")
     private PaymentCard paymentCard;
     @OneToMany(mappedBy = "user")
     private List<Payment> payments;
