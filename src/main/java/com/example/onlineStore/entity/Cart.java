@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class Cart {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+    @Min(value = 1,message = "Должно быть положительным.")
     private Double sum;
     @JsonIgnore
     @OneToMany

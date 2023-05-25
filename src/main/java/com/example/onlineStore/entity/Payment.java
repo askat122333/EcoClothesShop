@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 
 @Data
@@ -18,6 +19,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Min(value = 1,message = "Должно быть положительным.")
     private Double sum;
     @Enumerated(EnumType.STRING)
     private PaymentStatus status;

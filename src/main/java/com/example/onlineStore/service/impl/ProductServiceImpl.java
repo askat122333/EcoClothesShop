@@ -3,6 +3,7 @@ package com.example.onlineStore.service.impl;
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
+import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
@@ -10,10 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import javax.validation.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -80,10 +83,35 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto create(Product product) {
         return mapToDto(productRepository.save(product));
     }
+@Override
+public ProductDto create(@Valid ProductDto dto) {
+    Product product = Product.builder()
+            .name(dto.getName())
+            .category(dto.getCategory())
+            .price(dto.getPrice())
+            .material(dto.getMaterial())
+            .size(dto.getSize())
+            .build();
+
+    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    Validator validator = factory.getValidator();
+    Set<ConstraintViolation<Product>> violations = validator.validate(product);
+
+    if (!violations.isEmpty()) {
+
+        List<String> errorMessages = new ArrayList<>();
+        for (ConstraintViolation<Product> violation : violations) {
+            errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+        }
+        throw new ValidException(errorMessages);
+    }
+
+    return mapToDto(productRepository.save(product));
+}
 
     @Override
     @Transactional
-    public ProductDto update(Long id,ProductDto dto) throws ProductNotFoundException {
+    public ProductDto update(Long id,@Valid ProductDto dto) throws ProductNotFoundException {
 
             Product  product = getByIdEntity(id);
             if(product==null){
@@ -105,6 +133,20 @@ public class ProductServiceImpl implements ProductService {
         if(dto.getCategory()!=null){
             product.setCategory(dto.getCategory());
         }
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Product>> violations = validator.validate(product);
+
+        if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<Product> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            }
+            throw new ValidException(errorMessages);
+        }
+
         return mapToDto(productRepository.save(product));
     }
 

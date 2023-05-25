@@ -1,19 +1,23 @@
 package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.UserDto;
+import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.exceptions.UserNotFoundException;
+import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.UserRepository;
 import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -65,14 +69,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto create(User user) throws UserNotFoundException {
+    public UserDto create(@Valid User user) throws UserNotFoundException {
+
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+
+        if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<User> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            }
+            throw new ValidException(errorMessages);
+        }
         return mapToDto(userRepository.save(user));
     }
 
 
     @Override
     @Transactional
-    public UserDto update(Long id, UserDto dto) throws UserNotFoundException {
+    public UserDto update(Long id,@Valid UserDto dto) throws UserNotFoundException {
 
             User user = getByIdEntity(id);
             if(user==null){
@@ -97,6 +114,18 @@ public class UserServiceImpl implements UserService {
             if (dto.getGender() != null) {
                 user.setGender(dto.getGender());
             }
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+
+            if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<User> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            }
+            throw new ValidException(errorMessages);
+        }
 
             return mapToDto(userRepository.save(user));
 

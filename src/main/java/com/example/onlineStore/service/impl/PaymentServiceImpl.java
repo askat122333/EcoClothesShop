@@ -3,10 +3,7 @@ package com.example.onlineStore.service.impl;
 import com.example.onlineStore.dto.PaymentDto;
 import com.example.onlineStore.entity.*;
 import com.example.onlineStore.enums.PaymentStatus;
-import com.example.onlineStore.exceptions.OrderNotFoundException;
-import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
-import com.example.onlineStore.exceptions.PaymentNotFoundException;
-import com.example.onlineStore.exceptions.UserNotFoundException;
+import com.example.onlineStore.exceptions.*;
 import com.example.onlineStore.repository.OrderRepository;
 import com.example.onlineStore.repository.PaymentCardRepository;
 import com.example.onlineStore.repository.PaymentRepository;
@@ -14,9 +11,12 @@ import com.example.onlineStore.service.PaymentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.validation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 @Service
 @AllArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
@@ -65,13 +65,25 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentDto create(Payment payment) {
+    public PaymentDto create(@Valid Payment payment) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Payment>> violations = validator.validate(payment);
+
+        if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<Payment> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            }
+            throw new ValidException(errorMessages);
+        }
 
         return mapToDto(paymentRepository.save(payment));
     }
 
     @Override
-    public PaymentDto update(Long id, PaymentDto dto) throws PaymentNotFoundException {
+    public PaymentDto update(Long id,@Valid PaymentDto dto) throws PaymentNotFoundException {
 
             Payment payment = getByIdEntity(id);
             if(payment==null){
@@ -92,6 +104,19 @@ public class PaymentServiceImpl implements PaymentService {
             if (dto.getUser() != null) {
                 payment.setUser(dto.getUser());
             }
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Payment>> violations = validator.validate(payment);
+
+        if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<Payment> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            }
+            throw new ValidException(errorMessages);
+        }
+
             return mapToDto(payment);
 
 

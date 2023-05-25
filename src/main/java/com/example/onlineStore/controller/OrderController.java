@@ -5,10 +5,12 @@ import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.OrderNotFoundException;
 import com.example.onlineStore.service.OrderService;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Min;
 import java.util.List;
-
+@Validated
 @RestController
 @AllArgsConstructor
 @RequestMapping("/order")
@@ -17,7 +19,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping("/{id}")
-    public OrderDto getById(@PathVariable Long id) throws OrderNotFoundException {
+    public OrderDto getById(@PathVariable @Min(1) Long id) throws OrderNotFoundException {
         return orderService.getById(id);
     }
 

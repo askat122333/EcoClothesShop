@@ -2,15 +2,19 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.CategoryDto;
 import com.example.onlineStore.entity.Category;
+import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.exceptions.CategoryNotFoundException;
+import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.CategoryRepository;
 import com.example.onlineStore.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.validation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -55,12 +59,24 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto create(Category category) {
+    public CategoryDto create(@Valid Category category) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Category>> violations = validator.validate(category);
+
+        if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<Category> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            }
+            throw new ValidException(errorMessages);
+        }
        return mapToDto(categoryRepository.save(category));
     }
 
     @Override
-    public CategoryDto update(Long id,CategoryDto dto) throws CategoryNotFoundException {
+    public CategoryDto update(Long id,@Valid CategoryDto dto) throws CategoryNotFoundException {
         Category category = getByIdEntity(id);
         if(category==null){
             throw new CategoryNotFoundException("Категория с id "+id+" не найдена.");
@@ -71,6 +87,19 @@ public class CategoryServiceImpl implements CategoryService {
         if(dto.getProducts()!=null){
             category.setProducts(dto.getProducts());
         }
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Category>> violations = validator.validate(category);
+
+        if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<Category> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            }
+            throw new ValidException(errorMessages);
+        }
+
         return mapToDto(categoryRepository.save(category));
     }
 

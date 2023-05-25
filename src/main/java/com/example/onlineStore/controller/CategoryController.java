@@ -5,10 +5,12 @@ import com.example.onlineStore.entity.Category;
 import com.example.onlineStore.exceptions.CategoryNotFoundException;
 import com.example.onlineStore.service.CategoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Min;
 import java.util.List;
-
+@Validated
 @RestController
 @AllArgsConstructor
 @RequestMapping("/category")
@@ -16,7 +18,7 @@ public class CategoryController {
 
     private final CategoryService categoryService;
     @GetMapping("/{id}")
-    public CategoryDto getById(@PathVariable Long id) throws CategoryNotFoundException {
+    public CategoryDto getById(@PathVariable @Min(1) Long id) throws CategoryNotFoundException {
         return categoryService.getById(id);
     }
 

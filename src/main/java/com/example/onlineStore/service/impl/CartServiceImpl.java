@@ -6,6 +6,7 @@ import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.UserNotFoundException;
+import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.CartRepository;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.repository.UserRepository;
@@ -13,9 +14,11 @@ import com.example.onlineStore.service.CartService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.validation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -64,12 +67,24 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto create(Cart cart) {
+    public CartDto create(@Valid Cart cart) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Cart>> violations = validator.validate(cart);
+
+        if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<Cart> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            }
+            throw new ValidException(errorMessages);
+        }
         return mapToDto(cartRepository.save(cart));
     }
 
     @Override
-    public CartDto update(Long id,CartDto dto) throws CartNotFoundException {
+    public CartDto update(Long id,@Valid CartDto dto) throws CartNotFoundException {
         Cart cart = getByIdEntity(id);
         if(cart == null){
             throw new CartNotFoundException("Корзина с id "+id+" не найдена.");
@@ -83,6 +98,19 @@ public class CartServiceImpl implements CartService {
         if(dto.getProducts()!=null){
             cart.setProducts(dto.getProducts());
         }
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Cart>> violations = validator.validate(cart);
+
+        if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<Cart> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            }
+            throw new ValidException(errorMessages);
+        }
+
         return mapToDto(cartRepository.save(cart));
     }
 
