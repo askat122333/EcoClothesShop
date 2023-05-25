@@ -27,4 +27,5 @@ public interface ProductService {
 
     String uploadImage(Long productId, MultipartFile file) throws IOException, ProductNotFoundException;
     byte[] getImageById(Long id) throws Exception;
+    List<ProductDto> getAllByType() throws ProductNotFoundException;
 }

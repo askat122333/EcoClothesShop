@@ -91,6 +91,19 @@ public ProductDto create(@Valid ProductDto dto) {
 
     return mapToDto(productRepository.save(product));
 }
+    @Override
+    public List<ProductDto> getAllByType() throws ProductNotFoundException {
+        List<Product> productList = productRepository.findAllByProductTypeAAndRdtIsNull();
+        if (productList.isEmpty()){
+            throw new ProductNotFoundException("В базе нет новых товаров.");
+        }
+        List<ProductDto> productDtoList = new ArrayList<>();
+        for (Product product:productList) {
+            productDtoList.add(mapToDto(product));
+        }
+        return productDtoList;
+    }
+
 
     @Override
     @Transactional
