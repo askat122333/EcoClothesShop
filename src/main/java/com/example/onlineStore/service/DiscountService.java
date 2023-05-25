@@ -2,22 +2,22 @@ package com.example.onlineStore.service;
 
 import com.example.onlineStore.dto.DiscountDto;
 import com.example.onlineStore.entity.Discount;
-import com.example.onlineStore.exceptions.CategoryNotFoundException;
+import com.example.onlineStore.exceptions.DiscountNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
 public interface DiscountService {
-    DiscountDto getById(Long id) throws CategoryNotFoundException;
+    DiscountDto getById(Long id) throws DiscountNotFoundException;
 
     Discount getByIdEntity(Long id);
 
-    List<DiscountDto> getAll() throws CategoryNotFoundException;
+    List<DiscountDto> getAll() throws DiscountNotFoundException;
 
     DiscountDto create(Discount discount);
 
-    DiscountDto update(Long id,DiscountDto dto) throws CategoryNotFoundException;
+    DiscountDto update(Long id,DiscountDto dto) throws DiscountNotFoundException;
 
-    String deleteById(Long id) throws CategoryNotFoundException;
+    String deleteById(Long id) throws DiscountNotFoundException;
 }

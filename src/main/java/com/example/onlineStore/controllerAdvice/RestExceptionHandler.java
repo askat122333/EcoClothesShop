@@ -45,4 +45,9 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(errMessage, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(DiscountNotFoundException.class)
+    public ResponseEntity<ErrMessage> handleDiscountNotFoundException(DiscountNotFoundException ex){
+        ErrMessage errMessage = new ErrMessage(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+        return new ResponseEntity<>(errMessage,HttpStatus.NOT_FOUND);
+    }
 }
