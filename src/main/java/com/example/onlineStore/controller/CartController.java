@@ -6,10 +6,12 @@ import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.service.CartService;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Min;
 import java.util.List;
-
+@Validated
 @RestController
 @AllArgsConstructor
 @RequestMapping("/cart")
@@ -17,7 +19,7 @@ public class CartController {
 
     private final CartService cartService;
     @GetMapping("/{id}")
-    public CartDto getById(@PathVariable Long id) throws CartNotFoundException {
+    public CartDto getById(@PathVariable @Min(1) Long id) throws CartNotFoundException {
         return cartService.getById(id);
     }
 

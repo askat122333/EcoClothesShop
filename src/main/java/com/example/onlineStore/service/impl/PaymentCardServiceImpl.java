@@ -2,15 +2,19 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.PaymentCardDto;
 import com.example.onlineStore.entity.PaymentCard;
+import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
+import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.PaymentCardRepository;
 import com.example.onlineStore.service.PaymentCardService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.validation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -55,12 +59,24 @@ public class PaymentCardServiceImpl implements PaymentCardService {
     }
 
     @Override
-    public PaymentCardDto create(PaymentCard paymentCard) {
+    public PaymentCardDto create(@Valid PaymentCard paymentCard) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<PaymentCard>> violations = validator.validate(paymentCard);
+
+        if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<PaymentCard> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            }
+            throw new ValidException(errorMessages);
+        }
         return mapToDto(paymentCardRepository.save(paymentCard));
     }
 
     @Override
-    public PaymentCardDto update(Long id, PaymentCardDto dto) throws PaymentCardNotFoundException {
+    public PaymentCardDto update(Long id,@Valid PaymentCardDto dto) throws PaymentCardNotFoundException {
         PaymentCard paymentCard = getByIdEntity(id);
         if(paymentCard==null){
             throw new PaymentCardNotFoundException("Карта с id "+id+" не найдена.");
@@ -73,6 +89,18 @@ public class PaymentCardServiceImpl implements PaymentCardService {
         }
         if (dto.getUser() != null) {
             paymentCard.setUser(dto.getUser());
+        }
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<PaymentCard>> violations = validator.validate(paymentCard);
+
+        if (!violations.isEmpty()) {
+
+            List<String> errorMessages = new ArrayList<>();
+            for (ConstraintViolation<PaymentCard> violation : violations) {
+                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            }
+            throw new ValidException(errorMessages);
         }
 
         return mapToDto(paymentCard);

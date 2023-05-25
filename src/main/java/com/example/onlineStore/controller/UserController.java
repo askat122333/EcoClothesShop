@@ -5,17 +5,19 @@ import com.example.onlineStore.entity.User;
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Min;
 import java.util.List;
-
+@Validated
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
     @GetMapping("/{id}")
-    public UserDto getById(@PathVariable Long id) throws UserNotFoundException {
+    public UserDto getById(@PathVariable @Min(1) Long id) throws UserNotFoundException {
         return userService.getById(id);
     }
     @GetMapping("/all")

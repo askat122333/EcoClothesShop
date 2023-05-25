@@ -3,10 +3,13 @@ package com.example.onlineStore.entity;
 import com.example.onlineStore.enums.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Data
@@ -14,14 +17,18 @@ import java.time.LocalDate;
 @Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "Не может быть пустым.")
     private String name;
+    @Min(value = 1, message = "Должно быть положительным.")
     private Double price;
     @Enumerated(EnumType.STRING)
     private Size size;
+    @NotBlank(message = "Не может быть пустым.")
     private String material;
     private byte[] image;
 

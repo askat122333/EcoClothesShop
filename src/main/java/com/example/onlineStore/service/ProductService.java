@@ -17,7 +17,7 @@ public interface ProductService {
 
     List<ProductDto> getAll() throws ProductNotFoundException;
 
-    ProductDto create(Product product);
+    ProductDto create(ProductDto dto);
 
     ProductDto update(Long id,ProductDto dto) throws ProductNotFoundException;
 

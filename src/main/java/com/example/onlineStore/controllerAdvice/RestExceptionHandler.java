@@ -1,11 +1,16 @@
 package com.example.onlineStore.controllerAdvice;
 
 import com.example.onlineStore.dto.ErrMessage;
+import com.example.onlineStore.dto.ErrValidMessage;
 import com.example.onlineStore.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import javax.validation.ConstraintViolationException;
+import java.util.Collections;
+import java.util.List;
 
 @ControllerAdvice
 public class RestExceptionHandler {
@@ -43,6 +48,16 @@ public class RestExceptionHandler {
     public ResponseEntity<ErrMessage> handleCategoryNotFoundException(CategoryNotFoundException ex) {
         ErrMessage errMessage = new ErrMessage(HttpStatus.NOT_FOUND.value(), ex.getMessage());
         return new ResponseEntity<>(errMessage, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrMessage> handleConstraintNotFoundException(ConstraintViolationException ex) {
+        ErrMessage errMessage = new ErrMessage(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+        return new ResponseEntity<>(errMessage, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(ValidException.class)
+    public ResponseEntity<ErrValidMessage> handleValidNotFoundException(ValidException ex) {
+        ErrValidMessage errMessage = new ErrValidMessage(HttpStatus.BAD_REQUEST.value(), ex.getMsg());
+        return new ResponseEntity<>(errMessage, HttpStatus.BAD_REQUEST);
     }
 
 }
