@@ -1,12 +1,13 @@
 package com.example.onlineStore.dto;
 
 import com.example.onlineStore.entity.Category;
+import com.example.onlineStore.entity.Discount;
+import com.example.onlineStore.enums.ProductType;
 import com.example.onlineStore.enums.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
+import javax.persistence.*;
 import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ProductDto {
     private Long id;
     private String name;
@@ -25,6 +27,12 @@ public class ProductDto {
     private String material;
 
     private String img;
+
+    private ProductType productType;
+
+    private LocalDate dateAdded;
+
+    private Discount discount;
 
     private Category category;
     private LocalDate rdt;

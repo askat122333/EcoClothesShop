@@ -27,7 +27,6 @@ public class OrderController {
     public List<OrderDto> getAll() throws OrderNotFoundException {
         return orderService.getAll();
     }
-//TODO
     @PostMapping("/create")
     public OrderDto addNewOrder(@RequestParam("userId") Long userId,
                                 @RequestParam("address")String address) throws CartNotFoundException {

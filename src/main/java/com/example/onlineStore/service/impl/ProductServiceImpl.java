@@ -28,7 +28,6 @@ public class ProductServiceImpl implements ProductService {
                 product.getId(),
                 product.getName(),
                 product.getPrice(),
-
                 product.getSize(),
                 product.getMaterial(),
                 product.getCategory()
@@ -77,11 +76,6 @@ public class ProductServiceImpl implements ProductService {
             productDtoList.add(mapToDto(product));
         }
         return productDtoList;
-    }
-
-    @Override
-    public ProductDto create(Product product) {
-        return mapToDto(productRepository.save(product));
     }
 @Override
 public ProductDto create(@Valid ProductDto dto) {
@@ -163,7 +157,6 @@ public ProductDto create(@Valid ProductDto dto) {
 
     }
 
-    //TODO
     @Override
     public List<ProductDto> getAllByCategory(Long categoryId) throws ProductNotFoundException {
         List<Product> productList = productRepository.findAllByCategoryAndRdtIsNull(categoryId);
