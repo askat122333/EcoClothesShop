@@ -29,8 +29,8 @@ public class CartController {
     }
 
     @PostMapping("/create")
-    public CartDto addNewCart(@RequestBody Cart cart){
-        return cartService.create(cart);
+    public CartDto addNewCart(@RequestBody CartDto dto){
+        return cartService.create(dto);
     }
 
     @PutMapping("/update/{id}")

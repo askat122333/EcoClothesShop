@@ -18,7 +18,7 @@ public interface PaymentService {
 
     List<PaymentDto> getAll() throws PaymentNotFoundException;
 
-    PaymentDto create(Payment payment);
+    PaymentDto create(PaymentDto dto);
 
     PaymentDto update(Long id,PaymentDto dto) throws PaymentNotFoundException;
 

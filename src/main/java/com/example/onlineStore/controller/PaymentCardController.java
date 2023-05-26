@@ -7,6 +7,7 @@ import com.example.onlineStore.service.PaymentCardService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
@@ -15,7 +16,7 @@ import java.util.List;
 public class PaymentCardController {
     private final PaymentCardService paymentCardService;
     @GetMapping("/{id}")
-    public PaymentCardDto getById(@PathVariable Long id) throws PaymentCardNotFoundException {
+    public PaymentCardDto getById(@PathVariable @Min(1) Long id) throws PaymentCardNotFoundException {
         return paymentCardService.getById(id);
     }
     @GetMapping("/all")
@@ -23,8 +24,8 @@ public class PaymentCardController {
         return paymentCardService.getAll();
     }
     @PostMapping("/create")
-    public PaymentCardDto addNewPaymentCard(@RequestBody PaymentCard paymentCard){
-        return paymentCardService.create(paymentCard);
+    public PaymentCardDto addNewPaymentCard(@RequestBody PaymentCardDto dto){
+        return paymentCardService.create(dto);
     }
     @PutMapping("/update/{id}")
     public PaymentCardDto updateCategory(@PathVariable Long id,

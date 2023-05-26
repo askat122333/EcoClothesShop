@@ -15,7 +15,7 @@ public interface DiscountService {
 
     List<DiscountDto> getAll() throws DiscountNotFoundException;
 
-    DiscountDto create(Discount discount);
+    DiscountDto create(DiscountDto dto);
 
     DiscountDto update(Long id,DiscountDto dto) throws DiscountNotFoundException;
 

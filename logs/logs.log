@@ -1,0 +1,70 @@
+2023-05-26 02:35:17.853  INFO 9984 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 9984 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-05-26 02:35:17.855  INFO 9984 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-05-26 02:35:18.608  INFO 9984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-26 02:35:18.694  INFO 9984 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 8 JPA repository interfaces.
+2023-05-26 02:35:19.284  INFO 9984 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-05-26 02:35:19.296  INFO 9984 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-26 02:35:19.297  INFO 9984 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-05-26 02:35:19.425  INFO 9984 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-26 02:35:19.425  INFO 9984 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1510 ms
+2023-05-26 02:35:19.575  INFO 9984 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-26 02:35:19.643  INFO 9984 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-05-26 02:35:19.845  INFO 9984 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-26 02:35:19.962  INFO 9984 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-26 02:35:20.198  INFO 9984 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-26 02:35:20.244  INFO 9984 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-05-26 02:35:22.378  INFO 9984 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-26 02:35:22.401  INFO 9984 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-26 02:35:23.609  WARN 9984 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-26 02:35:24.361  INFO 9984 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-05-26 02:35:24.393  INFO 9984 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 7.078 seconds (JVM running for 9.404)
+2023-05-26 02:35:26.117  INFO 9984 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-26 02:35:26.117  INFO 9984 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-26 02:35:26.119  INFO 9984 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-26 02:35:58.183 ERROR 9984 --- [http-nio-9090-exec-5] c.e.o.service.impl.UserServiceImpl       : Метод getById(user), exception: Пользователь с id 5 не найден.
+2023-05-26 02:36:19.301 ERROR 9984 --- [http-nio-9090-exec-6] c.e.o.service.impl.UserServiceImpl       : Метод getById(user), exception: Пользователь с id 1 не найден.
+2023-05-26 02:36:30.211  WARN 9984 --- [http-nio-9090-exec-7] c.e.o.service.impl.UserServiceImpl       : Метод create(user): [Поле: surname - Не может быть пустым., Поле: password - Не может быть пустым., Поле: name - Не может быть пустым.]
+2023-05-26 02:36:42.181  WARN 9984 --- [http-nio-9090-exec-9] c.e.o.service.impl.UserServiceImpl       : Метод create(user): [Поле: phone - Должно содержать 9 или 10 символов., Поле: name - Не может быть пустым., Поле: surname - Не может быть пустым., Поле: password - Не может быть пустым.]
+2023-05-26 02:38:08.699  WARN 9984 --- [http-nio-9090-exec-1] c.e.o.service.impl.UserServiceImpl       : Метод update(user): [Поле: surname - Не может быть пустым.]
+2023-05-26 02:38:08.700  WARN 9984 --- [http-nio-9090-exec-1] c.e.o.service.impl.UserServiceImpl       : Метод update(user): [Поле: surname - Не может быть пустым., Поле: password - Не может быть пустым.]
+2023-05-26 02:38:08.701  WARN 9984 --- [http-nio-9090-exec-1] c.e.o.service.impl.UserServiceImpl       : Метод update(user): [Поле: surname - Не может быть пустым., Поле: password - Не может быть пустым., Поле: name - Не может быть пустым.]
+2023-05-26 02:38:29.852  INFO 9984 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-26 02:38:29.855  INFO 9984 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-26 02:38:29.860  INFO 9984 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-05-26 02:51:20.932  INFO 8744 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 8744 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-05-26 02:51:20.936  INFO 8744 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-05-26 02:51:21.792  INFO 8744 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-26 02:51:21.892  INFO 8744 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 90 ms. Found 8 JPA repository interfaces.
+2023-05-26 02:51:22.403  INFO 8744 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-05-26 02:51:22.410  INFO 8744 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-26 02:51:22.410  INFO 8744 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-05-26 02:51:22.506  INFO 8744 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-26 02:51:22.507  INFO 8744 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1502 ms
+2023-05-26 02:51:22.621  INFO 8744 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-26 02:51:22.680  INFO 8744 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-05-26 02:51:22.824  INFO 8744 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-26 02:51:22.915  INFO 8744 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-26 02:51:23.071  INFO 8744 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-26 02:51:23.095  INFO 8744 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-05-26 02:51:24.030  INFO 8744 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-26 02:51:24.039  INFO 8744 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-26 02:51:24.620  WARN 8744 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-26 02:51:24.959  INFO 8744 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-05-26 02:51:24.973  INFO 8744 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 4.457 seconds (JVM running for 5.203)
+2023-05-26 02:51:44.799  INFO 8744 --- [http-nio-9090-exec-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-26 02:51:44.799  INFO 8744 --- [http-nio-9090-exec-5] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-26 02:51:44.801  INFO 8744 --- [http-nio-9090-exec-5] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-05-26 02:51:52.650 ERROR 8744 --- [http-nio-9090-exec-2] c.e.o.service.impl.ProductServiceImpl    : Метод getById(Product), Exception: Продукт с id 5 не найден.
+2023-05-26 02:53:32.345  WARN 8744 --- [http-nio-9090-exec-8] c.e.o.service.impl.ProductServiceImpl    : Метод create(Product): [Поле: material - Не может быть пустым.]
+2023-05-26 02:53:32.345  WARN 8744 --- [http-nio-9090-exec-8] c.e.o.service.impl.ProductServiceImpl    : Метод create(Product): [Поле: material - Не может быть пустым., Поле: price - Должно быть положительным.]
+2023-05-26 02:53:32.345  WARN 8744 --- [http-nio-9090-exec-8] c.e.o.service.impl.ProductServiceImpl    : Метод create(Product): [Поле: material - Не может быть пустым., Поле: price - Должно быть положительным., Поле: name - Не может быть пустым.]
+2023-05-26 02:53:46.533  WARN 8744 --- [http-nio-9090-exec-9] c.e.o.service.impl.ProductServiceImpl    : Метод create(Product): [Поле: name - Не может быть пустым.]
+2023-05-26 02:54:23.005 ERROR 8744 --- [http-nio-9090-exec-10] c.e.o.service.impl.ProductServiceImpl    : Метод update(Product), Exception: Продукт с id 2 не найден.
+2023-05-26 02:54:29.485  WARN 8744 --- [http-nio-9090-exec-5] c.e.o.service.impl.ProductServiceImpl    : Метод update(Product): [Поле: name - Не может быть пустым.]
+2023-05-26 02:54:47.979  WARN 8744 --- [http-nio-9090-exec-4] c.e.o.service.impl.ProductServiceImpl    : Метод update(Product): [Поле: price - Должно быть положительным.]
+2023-05-26 02:54:47.980  WARN 8744 --- [http-nio-9090-exec-4] c.e.o.service.impl.ProductServiceImpl    : Метод update(Product): [Поле: price - Должно быть положительным., Поле: name - Не может быть пустым.]
+2023-05-26 02:55:08.558 ERROR 8744 --- [http-nio-9090-exec-6] c.e.o.service.impl.ProductServiceImpl    : Метод getAllByCategory(Product), Exception: В базе нет товаров данной категории.
+2023-05-26 02:55:13.801 ERROR 8744 --- [http-nio-9090-exec-8] c.e.o.service.impl.ProductServiceImpl    : Метод getAllByCategory(Product), Exception: В базе нет товаров данной категории.
+2023-05-26 02:55:26.357  INFO 8744 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-26 02:55:26.358  INFO 8744 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-26 02:55:26.363  INFO 8744 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

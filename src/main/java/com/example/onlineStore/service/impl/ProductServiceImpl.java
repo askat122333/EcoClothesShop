@@ -7,6 +7,7 @@ import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,7 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
@@ -28,6 +30,7 @@ public class ProductServiceImpl implements ProductService {
                 product.getId(),
                 product.getName(),
                 product.getPrice(),
+
                 product.getSize(),
                 product.getMaterial(),
                 product.getCategory()
@@ -40,6 +43,7 @@ public class ProductServiceImpl implements ProductService {
             Product product = productRepository.findByIdAndRdtIsNull(id);
             return mapToDto(product);
         }catch (NullPointerException e){
+            log.error("Метод getById(Product), Exception: Продукт с id "+id+" не найден.");
             throw new ProductNotFoundException("Продукт с id "+id+" не найден.");
         }
 
@@ -56,6 +60,7 @@ public class ProductServiceImpl implements ProductService {
 
             List<Product> productList = productRepository.findAllByRdtIsNull();
             if (productList.isEmpty()) {
+                log.error("Метод getAll(Product), Exception: В базе нет товаров.");
                 throw new ProductNotFoundException("В базе нет товаров.");
             }
             List<ProductDto> productDtoList = new ArrayList<>();
@@ -64,18 +69,6 @@ public class ProductServiceImpl implements ProductService {
             }
             return productDtoList;
 
-    }
-    @Override
-    public List<ProductDto> getAllByType() throws ProductNotFoundException {
-        List<Product> productList = productRepository.findAllByProductTypeAAndRdtIsNull();
-        if (productList.isEmpty()){
-            throw new ProductNotFoundException("В базе нет новых товаров.");
-        }
-        List<ProductDto> productDtoList = new ArrayList<>();
-        for (Product product:productList) {
-            productDtoList.add(mapToDto(product));
-        }
-        return productDtoList;
     }
 @Override
 public ProductDto create(@Valid ProductDto dto) {
@@ -96,12 +89,27 @@ public ProductDto create(@Valid ProductDto dto) {
         List<String> errorMessages = new ArrayList<>();
         for (ConstraintViolation<Product> violation : violations) {
             errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+            log.warn("Метод create(Product): "+errorMessages);
         }
         throw new ValidException(errorMessages);
     }
 
     return mapToDto(productRepository.save(product));
 }
+    @Override
+    public List<ProductDto> getAllByType() throws ProductNotFoundException {
+        List<Product> productList = productRepository.findAllByProductTypeAAndRdtIsNull();
+        if (productList.isEmpty()){
+            log.error("Метод getAllByType(Product), Exception: В базе нет новинок.");
+            throw new ProductNotFoundException("В базе нет новинок.");
+        }
+        List<ProductDto> productDtoList = new ArrayList<>();
+        for (Product product:productList) {
+            productDtoList.add(mapToDto(product));
+        }
+        return productDtoList;
+    }
+
 
     @Override
     @Transactional
@@ -109,6 +117,7 @@ public ProductDto create(@Valid ProductDto dto) {
 
             Product  product = getByIdEntity(id);
             if(product==null){
+                log.error("Метод update(Product), Exception: Продукт с id "+id+" не найден.");
                 throw  new ProductNotFoundException("Продукт с id "+id+" не найден.");
             }
 
@@ -137,6 +146,7 @@ public ProductDto create(@Valid ProductDto dto) {
             List<String> errorMessages = new ArrayList<>();
             for (ConstraintViolation<Product> violation : violations) {
                 errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+                log.warn("Метод update(Product): "+errorMessages);
             }
             throw new ValidException(errorMessages);
         }
@@ -152,6 +162,7 @@ public ProductDto create(@Valid ProductDto dto) {
             productRepository.save(product);
             return "Продукт с id: "+id+" был удален.";
         }catch (NullPointerException e){
+            log.error("Метод deleteById(Product), Exception: Продукт с id "+id+" не найден.");
             throw new ProductNotFoundException("Продукт с id "+id+" не найден.");
         }
 
@@ -161,7 +172,8 @@ public ProductDto create(@Valid ProductDto dto) {
     public List<ProductDto> getAllByCategory(Long categoryId) throws ProductNotFoundException {
         List<Product> productList = productRepository.findAllByCategoryAndRdtIsNull(categoryId);
         if (productList.isEmpty()) {
-            throw new ProductNotFoundException("В базе нет товаров.");
+            log.error("Метод getAllByCategory(Product), Exception: В базе нет товаров данной категории.");
+            throw new ProductNotFoundException("В базе нет товаров данной категории.");
         }
         List<ProductDto> productDtoList = new ArrayList<>();
         for (Product product:productList) {
@@ -184,6 +196,7 @@ public ProductDto create(@Valid ProductDto dto) {
             productRepository.save(product);
             return "Image saved to database successfully!";
         }catch (NullPointerException e){
+            log.error("Метод uploadImage(Product), Exception: Продукт с id "+productId+" не найден.");
             throw new ProductNotFoundException("Продукт с id "+productId+" не найден.");
         }
     }
@@ -194,10 +207,9 @@ public ProductDto create(@Valid ProductDto dto) {
             Product product = getByIdEntity(id);
             return product.getImage();
         }catch (NullPointerException e){
+            log.error("Метод getImageById(Product), Exception: Продукт с id "+id+" не найден.");
             throw new ProductNotFoundException("Продукт с id "+id+" не найден.");
         }
 
     }
-
-
 }

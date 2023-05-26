@@ -16,7 +16,7 @@ public interface CartService {
 
     List<CartDto> getAll() throws CartNotFoundException;
 
-    CartDto create(Cart cart);
+    CartDto create(CartDto dto);
 
     CartDto update(Long id,CartDto dto) throws CartNotFoundException;
 

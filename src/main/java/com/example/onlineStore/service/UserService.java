@@ -15,7 +15,7 @@ public interface UserService {
 
     List<UserDto> getAll() throws UserNotFoundException;
 
-    UserDto create(User user) throws UserNotFoundException;
+    UserDto create(UserDto dto) throws UserNotFoundException;
 
     UserDto update(Long id,UserDto dto) throws UserNotFoundException;
 

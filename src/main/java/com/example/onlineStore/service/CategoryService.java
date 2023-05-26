@@ -15,7 +15,7 @@ public interface CategoryService {
 
     List<CategoryDto> getAll() throws CategoryNotFoundException;
 
-    CategoryDto create(Category category);
+    CategoryDto create(CategoryDto dto);
 
     CategoryDto update(Long id,CategoryDto dto) throws CategoryNotFoundException;
 

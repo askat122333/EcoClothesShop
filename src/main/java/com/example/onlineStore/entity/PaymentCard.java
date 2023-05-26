@@ -2,6 +2,7 @@ package com.example.onlineStore.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @Table(name = "payment_card")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PaymentCard {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

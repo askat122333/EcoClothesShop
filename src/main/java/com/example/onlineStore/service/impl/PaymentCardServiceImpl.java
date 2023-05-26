@@ -8,6 +8,7 @@ import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.PaymentCardRepository;
 import com.example.onlineStore.service.PaymentCardService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.validation.*;
@@ -18,6 +19,7 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class PaymentCardServiceImpl implements PaymentCardService {
     private final PaymentCardRepository paymentCardRepository;
     private PaymentCardDto mapToDto (PaymentCard paymentCard){
@@ -35,6 +37,7 @@ public class PaymentCardServiceImpl implements PaymentCardService {
             PaymentCard paymentCard = paymentCardRepository.findByIdAndRdtIsNull(id);
             return mapToDto(paymentCard);
         }catch (NullPointerException e){
+            log.error("Метод getById(PaymentCard), Exception: Карта с id "+id+" не найдена.");
             throw new PaymentCardNotFoundException("Карта с id "+id+" не найдена.");
         }
 
@@ -49,6 +52,7 @@ public class PaymentCardServiceImpl implements PaymentCardService {
     public List<PaymentCardDto> getAll() throws PaymentCardNotFoundException {
         List<PaymentCard> paymentCardList = paymentCardRepository.findAllByRdtIsNull();
         if(paymentCardList.isEmpty()){
+            log.error("Метод getAll(PaymentCard), Exception: В базе нет платежных карт.");
             throw new PaymentCardNotFoundException("В базе нет платежных карт.");
         }
         List<PaymentCardDto> paymentCardDtoList = new ArrayList<>();
@@ -59,7 +63,13 @@ public class PaymentCardServiceImpl implements PaymentCardService {
     }
 
     @Override
-    public PaymentCardDto create(@Valid PaymentCard paymentCard) {
+    public PaymentCardDto create(@Valid PaymentCardDto dto) {
+        PaymentCard paymentCard = PaymentCard.builder()
+                .user(dto.getUser())
+                .cardNum(dto.getCardNum())
+                .balance(dto.getBalance())
+                .build();
+
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<PaymentCard>> violations = validator.validate(paymentCard);
@@ -69,6 +79,7 @@ public class PaymentCardServiceImpl implements PaymentCardService {
             List<String> errorMessages = new ArrayList<>();
             for (ConstraintViolation<PaymentCard> violation : violations) {
                 errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+                log.warn("Метод create(PaymentCard): "+errorMessages);
             }
             throw new ValidException(errorMessages);
         }
@@ -79,6 +90,7 @@ public class PaymentCardServiceImpl implements PaymentCardService {
     public PaymentCardDto update(Long id,@Valid PaymentCardDto dto) throws PaymentCardNotFoundException {
         PaymentCard paymentCard = getByIdEntity(id);
         if(paymentCard==null){
+            log.error("Метод getAll(PaymentCard), Exception: Карта с id "+id+" не найдена.");
             throw new PaymentCardNotFoundException("Карта с id "+id+" не найдена.");
         }
         if (dto.getCardNum() != null) {
@@ -99,6 +111,7 @@ public class PaymentCardServiceImpl implements PaymentCardService {
             List<String> errorMessages = new ArrayList<>();
             for (ConstraintViolation<PaymentCard> violation : violations) {
                 errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+                log.warn("Метод update(PaymentCard): "+errorMessages);
             }
             throw new ValidException(errorMessages);
         }
@@ -115,6 +128,7 @@ public class PaymentCardServiceImpl implements PaymentCardService {
             paymentCardRepository.save(paymentCard);
             return "Платежная карта с id: "+id+" была удалена.";
         }catch (NullPointerException e){
+            log.error("Метод deleteById(PaymentCard), Exception: Карта с id "+id+" не найдена.");
             throw new PaymentCardNotFoundException("Карта с id "+id+" не найдена.");
         }
 
