@@ -5,6 +5,7 @@ import com.example.onlineStore.entity.Cart;
 import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.enums.Gender;
+import com.example.onlineStore.enums.ProductType;
 import com.example.onlineStore.enums.Roles;
 import com.example.onlineStore.enums.Size;
 import com.example.onlineStore.exceptions.CartNotFoundException;
@@ -19,6 +20,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,8 +40,8 @@ public class CartServiceImplTest {
   public   void addNewProduct() throws UserNotFoundException, CartNotFoundException {
         User user = new User();
         user.setId(1l);
-        Product product = new Product(1l,"product",123d,Size.XL,"material" ,null,
-               null,null );
+        Product product = new Product(1l,"name",123d,Size.S,"material",
+                null, ProductType.REGULAR, LocalDate.now(),null,null,null);
         List<Product> products = new ArrayList<>();
         products.add(product);
         Cart cart = new Cart(null,user,null,products,null);
@@ -56,8 +58,8 @@ public class CartServiceImplTest {
     public void removeProduct() throws CartNotFoundException {
         User user = new User();
         user.setId(1l);
-        Product product = new Product(1l,"product",123d,Size.XL,"material" ,null,
-                null,null );
+        Product product = new Product(1l,"name",123d,Size.S,"material",
+                null, ProductType.REGULAR, LocalDate.now(),null,null,null);
         List<Product> products = new ArrayList<>();
         products.add(product);
         Cart cart = new Cart(null,user,null,products,null);
