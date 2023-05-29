@@ -197,7 +197,7 @@ public class PaymentServiceImpl implements PaymentService {
         for (Product product : products) {
             if (product.getDiscount() != null) {
                 discountSum += (product.getPrice()
-                        - (product.getPrice() * product.getDiscount().getDiscount()));
+                        - (product.getPrice() * product.getDiscount().getDiscount() / 100));
             }else {
                 discountSum += product.getPrice();
             }

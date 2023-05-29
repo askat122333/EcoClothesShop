@@ -1,7 +1,7 @@
 package com.example.onlineStore.controllerAdvice;
 
-import com.example.onlineStore.dto.ErrMessage;
-import com.example.onlineStore.dto.ErrValidMessage;
+import com.example.onlineStore.dto.errMessage.ErrMessage;
+import com.example.onlineStore.dto.errMessage.ErrValidMessage;
 import com.example.onlineStore.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
-import java.util.Collections;
-import java.util.List;
 
 @ControllerAdvice
 public class RestExceptionHandler {

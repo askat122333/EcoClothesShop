@@ -1,12 +1,16 @@
 package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.PaymentCardDto;
+import com.example.onlineStore.dto.UserDto;
 import com.example.onlineStore.entity.PaymentCard;
-import com.example.onlineStore.entity.Product;
+import com.example.onlineStore.entity.User;
 import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
+import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.PaymentCardRepository;
+import com.example.onlineStore.repository.UserRepository;
 import com.example.onlineStore.service.PaymentCardService;
+import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,6 +26,7 @@ import java.util.Set;
 @Slf4j
 public class PaymentCardServiceImpl implements PaymentCardService {
     private final PaymentCardRepository paymentCardRepository;
+    private final UserRepository userRepository;
     private PaymentCardDto mapToDto (PaymentCard paymentCard){
         return new PaymentCardDto(
                 paymentCard.getId(),
@@ -63,27 +68,38 @@ public class PaymentCardServiceImpl implements PaymentCardService {
     }
 
     @Override
-    public PaymentCardDto create(@Valid PaymentCardDto dto) {
-        PaymentCard paymentCard = PaymentCard.builder()
-                .user(dto.getUser())
-                .cardNum(dto.getCardNum())
-                .balance(dto.getBalance())
-                .build();
+    public String create(@Valid PaymentCardDto dto, Long userId) throws UserNotFoundException {
+        User user = userRepository.findByIdAndRdtIsNull(userId);
+        if (user == null) {
+            log.error("Метод create(paymentCard), Exception : Пользователь с id "+userId+" не найден");
+            throw new UserNotFoundException("Пользователь с id "+userId+" не найден");
+        } else if (user.getPaymentCard() != null) {
+            return "У вас уже есть платежная карта.";
+        }else {
+            PaymentCard paymentCard = PaymentCard.builder()
+                    .user(user)
+                    .cardNum(dto.getCardNum())
+                    .balance(dto.getBalance())
+                    .build();
 
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        Set<ConstraintViolation<PaymentCard>> violations = validator.validate(paymentCard);
 
-        if (!violations.isEmpty()) {
+            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+            Validator validator = factory.getValidator();
+            Set<ConstraintViolation<PaymentCard>> violations = validator.validate(paymentCard);
 
-            List<String> errorMessages = new ArrayList<>();
-            for (ConstraintViolation<PaymentCard> violation : violations) {
-                errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
-                log.warn("Метод create(PaymentCard): "+errorMessages);
+            if (!violations.isEmpty()) {
+
+                List<String> errorMessages = new ArrayList<>();
+                for (ConstraintViolation<PaymentCard> violation : violations) {
+                    errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
+                    log.warn("Метод create(PaymentCard): " + errorMessages);
+                }
+                throw new ValidException(errorMessages);
             }
-            throw new ValidException(errorMessages);
+            user.setPaymentCard(paymentCard);
+            paymentCardRepository.save(paymentCard);
+            return "Платежная карта добавлена.";
         }
-        return mapToDto(paymentCardRepository.save(paymentCard));
     }
 
     @Override

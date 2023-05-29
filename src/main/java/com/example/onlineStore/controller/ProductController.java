@@ -1,27 +1,16 @@
 package com.example.onlineStore.controller;
 
-import com.example.onlineStore.dto.ErrMessage;
 import com.example.onlineStore.dto.ProductDto;
-import com.example.onlineStore.dto.ProductDtoWithImageResponse;
-import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.service.ProductService;
-import com.sun.xml.bind.v2.TODO;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
 import javax.validation.constraints.Min;
-import javax.xml.bind.DatatypeConverter;
-import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.Base64;
 import java.util.List;
 @Validated
 @RestController

@@ -1,8 +1,8 @@
 package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.PaymentCardDto;
-import com.example.onlineStore.entity.PaymentCard;
 import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
+import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.service.PaymentCardService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +23,10 @@ public class PaymentCardController {
     public List<PaymentCardDto> getAll() throws PaymentCardNotFoundException {
         return paymentCardService.getAll();
     }
-    @PostMapping("/create")
-    public PaymentCardDto addNewPaymentCard(@RequestBody PaymentCardDto dto){
-        return paymentCardService.create(dto);
+    @PostMapping("/create/{userId}")
+    public String addNewPaymentCard(@RequestBody PaymentCardDto dto
+            , @PathVariable Long userId) throws UserNotFoundException {
+        return paymentCardService.create(dto, userId);
     }
     @PutMapping("/update/{id}")
     public PaymentCardDto updateCategory(@PathVariable Long id,

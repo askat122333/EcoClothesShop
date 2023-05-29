@@ -24,7 +24,7 @@ public class DiscountController {
         return discountService.getAll();
     }
     @PostMapping("/create")
-    public DiscountDto addNewDiscount(DiscountDto dto){
+    public DiscountDto addNewDiscount(@RequestBody DiscountDto dto){
         return discountService.create(dto);
     }
 
