@@ -1,7 +1,6 @@
 package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.UserDto;
-import com.example.onlineStore.entity.User;
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;

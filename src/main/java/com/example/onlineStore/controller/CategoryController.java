@@ -1,7 +1,6 @@
 package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.CategoryDto;
-import com.example.onlineStore.entity.Category;
 import com.example.onlineStore.exceptions.CategoryNotFoundException;
 import com.example.onlineStore.service.CategoryService;
 import lombok.AllArgsConstructor;

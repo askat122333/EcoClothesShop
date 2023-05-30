@@ -1,7 +1,6 @@
 package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.CartDto;
-import com.example.onlineStore.entity.Cart;
 import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.service.CartService;

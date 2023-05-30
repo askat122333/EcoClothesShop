@@ -1,7 +1,6 @@
 package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.DiscountDto;
-import com.example.onlineStore.entity.Discount;
 import com.example.onlineStore.exceptions.DiscountNotFoundException;
 import com.example.onlineStore.service.DiscountService;
 import lombok.AllArgsConstructor;
@@ -27,6 +26,7 @@ public class DiscountController {
     public DiscountDto addNewDiscount(@RequestBody DiscountDto dto){
         return discountService.create(dto);
     }
+
 
     @PutMapping("/update/{id}")
     public DiscountDto update(@PathVariable Long id ,
