@@ -1,6 +1,7 @@
 package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.OrderDto;
+import com.example.onlineStore.dto.PayPalDto;
 import com.example.onlineStore.entity.*;
 import com.example.onlineStore.enums.PaymentStatus;
 import com.example.onlineStore.exceptions.CartNotFoundException;
@@ -167,5 +168,18 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderTime(LocalDate.now());
         orderRepository.save(order);
         return mapToDto(order);
+    }
+
+    @Override
+    public PayPalDto findByUserId(Long id) {
+        Order order = orderRepository.findByUserId(id);
+        return PayPalDto.builder()
+                .user(order.getUser().getName())
+                .sum(order.getSum())
+                .address(order.getAddress())
+                .products(order.getProducts())
+                .id(order.getId())
+                .build();
+
     }
 }

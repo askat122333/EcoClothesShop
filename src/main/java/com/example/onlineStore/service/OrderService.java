@@ -1,6 +1,7 @@
 package com.example.onlineStore.service;
 
 import com.example.onlineStore.dto.OrderDto;
+import com.example.onlineStore.dto.PayPalDto;
 import com.example.onlineStore.entity.Order;
 import com.example.onlineStore.entity.Payment;
 import com.example.onlineStore.exceptions.CartNotFoundException;
@@ -25,4 +26,5 @@ public interface OrderService {
 
     String deleteById(Long id) throws OrderNotFoundException;
     OrderDto quickCreate(Long userId, Long productId,String address) throws ProductNotFoundException;
+    PayPalDto findByUserId(Long id);
 }

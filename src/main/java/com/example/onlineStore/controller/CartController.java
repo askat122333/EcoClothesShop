@@ -2,6 +2,7 @@ package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.CartDto;
 import com.example.onlineStore.entity.Cart;
+import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.service.CartService;
@@ -53,5 +54,10 @@ public class CartController {
     @DeleteMapping("/delete/{id}")
     public String deleteById(@PathVariable Long id) throws CartNotFoundException {
         return cartService.deleteById(id);
+    }
+    @GetMapping("/findByUser/{id}")
+    public List<Product> findByUser(@PathVariable Long id){
+        CartDto dto = cartService.findByUser(id);
+        return dto.getProducts();
     }
 }

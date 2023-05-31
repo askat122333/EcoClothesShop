@@ -4,6 +4,7 @@ import com.example.onlineStore.dto.UserDto;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,5 +23,7 @@ public interface UserService {
     String deleteById(Long id) throws UserNotFoundException;
     String setNewPassword(Long id,String token, String password) throws UserNotFoundException;
     String resetPassword(String email) throws UserNotFoundException;
+    String uploadImage(Long userId, MultipartFile file) throws UserNotFoundException;
+    byte[] getImageById(Long id) throws UserNotFoundException;
 
 }

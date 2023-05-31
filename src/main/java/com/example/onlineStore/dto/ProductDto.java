@@ -26,8 +26,6 @@ public class ProductDto {
 
     private String material;
 
-    private String img;
-
     private ProductType productType;
 
     private LocalDate dateAdded;
@@ -37,11 +35,11 @@ public class ProductDto {
     private Category category;
     private LocalDate rdt;
 
-    public ProductDto(Long id, String name, Double price,  Size size, String material, Category category) {
+    public ProductDto(Long id, String name, Double price,byte[] image,  Size size, String material, Category category) {
         this.id = id;
         this.name = name;
         this.price = price;
-
+        this.image = image;
         this.size = size;
         this.material = material;
         this.category = category;

@@ -22,7 +22,7 @@ public class UserDto {
     private String surname;
     private String email;
     private String password;
-    private Byte[] photo;
+    private byte[] photo;
 
     private Roles role;
 
@@ -35,7 +35,7 @@ public class UserDto {
 
     private LocalDate rdt;
 
-    public UserDto(Long id, String name, String surname, String email, String password, Byte[] photo, Roles role, Gender gender) {
+    public UserDto(Long id, String name, String surname, String email, String password, byte[] photo, Roles role, Gender gender) {
         this.id = id;
         this.name = name;
         this.surname = surname;

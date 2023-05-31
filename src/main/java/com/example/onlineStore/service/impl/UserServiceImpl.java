@@ -4,6 +4,7 @@ import com.example.onlineStore.dto.UserDto;
 import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.enums.Roles;
+import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.UserRepository;
@@ -11,9 +12,11 @@ import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import javax.validation.*;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -202,6 +205,35 @@ public class UserServiceImpl implements UserService {
         }catch (NullPointerException e){
             log.error("Метод resetPassword(user), Exception: Пользователь с email "+email+" не найден.");
             throw new UserNotFoundException("Пользователь с email "+email+" не найден.");
+        }
+
+    }
+
+    public String uploadImage(Long userId, MultipartFile file) throws UserNotFoundException {
+        try {
+
+            User user = getByIdEntity(userId);
+            try {
+                user.setPhoto(file.getBytes());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            userRepository.save(user);
+            return "Image saved to database successfully!";
+        }catch (NullPointerException e){
+            log.error("Метод uploadImage(User), Exception: Пользователь с id "+userId+" не найден.");
+            throw new UserNotFoundException("Пользователь с id "+userId+" не найден.");
+        }
+    }
+
+
+    public  byte[] getImageById(Long id) throws UserNotFoundException {
+        try {
+            User user = getByIdEntity(id);
+            return user.getPhoto();
+        }catch (NullPointerException e){
+            log.error("Метод getImageById(User), Exception: Пользователь с id "+id+" не найден.");
+            throw new UserNotFoundException("Пользователь с id "+id+" не найден.");
         }
 
     }

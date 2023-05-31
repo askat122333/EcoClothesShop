@@ -1,6 +1,7 @@
 package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.OrderDto;
+import com.example.onlineStore.dto.PayPalDto;
 import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.OrderNotFoundException;
 import com.example.onlineStore.service.OrderService;
@@ -42,5 +43,9 @@ public class OrderController {
     @DeleteMapping("/delete/{id}")
     public String deleteById(@PathVariable Long id) throws OrderNotFoundException {
         return orderService.deleteById(id);
+    }
+    @GetMapping("/byUserId/{id}")
+    public PayPalDto getByUserId(@PathVariable Long id){
+        return orderService.findByUserId(id);
     }
 }

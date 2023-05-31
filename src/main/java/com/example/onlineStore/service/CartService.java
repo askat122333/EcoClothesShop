@@ -23,4 +23,5 @@ public interface CartService {
     String deleteById(Long id) throws CartNotFoundException;
      CartDto addNewProduct(Long userId,Long productId) throws UserNotFoundException, CartNotFoundException;
     CartDto removeProduct(Long userId, Long productId) throws CartNotFoundException;
+    CartDto findByUser(Long id);
 }

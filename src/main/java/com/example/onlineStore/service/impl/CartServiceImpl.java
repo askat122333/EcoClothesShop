@@ -185,4 +185,7 @@ public class CartServiceImpl implements CartService {
         cartRepository.save(cart);
         return mapToDto(cart);
     }
+    public CartDto findByUser(Long id){
+        return mapToDto(cartRepository.findByUserId(id)) ;
+    }
 }
