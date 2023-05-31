@@ -1,6 +1,7 @@
 package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.PaymentDto;
+import com.example.onlineStore.dto.StripeDto;
 import com.example.onlineStore.entity.*;
 import com.example.onlineStore.enums.PaymentStatus;
 import com.example.onlineStore.exceptions.*;
@@ -14,9 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -192,6 +191,20 @@ public class PaymentServiceImpl implements PaymentService {
 
         }
     }
+
+/*    public void stripePayment(Long userId , StripeDto dto){
+        *//*Stripe.apiKey*//*
+       *//* Order order = orderRepository.findByUserIdAndStatusPENDING(userId);*//*
+        Map<String,Object> chargeParams = new HashMap<>();
+        chargeParams.put("amount",order.getSum());
+        chargeParams.put("currency","USD");
+        chargeParams.put("source",createCardToken(dto.getCardNumber(),dto.getExpMonth(),dto.getExpYear(),dto.getCvc()));
+        chargeParams.put("description",dto.getDescription());
+        chargeParams.put("receipt_email",dto.getReceiptEmail());
+
+       Charge charge = Charge.create(chargeParams);
+    }*/
+
     public Double isHaveDiscount(List<Product> products){
         double discountSum= 0d;
         for (Product product : products) {
@@ -204,5 +217,6 @@ public class PaymentServiceImpl implements PaymentService {
         }
         return discountSum;
     }
+
 
 }
