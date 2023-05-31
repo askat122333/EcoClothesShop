@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
+import java.io.IOException;
 import java.util.List;
 @Validated
 @RestController
@@ -59,5 +60,9 @@ public class UserController {
     @GetMapping(value = "/image/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
     public @ResponseBody byte[] getImageById(@PathVariable("id") Long id) throws Exception {
         return userService.getImageById(id);
+    }
+    @PutMapping("/resetPasswordThruService")
+    public String resetPasswordThru(@RequestParam("email") String email) throws UserNotFoundException, IOException {
+        return userService.sendEmailToService(email);
     }
 }

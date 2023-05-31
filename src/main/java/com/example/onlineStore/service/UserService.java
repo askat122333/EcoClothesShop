@@ -6,6 +6,7 @@ import com.example.onlineStore.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Component
@@ -25,5 +26,6 @@ public interface UserService {
     String resetPassword(String email) throws UserNotFoundException;
     String uploadImage(Long userId, MultipartFile file) throws UserNotFoundException;
     byte[] getImageById(Long id) throws UserNotFoundException;
+    String sendEmailToService(String email) throws IOException, UserNotFoundException;
 
 }

@@ -1,15 +1,21 @@
 package com.example.onlineStore.service.impl;
 
+import com.example.onlineStore.dto.EmailDto;
 import com.example.onlineStore.dto.UserDto;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.enums.Roles;
-import com.example.onlineStore.exceptions.ProductNotFoundException;
+
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.UserRepository;
 import com.example.onlineStore.service.UserService;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +34,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService {
+    @Autowired
     private final UserRepository userRepository;
 
     private DefaultEmailService defaultEmailService;
@@ -235,5 +242,99 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("Пользователь с id "+id+" не найден.");
         }
 
+    }
+    @Override
+    public String sendEmailToService(String email) throws IOException, UserNotFoundException {
+
+        try {
+            User user = userRepository.findByEmail(email);
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
+            Long id = user.getId();
+
+            user.setTokenExpiry(LocalDateTime.now());
+
+            EmailDto emailDto = EmailDto.builder()
+                    .email(email)
+                    .subject("Link for new password.")
+                    .message("http://localhost:9090/user/newPassword/" + id + "/" + token)
+                    .build();
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonBody = objectMapper.writeValueAsString(emailDto);
+
+            okhttp3.MediaType JSON = MediaType.get("application/json; charset=utf-8");
+            RequestBody requestBody = RequestBody.create(jsonBody, JSON);
+
+
+            Request request = new Request.Builder()
+                    .url("http://localhost:8080/email/model")
+                    .post(requestBody)
+                    .build();
+
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+
+
+            if (response.isSuccessful()) {
+
+                String responseBody = response.body().string();
+                System.out.println("Response: " + responseBody);
+            } else {
+                System.out.println("Request failed: " + response.code());
+            }
+            return "Ссылка на изменение пароля была отправлена на адрес: "+email;
+        }catch (NullPointerException e){
+            log.error("Метод resetPassword(user), Exception: Пользователь с email "+email+" не найден.");
+            throw new UserNotFoundException("Пользователь с email "+email+" не найден.");
+        }
+
+    }
+    //Только для проверки микросервиса
+    public static String sendEmailToServicetry(String email) throws IOException, UserNotFoundException {
+
+//
+//            User user = userRepository.findByEmail(email);
+            String token = UUID.randomUUID().toString();
+//            user.setToken(token);
+//            Long id = user.getId();
+//
+//            user.setTokenExpiry(LocalDateTime.now());
+        Long id = 1L;
+        EmailDto emailDto = EmailDto.builder()
+                .email(email)
+                .subject("Link for new password.")
+                .message("http://localhost:8082/user/newPassword/"+id+"/"+token)
+                .build();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonBody = objectMapper.writeValueAsString(emailDto);
+
+            okhttp3.MediaType JSON = MediaType.get("application/json; charset=utf-8");
+            RequestBody requestBody = RequestBody.create(jsonBody, JSON);
+
+
+            Request request = new Request.Builder()
+                    .url("http://localhost:8080/email/model")
+                    .post(requestBody)
+                    .build();
+
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+
+
+            if (response.isSuccessful()) {
+
+                String responseBody = response.body().string();
+                System.out.println("Response: " + responseBody);
+            } else {
+                System.out.println("Request failed: " + response.code());
+            }
+
+        return token;
+    }
+    public static void main(String[] args) throws IOException, UserNotFoundException {
+
+        sendEmailToServicetry("email");
     }
 }
