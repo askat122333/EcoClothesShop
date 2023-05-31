@@ -4,10 +4,7 @@ import com.example.onlineStore.entity.Payment;
 import com.example.onlineStore.entity.PaymentCard;
 import com.example.onlineStore.enums.Gender;
 import com.example.onlineStore.enums.Roles;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,13 +13,14 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserDto {
     private Long id;
     private String name;
     private String surname;
     private String email;
     private String password;
-    private byte[] photo;
+    private Byte[] photo;
 
     private Roles role;
 
@@ -35,7 +33,7 @@ public class UserDto {
 
     private LocalDate rdt;
 
-    public UserDto(Long id, String name, String surname, String email, String password, byte[] photo, Roles role, Gender gender) {
+    public UserDto(Long id, String name, String surname, String email, String password, Byte[] photo, Roles role, Gender gender) {
         this.id = id;
         this.name = name;
         this.surname = surname;

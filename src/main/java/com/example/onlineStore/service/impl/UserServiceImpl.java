@@ -1,7 +1,6 @@
 package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.UserDto;
-import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.enums.Roles;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
@@ -32,16 +31,19 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     private DefaultEmailService defaultEmailService;
+
     private UserDto mapToDto(User user) {
-        return new UserDto(
-                user.getId(),
-                user.getName(),
-                user.getSurname(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getPhoto(),
-                user.getRole(),
-                user.getGender());
+        return UserDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .surname(user.getSurname())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .gender(user.getGender())
+                .phone(user.getPhone())
+                .paymentCard(user.getPaymentCard())
+                .build();
     }
 
     @Override
@@ -127,9 +129,6 @@ public class UserServiceImpl implements UserService {
             }
             if (dto.getPassword() != null) {
                 user.setPassword(dto.getPassword());
-            }
-            if (dto.getRole() != null) {
-                user.setRole(dto.getRole());
             }
             if (dto.getGender() != null) {
                 user.setGender(dto.getGender());

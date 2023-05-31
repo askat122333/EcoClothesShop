@@ -64,10 +64,9 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public DiscountDto create(@Valid DiscountDto dto) {
         Discount discount = Discount.builder()
-                .discount(dto.getDiscount())
                 .name(dto.getName())
+                .discount(dto.getDiscount())
                 .build();
-
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Discount>> violations = validator.validate(discount);

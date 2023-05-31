@@ -3,6 +3,7 @@ package com.example.onlineStore.service;
 import com.example.onlineStore.dto.PaymentCardDto;
 import com.example.onlineStore.entity.PaymentCard;
 import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
+import com.example.onlineStore.exceptions.UserNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface PaymentCardService {
 
     List<PaymentCardDto> getAll() throws PaymentCardNotFoundException;
 
-    PaymentCardDto create(PaymentCardDto dto);
+    String create(PaymentCardDto dto,Long userId)throws UserNotFoundException;
 
     PaymentCardDto update(Long id,PaymentCardDto dto) throws PaymentCardNotFoundException;
 

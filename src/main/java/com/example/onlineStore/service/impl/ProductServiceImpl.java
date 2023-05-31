@@ -2,6 +2,7 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
+import com.example.onlineStore.enums.ProductType;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.ProductRepository;
@@ -26,15 +27,17 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     private ProductDto mapToDto(Product product) {
-        return new ProductDto(
-                product.getId(),
-                product.getName(),
-                product.getPrice(),
-                product.getImage(),
-                product.getSize(),
-                product.getMaterial(),
-                product.getCategory()
-        );
+        return ProductDto.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .size(product.getSize())
+                .price(product.getPrice())
+                .material(product.getMaterial())
+                .productType(product.getProductType())
+                .dateAdded(product.getDateAdded())
+                .discount(product.getDiscount())
+                .category(product.getCategory())
+                .build();
     }
 
     @Override
@@ -74,8 +77,11 @@ public class ProductServiceImpl implements ProductService {
 public ProductDto create(@Valid ProductDto dto) {
     Product product = Product.builder()
             .name(dto.getName())
+            .discount(dto.getDiscount())
             .category(dto.getCategory())
             .price(dto.getPrice())
+            .dateAdded(LocalDate.now())
+            .productType(ProductType.NEW)
             .material(dto.getMaterial())
             .size(dto.getSize())
             .build();
@@ -136,6 +142,9 @@ public ProductDto create(@Valid ProductDto dto) {
         if(dto.getCategory()!=null){
             product.setCategory(dto.getCategory());
         }
+        if (dto.getDiscount()!=null){
+            product.setDiscount(dto.getDiscount());
+        }
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -168,7 +177,6 @@ public ProductDto create(@Valid ProductDto dto) {
 
     }
 
-    //TODO
     @Override
     public List<ProductDto> getAllByCategory(Long categoryId) throws ProductNotFoundException {
         List<Product> productList = productRepository.findAllByCategoryAndRdtIsNull(categoryId);
@@ -213,6 +221,4 @@ public ProductDto create(@Valid ProductDto dto) {
         }
 
     }
-
-
 }

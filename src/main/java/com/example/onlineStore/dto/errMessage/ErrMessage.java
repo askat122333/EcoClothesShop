@@ -1,4 +1,4 @@
-package com.example.onlineStore.dto;
+package com.example.onlineStore.dto.errMessage;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
