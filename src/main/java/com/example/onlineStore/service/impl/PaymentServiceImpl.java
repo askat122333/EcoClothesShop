@@ -1,5 +1,6 @@
 package com.example.onlineStore.service.impl;
 
+import com.example.onlineStore.dto.CreateStripeCustomerDto;
 import com.example.onlineStore.dto.PaymentDto;
 import com.example.onlineStore.dto.StripeDto;
 import com.example.onlineStore.entity.*;
@@ -9,8 +10,20 @@ import com.example.onlineStore.repository.OrderRepository;
 import com.example.onlineStore.repository.PaymentCardRepository;
 import com.example.onlineStore.repository.PaymentRepository;
 import com.example.onlineStore.service.PaymentService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
+import com.stripe.model.Customer;
+import com.stripe.model.Token;
+import io.swagger.v3.core.util.Json;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import javax.validation.*;
@@ -192,18 +205,90 @@ public class PaymentServiceImpl implements PaymentService {
         }
     }
 
-/*    public void stripePayment(Long userId , StripeDto dto){
-        *//*Stripe.apiKey*//*
-       *//* Order order = orderRepository.findByUserIdAndStatusPENDING(userId);*//*
+    @Override
+   public String stripePayment(Long userId , StripeDto dto) throws StripeException {
+        Stripe.apiKey = "sk_test_51NDXxjGOVlOOV4yQONVbA1UvZMDnrwrSWaTdAAyfXyPNFcdXOywDnmTYUXRF6sEXjDhZl9H7LlFECq5fIiR4g3ec009HqtR6L9";
+//        Order order = orderRepository.findByUserIdAndStatusPENDING(userId);
         Map<String,Object> chargeParams = new HashMap<>();
-        chargeParams.put("amount",order.getSum());
+        chargeParams.put("amount","1000");
         chargeParams.put("currency","USD");
         chargeParams.put("source",createCardToken(dto.getCardNumber(),dto.getExpMonth(),dto.getExpYear(),dto.getCvc()));
         chargeParams.put("description",dto.getDescription());
         chargeParams.put("receipt_email",dto.getReceiptEmail());
 
        Charge charge = Charge.create(chargeParams);
-    }*/
+        Gson gson = new GsonBuilder().create();
+        String jsonString = gson.toJson(charge);
+
+            JSONObject json = new JSONObject(jsonString);
+
+
+        JSONObject card = json.getJSONObject("payment_method_details").getJSONObject("card");
+
+            String email = json.getString("receipt_email");
+            Integer amount = json.getInt("amount");
+            String currency = json.getString("currency");
+            String status = json.getString("status");
+            String brand = card.getString("brand");
+            String last4 = card.getString("last4");
+            String response = "Статус оплаты: "+status+
+                    "\nТип карты: "+brand+
+                    "\nНомер карты: "+last4+
+                    "\nСумма: "+(amount/100)+" "+currency+
+                    "\nEmail клиента: "+email;
+
+            return response;
+
+    }
+
+    private String createCardToken(String cardNumber, String expMonth, String expYear, String cvc) throws StripeException {
+        Map<String, Object> cardParams = new HashMap<>();
+        cardParams.put("number", cardNumber);
+        cardParams.put("exp_month", expMonth);
+        cardParams.put("exp_year", expYear);
+        cardParams.put("cvc", cvc);
+
+        Map<String, Object> tokenParams = new HashMap<>();
+        tokenParams.put("card", cardParams);
+
+        com.stripe.model.Token token = com.stripe.model.Token.create(tokenParams);
+
+        return token.getId();
+    }
+
+    @Override
+    public String addCustomerAndCard(CreateStripeCustomerDto dto) throws StripeException {
+        Stripe.apiKey = "sk_test_51NDXxjGOVlOOV4yQONVbA1UvZMDnrwrSWaTdAAyfXyPNFcdXOywDnmTYUXRF6sEXjDhZl9H7LlFECq5fIiR4g3ec009HqtR6L9";
+        Map<String,Object> customerParameter = new HashMap<>();
+        customerParameter.put("name",dto.getName());
+        customerParameter.put("email",dto.getEmail());
+        Customer newCustomer = Customer.create(customerParameter);
+
+        Map<String,Object> cardParameter = new HashMap<>();
+        cardParameter.put("number",dto.getCardNumber());
+        cardParameter.put("exp_month",dto.getExp_month());
+        cardParameter.put("exp_year",dto.getExp_year());
+        cardParameter.put("cvc",dto.getCvc());
+        Map<String,Object> token = new HashMap<>();
+        token.put("card",cardParameter);
+
+        Token token2 = Token.create(token);
+        Map<String,Object> source = new HashMap<>();
+        source.put("source",token2.getId());
+
+        newCustomer.getSources().create(source);
+        return "ПОльзователь с именем: "+newCustomer.getName()+" добавлен в систему.";
+    }
+
+    public static void chargeForDbCustomer() throws StripeException {
+        Map<String,Object> charge = new HashMap<>();
+        charge.put("amount","500");
+        charge.put("currency","usd");
+        charge.put("customer","cus_NzXHJEmBjUgnCt");
+        Charge charge2 = Charge.create(charge);
+        Gson gson = new GsonBuilder().create();
+        System.out.println(gson.toJson(charge2));
+    }
 
     public Double isHaveDiscount(List<Product> products){
         double discountSum= 0d;
