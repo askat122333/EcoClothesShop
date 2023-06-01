@@ -208,9 +208,12 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
    public String stripePayment(Long userId , StripeDto dto) throws StripeException {
         Stripe.apiKey = "sk_test_51NDXxjGOVlOOV4yQONVbA1UvZMDnrwrSWaTdAAyfXyPNFcdXOywDnmTYUXRF6sEXjDhZl9H7LlFECq5fIiR4g3ec009HqtR6L9";
-//        Order order = orderRepository.findByUserIdAndStatusPENDING(userId);
+        Double orderSum = orderRepository.getOrderSumByUSerId(userId)*100;
+
+        Integer sum = Double.valueOf(orderSum).intValue();
+
         Map<String,Object> chargeParams = new HashMap<>();
-        chargeParams.put("amount","1000");
+        chargeParams.put("amount", sum);
         chargeParams.put("currency","USD");
         chargeParams.put("source",createCardToken(dto.getCardNumber(),dto.getExpMonth(),dto.getExpYear(),dto.getCvc()));
         chargeParams.put("description",dto.getDescription());
@@ -263,6 +266,7 @@ public class PaymentServiceImpl implements PaymentService {
         customerParameter.put("name",dto.getName());
         customerParameter.put("email",dto.getEmail());
         Customer newCustomer = Customer.create(customerParameter);
+        String customerId = newCustomer.getId();//этот айди должен быть в базе с его использованием можно проводить оплату
 
         Map<String,Object> cardParameter = new HashMap<>();
         cardParameter.put("number",dto.getCardNumber());

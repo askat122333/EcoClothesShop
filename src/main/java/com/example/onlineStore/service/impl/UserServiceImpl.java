@@ -12,7 +12,6 @@ import com.example.onlineStore.service.UserService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -304,7 +303,7 @@ public class UserServiceImpl implements UserService {
         EmailDto emailDto = EmailDto.builder()
                 .email(email)
                 .subject("Link for new password.")
-                .message("http://localhost:8082/user/newPassword/"+id+"/"+token)
+                .message("http://localhost:9090/user/newPassword/"+id+"/"+token)
                 .build();
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -315,7 +314,7 @@ public class UserServiceImpl implements UserService {
 
 
             Request request = new Request.Builder()
-                    .url("http://localhost:8080/email/model")
+                    .url("https://emailserviceforeco.herokuapp.com/email/model")
                     .post(requestBody)
                     .build();
 
@@ -335,6 +334,6 @@ public class UserServiceImpl implements UserService {
     }
     public static void main(String[] args) throws IOException, UserNotFoundException {
 
-        sendEmailToServicetry("email");
+        sendEmailToServicetry("azamatomurkulov01@gmail.com");
     }
 }

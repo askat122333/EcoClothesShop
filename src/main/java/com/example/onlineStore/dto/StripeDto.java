@@ -12,7 +12,6 @@ public class StripeDto {
     private String expMonth;
     private String expYear;
     private String cvc;
-    private String source;
     private String description;
     private String receiptEmail;
 }

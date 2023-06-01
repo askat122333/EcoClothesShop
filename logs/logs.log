@@ -1402,3 +1402,909 @@ com.stripe.exception.AuthenticationException: No API key provided. (HINT: set yo
 2023-06-01 02:53:51.820  INFO 13908 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2023-06-01 02:53:51.821  INFO 13908 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2023-06-01 02:53:51.825  INFO 13908 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 04:40:56.954  INFO 13760 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 13760 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 04:40:56.959  INFO 13760 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 04:40:57.815  INFO 13760 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 04:40:57.883  INFO 13760 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 8 JPA repository interfaces.
+2023-06-01 04:40:58.351  INFO 13760 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 04:40:58.360  INFO 13760 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 04:40:58.361  INFO 13760 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 04:40:58.467  INFO 13760 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 04:40:58.468  INFO 13760 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1445 ms
+2023-06-01 04:40:58.635  INFO 13760 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 04:40:58.690  INFO 13760 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 04:40:58.845  INFO 13760 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 04:40:58.957  INFO 13760 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 04:40:59.137  INFO 13760 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 04:40:59.164  INFO 13760 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 04:41:00.112  INFO 13760 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 04:41:00.121  INFO 13760 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 04:41:00.952  WARN 13760 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 04:41:01.515  INFO 13760 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 04:41:03.017  WARN 13760 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 04:41:03.196  INFO 13760 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 04:41:03.197  INFO 13760 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 04:41:03.213  INFO 13760 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 04:41:03.236  INFO 13760 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 04:41:03.365  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 04:41:03.368  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 04:41:03.370  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 04:41:03.380  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 04:41:03.382  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 04:41:03.392  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 04:41:03.395  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 04:41:03.396  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 04:41:03.410  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 04:41:03.412  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 04:41:03.413  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 04:41:03.415  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 04:41:03.429  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 04:41:03.431  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 04:41:03.433  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 04:41:03.444  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 04:41:03.445  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 04:41:03.446  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 04:41:03.448  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 04:41:03.454  INFO 13760 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 04:41:03.482  INFO 13760 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 6.913 seconds (JVM running for 7.502)
+2023-06-01 04:41:05.836  INFO 13760 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 04:41:05.837  INFO 13760 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 04:41:05.838  INFO 13760 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-06-01 04:45:30.142  INFO 13760 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 04:45:30.143  INFO 13760 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 04:45:30.154  INFO 13760 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 04:45:56.981  INFO 3156 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 3156 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 04:45:56.984  INFO 3156 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 04:45:57.789  INFO 3156 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 04:45:57.849  INFO 3156 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 52 ms. Found 8 JPA repository interfaces.
+2023-06-01 04:45:58.329  INFO 3156 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 04:45:58.339  INFO 3156 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 04:45:58.339  INFO 3156 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 04:45:58.449  INFO 3156 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 04:45:58.450  INFO 3156 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1399 ms
+2023-06-01 04:45:58.586  INFO 3156 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 04:45:58.664  INFO 3156 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 04:45:58.842  INFO 3156 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 04:45:58.940  INFO 3156 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 04:45:59.287  INFO 3156 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 04:45:59.327  INFO 3156 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 04:46:00.447  INFO 3156 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 04:46:00.454  INFO 3156 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 04:46:01.167  WARN 3156 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 04:46:01.499  INFO 3156 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 04:46:02.368  WARN 3156 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 04:46:02.582  INFO 3156 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 04:46:02.583  INFO 3156 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 04:46:02.619  INFO 3156 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 04:46:02.645  INFO 3156 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 04:46:02.867  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 04:46:02.870  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 04:46:02.872  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 04:46:02.886  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 04:46:02.888  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 04:46:02.901  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 04:46:02.905  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 04:46:02.909  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 04:46:02.931  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 04:46:02.959  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 04:46:02.967  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 04:46:02.974  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 04:46:03.036  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 04:46:03.042  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 04:46:03.052  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 04:46:03.086  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 04:46:03.090  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 04:46:03.092  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 04:46:03.094  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 04:46:03.111  INFO 3156 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 04:46:03.164  INFO 3156 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 6.578 seconds (JVM running for 7.173)
+2023-06-01 04:46:08.295  INFO 3156 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 04:46:08.295  INFO 3156 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 04:46:08.297  INFO 3156 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-06-01 04:46:25.316  INFO 3156 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 04:46:25.317  INFO 3156 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 04:46:25.322  INFO 3156 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 04:50:07.184  INFO 15332 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 15332 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 04:50:07.187  INFO 15332 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 04:50:08.016  INFO 15332 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 04:50:08.074  INFO 15332 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51 ms. Found 8 JPA repository interfaces.
+2023-06-01 04:50:08.538  INFO 15332 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 04:50:08.548  INFO 15332 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 04:50:08.549  INFO 15332 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 04:50:08.717  INFO 15332 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 04:50:08.717  INFO 15332 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1478 ms
+2023-06-01 04:50:08.990  INFO 15332 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 04:50:09.059  INFO 15332 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 04:50:09.334  INFO 15332 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 04:50:09.478  INFO 15332 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 04:50:09.667  INFO 15332 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 04:50:09.712  INFO 15332 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 04:50:11.847  INFO 15332 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 04:50:11.864  INFO 15332 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 04:50:13.768  WARN 15332 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 04:50:14.021  INFO 15332 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 04:50:14.781  WARN 15332 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 04:50:15.445  INFO 15332 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 04:50:15.447  INFO 15332 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 04:50:15.508  INFO 15332 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 04:50:15.581  INFO 15332 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 04:50:16.132  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 04:50:16.143  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 04:50:16.151  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 04:50:16.196  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 04:50:16.201  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 04:50:16.230  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 04:50:16.233  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 04:50:16.237  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 04:50:16.270  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 04:50:16.278  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 04:50:16.282  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 04:50:16.285  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 04:50:16.336  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 04:50:16.343  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 04:50:16.352  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 04:50:16.400  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 04:50:16.404  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 04:50:16.411  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 04:50:16.414  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 04:50:16.432  INFO 15332 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 04:50:16.511  INFO 15332 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 10.383 seconds (JVM running for 11.487)
+2023-06-01 04:50:19.729  INFO 15332 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 04:50:19.729  INFO 15332 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 04:50:19.730  INFO 15332 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-06-01 04:50:49.454  INFO 15332 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 04:50:49.455  INFO 15332 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 04:50:49.460  INFO 15332 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 04:52:31.812  INFO 16044 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 16044 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 04:52:31.814  INFO 16044 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 04:52:32.582  INFO 16044 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 04:52:32.639  INFO 16044 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 8 JPA repository interfaces.
+2023-06-01 04:52:33.050  INFO 16044 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 04:52:33.057  INFO 16044 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 04:52:33.057  INFO 16044 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 04:52:33.146  INFO 16044 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 04:52:33.147  INFO 16044 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1292 ms
+2023-06-01 04:52:33.262  INFO 16044 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 04:52:33.310  INFO 16044 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 04:52:33.435  INFO 16044 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 04:52:33.523  INFO 16044 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 04:52:33.755  INFO 16044 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 04:52:33.780  INFO 16044 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 04:52:34.596  INFO 16044 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 04:52:34.603  INFO 16044 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 04:52:35.249  WARN 16044 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 04:52:35.378  INFO 16044 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 04:52:35.867  WARN 16044 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 04:52:36.025  INFO 16044 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 04:52:36.026  INFO 16044 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 04:52:36.040  INFO 16044 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 04:52:36.056  INFO 16044 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 04:52:36.177  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 04:52:36.178  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 04:52:36.179  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 04:52:36.185  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 04:52:36.186  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 04:52:36.192  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 04:52:36.194  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 04:52:36.195  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 04:52:36.204  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 04:52:36.206  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 04:52:36.208  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 04:52:36.210  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 04:52:36.228  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 04:52:36.230  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 04:52:36.234  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 04:52:36.249  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 04:52:36.250  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 04:52:36.251  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 04:52:36.252  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 04:52:36.256  INFO 16044 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 04:52:36.283  INFO 16044 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 4.893 seconds (JVM running for 5.762)
+2023-06-01 04:53:05.825  INFO 16044 --- [http-nio-9090-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 04:53:05.825  INFO 16044 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 04:53:05.827  INFO 16044 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-06-01 04:53:29.247  INFO 16044 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 04:53:29.248  INFO 16044 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 04:53:29.260  INFO 16044 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 04:54:40.858  INFO 16028 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 16028 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 04:54:40.862  INFO 16028 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 04:54:42.798  INFO 16028 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 04:54:42.977  INFO 16028 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 163 ms. Found 8 JPA repository interfaces.
+2023-06-01 04:54:43.848  INFO 16028 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 04:54:43.856  INFO 16028 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 04:54:43.857  INFO 16028 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 04:54:44.009  INFO 16028 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 04:54:44.010  INFO 16028 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3071 ms
+2023-06-01 04:54:44.169  INFO 16028 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 04:54:44.321  INFO 16028 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 04:54:44.495  INFO 16028 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 04:54:44.579  INFO 16028 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 04:54:44.781  INFO 16028 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 04:54:44.823  INFO 16028 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 04:54:46.435  INFO 16028 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 04:54:46.452  INFO 16028 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 04:54:47.858  WARN 16028 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 04:54:48.064  INFO 16028 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 04:54:49.099  WARN 16028 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 04:54:49.371  INFO 16028 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 04:54:49.372  INFO 16028 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 04:54:49.391  INFO 16028 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 04:54:49.409  INFO 16028 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 04:54:49.538  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 04:54:49.539  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 04:54:49.540  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 04:54:49.546  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 04:54:49.547  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 04:54:49.556  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 04:54:49.559  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 04:54:49.562  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 04:54:49.574  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 04:54:49.576  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 04:54:49.578  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 04:54:49.580  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 04:54:49.600  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 04:54:49.603  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 04:54:49.607  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 04:54:49.625  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 04:54:49.630  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 04:54:49.634  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 04:54:49.636  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 04:54:49.640  INFO 16028 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 04:54:49.674  INFO 16028 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 9.285 seconds (JVM running for 9.952)
+2023-06-01 04:54:52.581  INFO 16028 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 04:54:52.581  INFO 16028 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 04:54:52.583  INFO 16028 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-06-01 04:55:06.960  INFO 16028 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 04:55:06.962  INFO 16028 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 04:55:06.967  INFO 16028 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 19:44:21.642  INFO 11816 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 11816 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 19:44:21.646  INFO 11816 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 19:44:22.809  INFO 11816 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 19:44:22.898  INFO 11816 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 78 ms. Found 8 JPA repository interfaces.
+2023-06-01 19:44:23.585  INFO 11816 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 19:44:23.599  INFO 11816 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 19:44:23.599  INFO 11816 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 19:44:23.734  INFO 11816 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 19:44:23.734  INFO 11816 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2029 ms
+2023-06-01 19:44:23.907  INFO 11816 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 19:44:23.974  INFO 11816 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 19:44:24.183  INFO 11816 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 19:44:24.314  INFO 11816 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 19:44:24.594  INFO 11816 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 19:44:24.635  INFO 11816 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 19:44:27.301  INFO 11816 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 19:44:27.311  INFO 11816 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 19:44:28.181  WARN 11816 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 19:44:28.433  INFO 11816 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 19:44:29.119  WARN 11816 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 19:44:29.332  INFO 11816 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 19:44:29.333  INFO 11816 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 19:44:29.353  INFO 11816 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 19:44:29.373  INFO 11816 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 19:44:29.522  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 19:44:29.524  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 19:44:29.526  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 19:44:29.535  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 19:44:29.538  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 19:44:29.548  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 19:44:29.551  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 19:44:29.552  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 19:44:29.567  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 19:44:29.569  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 19:44:29.571  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 19:44:29.573  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 19:44:29.600  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 19:44:29.602  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 19:44:29.606  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 19:44:29.622  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 19:44:29.624  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 19:44:29.625  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 19:44:29.627  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 19:44:29.633  INFO 11816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 19:44:29.658  INFO 11816 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 8.692 seconds (JVM running for 10.062)
+2023-06-01 19:45:58.465  INFO 11816 --- [http-nio-9090-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 19:45:58.465  INFO 11816 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 19:45:58.470  INFO 11816 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2023-06-01 19:52:03.873  INFO 11816 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 19:52:03.874  INFO 11816 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 19:52:03.877  INFO 11816 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 20:03:14.044  INFO 14992 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 14992 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 20:03:14.047  INFO 14992 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 20:03:15.955  INFO 14992 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 20:03:16.024  INFO 14992 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 8 JPA repository interfaces.
+2023-06-01 20:03:16.520  INFO 14992 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 20:03:16.529  INFO 14992 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 20:03:16.529  INFO 14992 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 20:03:16.676  INFO 14992 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 20:03:16.676  INFO 14992 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2550 ms
+2023-06-01 20:03:16.826  INFO 14992 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 20:03:16.877  INFO 14992 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 20:03:17.144  INFO 14992 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 20:03:17.941  INFO 14992 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 20:03:18.512  INFO 14992 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 20:03:18.549  INFO 14992 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 20:03:19.538  INFO 14992 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 20:03:19.552  INFO 14992 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:03:20.243  WARN 14992 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 20:03:20.410  INFO 14992 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 20:03:22.384  WARN 14992 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 20:03:22.937  INFO 14992 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 20:03:22.938  INFO 14992 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 20:03:22.966  INFO 14992 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 20:03:22.994  INFO 14992 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 20:03:23.273  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 20:03:23.278  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 20:03:23.281  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 20:03:23.299  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 20:03:23.301  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 20:03:23.318  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 20:03:23.321  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 20:03:23.323  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 20:03:23.343  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 20:03:23.347  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 20:03:23.349  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 20:03:23.352  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 20:03:23.374  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 20:03:23.377  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 20:03:23.383  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 20:03:23.404  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 20:03:23.406  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 20:03:23.408  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 20:03:23.410  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 20:03:23.416  INFO 14992 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 20:03:23.455  INFO 14992 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 9.878 seconds (JVM running for 10.651)
+2023-06-01 20:03:43.028  INFO 14992 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 20:03:43.029  INFO 14992 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 20:03:43.029  INFO 14992 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-06-01 20:04:51.246  INFO 14992 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:04:51.249  INFO 14992 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 20:04:51.259  INFO 14992 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 20:20:24.897  INFO 8072 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 8072 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 20:20:24.900  INFO 8072 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 20:20:25.784  INFO 8072 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 20:20:25.855  INFO 8072 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 8 JPA repository interfaces.
+2023-06-01 20:20:26.397  INFO 8072 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 20:20:26.408  INFO 8072 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 20:20:26.408  INFO 8072 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 20:20:26.518  INFO 8072 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 20:20:26.518  INFO 8072 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1567 ms
+2023-06-01 20:20:26.686  INFO 8072 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 20:20:26.754  INFO 8072 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 20:20:26.929  INFO 8072 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 20:20:27.031  INFO 8072 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 20:20:27.186  INFO 8072 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 20:20:27.222  INFO 8072 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 20:20:28.133  INFO 8072 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 20:20:28.142  INFO 8072 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:20:28.826  WARN 8072 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 20:20:28.978  INFO 8072 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 20:20:29.497  WARN 8072 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 20:20:29.662  INFO 8072 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 20:20:29.663  INFO 8072 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 20:20:29.682  INFO 8072 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 20:20:29.702  INFO 8072 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 20:20:29.834  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 20:20:29.836  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 20:20:29.837  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 20:20:29.846  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 20:20:29.848  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 20:20:29.856  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 20:20:29.857  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 20:20:29.858  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 20:20:29.869  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 20:20:29.871  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 20:20:29.872  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 20:20:29.874  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 20:20:29.889  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 20:20:29.891  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 20:20:29.893  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 20:20:29.904  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 20:20:29.906  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 20:20:29.916  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 20:20:29.919  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 20:20:29.929  INFO 8072 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 20:20:29.999  INFO 8072 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 5.627 seconds (JVM running for 6.44)
+2023-06-01 20:20:35.098  INFO 8072 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 20:20:35.099  INFO 8072 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 20:20:35.100  INFO 8072 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-06-01 20:20:35.267 ERROR 8072 --- [http-nio-9090-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "java.lang.Double.doubleValue()" because the return value of "com.example.onlineStore.repository.OrderRepository.getOrderSumByUSerId(java.lang.Long)" is null] with root cause
+
+java.lang.NullPointerException: Cannot invoke "java.lang.Double.doubleValue()" because the return value of "com.example.onlineStore.repository.OrderRepository.getOrderSumByUSerId(java.lang.Long)" is null
+	at com.example.onlineStore.service.impl.PaymentServiceImpl.stripePayment(PaymentServiceImpl.java:211) ~[classes/:na]
+	at com.example.onlineStore.controller.PaymentController.stripePayment(PaymentController.java:33) ~[classes/:na]
+	at com.example.onlineStore.controller.PaymentController$$FastClassBySpringCGLIB$$e5e9ccc1.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.validation.beanvalidation.MethodValidationInterceptor.invoke(MethodValidationInterceptor.java:123) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708) ~[spring-aop-5.3.27.jar:5.3.27]
+	at com.example.onlineStore.controller.PaymentController$$EnhancerBySpringCGLIB$$dabe2713.stripePayment(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529) ~[tomcat-embed-core-9.0.74.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.74.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.servlet.resource.ResourceUrlEncodingFilter.doFilter(ResourceUrlEncodingFilter.java:67) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2023-06-01 20:20:51.356  INFO 8072 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:20:51.358  INFO 8072 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 20:20:51.363  INFO 8072 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 20:22:21.204  INFO 4664 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 4664 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 20:22:21.206  INFO 4664 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 20:22:21.990  INFO 4664 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 20:22:22.075  INFO 4664 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 77 ms. Found 8 JPA repository interfaces.
+2023-06-01 20:22:22.777  INFO 4664 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 20:22:22.796  INFO 4664 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 20:22:22.796  INFO 4664 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 20:22:23.213  INFO 4664 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 20:22:23.216  INFO 4664 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1966 ms
+2023-06-01 20:22:23.688  INFO 4664 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 20:22:23.764  INFO 4664 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 20:22:23.902  INFO 4664 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 20:22:24.001  INFO 4664 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 20:22:24.167  INFO 4664 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 20:22:24.194  INFO 4664 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 20:22:24.989  INFO 4664 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 20:22:24.996  INFO 4664 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:22:25.673  WARN 4664 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 20:22:25.814  INFO 4664 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 20:22:26.290  WARN 4664 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 20:22:26.440  INFO 4664 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 20:22:26.441  INFO 4664 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 20:22:26.461  INFO 4664 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 20:22:26.482  INFO 4664 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 20:22:26.620  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 20:22:26.621  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 20:22:26.622  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 20:22:26.629  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 20:22:26.630  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 20:22:26.636  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 20:22:26.638  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 20:22:26.639  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 20:22:26.647  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 20:22:26.649  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 20:22:26.650  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 20:22:26.652  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 20:22:26.666  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 20:22:26.667  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 20:22:26.669  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 20:22:26.678  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 20:22:26.679  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 20:22:26.680  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 20:22:26.681  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 20:22:26.684  INFO 4664 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 20:22:26.701  INFO 4664 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 5.945 seconds (JVM running for 6.668)
+2023-06-01 20:22:29.756  INFO 4664 --- [http-nio-9090-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 20:22:29.756  INFO 4664 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 20:22:29.757  INFO 4664 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-06-01 20:22:32.245 ERROR 4664 --- [http-nio-9090-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is com.stripe.exception.InvalidRequestException: Invalid integer: 25500.0; code: parameter_invalid_integer; request-id: req_MZ2QPfd7fHPZTc] with root cause
+
+com.stripe.exception.InvalidRequestException: Invalid integer: 25500.0; code: parameter_invalid_integer; request-id: req_MZ2QPfd7fHPZTc
+	at com.stripe.net.LiveStripeResponseGetter.handleApiError(LiveStripeResponseGetter.java:792) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.net.LiveStripeResponseGetter.staticRequest(LiveStripeResponseGetter.java:553) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.net.LiveStripeResponseGetter.request(LiveStripeResponseGetter.java:78) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.net.ApiResource.request(ApiResource.java:228) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.model.Charge.create(Charge.java:590) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.model.Charge.create(Charge.java:578) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.example.onlineStore.service.impl.PaymentServiceImpl.stripePayment(PaymentServiceImpl.java:219) ~[classes/:na]
+	at com.example.onlineStore.controller.PaymentController.stripePayment(PaymentController.java:33) ~[classes/:na]
+	at com.example.onlineStore.controller.PaymentController$$FastClassBySpringCGLIB$$e5e9ccc1.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.validation.beanvalidation.MethodValidationInterceptor.invoke(MethodValidationInterceptor.java:123) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708) ~[spring-aop-5.3.27.jar:5.3.27]
+	at com.example.onlineStore.controller.PaymentController$$EnhancerBySpringCGLIB$$1124fe48.stripePayment(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529) ~[tomcat-embed-core-9.0.74.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.74.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.servlet.resource.ResourceUrlEncodingFilter.doFilter(ResourceUrlEncodingFilter.java:67) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2023-06-01 20:23:17.309  INFO 4664 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:23:17.311  INFO 4664 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 20:23:17.316  INFO 4664 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 20:23:23.048  INFO 4896 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 4896 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 20:23:23.051  INFO 4896 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 20:23:23.855  INFO 4896 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 20:23:23.916  INFO 4896 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 8 JPA repository interfaces.
+2023-06-01 20:23:24.355  INFO 4896 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 20:23:24.365  INFO 4896 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 20:23:24.365  INFO 4896 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 20:23:24.475  INFO 4896 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 20:23:24.476  INFO 4896 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1371 ms
+2023-06-01 20:23:24.622  INFO 4896 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 20:23:24.679  INFO 4896 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 20:23:24.836  INFO 4896 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 20:23:24.939  INFO 4896 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 20:23:25.188  INFO 4896 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 20:23:25.218  INFO 4896 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 20:23:26.123  INFO 4896 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 20:23:26.131  INFO 4896 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:23:26.845  WARN 4896 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 20:23:26.995  INFO 4896 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 20:23:27.472  WARN 4896 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 20:23:27.632  INFO 4896 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 20:23:27.633  INFO 4896 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 20:23:27.650  INFO 4896 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 20:23:27.668  INFO 4896 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 20:23:27.800  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 20:23:27.802  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 20:23:27.803  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 20:23:27.810  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 20:23:27.812  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 20:23:27.818  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 20:23:27.819  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 20:23:27.820  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 20:23:27.828  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 20:23:27.830  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 20:23:27.832  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 20:23:27.833  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 20:23:27.846  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 20:23:27.849  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 20:23:27.851  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 20:23:27.860  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 20:23:27.861  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 20:23:27.862  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 20:23:27.862  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 20:23:27.865  INFO 4896 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 20:23:27.883  INFO 4896 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 5.244 seconds (JVM running for 5.931)
+2023-06-01 20:23:31.250  INFO 4896 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 20:23:31.251  INFO 4896 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 20:23:31.252  INFO 4896 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-06-01 20:23:33.700 ERROR 4896 --- [http-nio-9090-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is com.stripe.exception.InvalidRequestException: Invalid integer: 25500.0; code: parameter_invalid_integer; request-id: req_mLKxSeth3Jt3f4] with root cause
+
+com.stripe.exception.InvalidRequestException: Invalid integer: 25500.0; code: parameter_invalid_integer; request-id: req_mLKxSeth3Jt3f4
+	at com.stripe.net.LiveStripeResponseGetter.handleApiError(LiveStripeResponseGetter.java:792) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.net.LiveStripeResponseGetter.staticRequest(LiveStripeResponseGetter.java:553) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.net.LiveStripeResponseGetter.request(LiveStripeResponseGetter.java:78) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.net.ApiResource.request(ApiResource.java:228) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.model.Charge.create(Charge.java:590) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.model.Charge.create(Charge.java:578) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.example.onlineStore.service.impl.PaymentServiceImpl.stripePayment(PaymentServiceImpl.java:219) ~[classes/:na]
+	at com.example.onlineStore.controller.PaymentController.stripePayment(PaymentController.java:33) ~[classes/:na]
+	at com.example.onlineStore.controller.PaymentController$$FastClassBySpringCGLIB$$e5e9ccc1.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.validation.beanvalidation.MethodValidationInterceptor.invoke(MethodValidationInterceptor.java:123) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708) ~[spring-aop-5.3.27.jar:5.3.27]
+	at com.example.onlineStore.controller.PaymentController$$EnhancerBySpringCGLIB$$1124fe48.stripePayment(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529) ~[tomcat-embed-core-9.0.74.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.74.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.servlet.resource.ResourceUrlEncodingFilter.doFilter(ResourceUrlEncodingFilter.java:67) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2023-06-01 20:23:47.122  INFO 4896 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:23:47.123  INFO 4896 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 20:23:47.129  INFO 4896 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 20:25:15.297  INFO 13148 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 13148 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 20:25:15.300  INFO 13148 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 20:25:16.075  INFO 13148 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 20:25:16.134  INFO 13148 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 52 ms. Found 8 JPA repository interfaces.
+2023-06-01 20:25:16.561  INFO 13148 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 20:25:16.569  INFO 13148 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 20:25:16.569  INFO 13148 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 20:25:16.667  INFO 13148 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 20:25:16.667  INFO 13148 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1302 ms
+2023-06-01 20:25:16.792  INFO 13148 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 20:25:16.837  INFO 13148 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 20:25:16.966  INFO 13148 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 20:25:17.064  INFO 13148 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 20:25:17.193  INFO 13148 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 20:25:17.217  INFO 13148 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 20:25:18.012  INFO 13148 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 20:25:18.019  INFO 13148 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:25:18.709  WARN 13148 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 20:25:18.852  INFO 13148 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 20:25:19.319  WARN 13148 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 20:25:19.474  INFO 13148 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 20:25:19.475  INFO 13148 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 20:25:19.489  INFO 13148 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 20:25:19.506  INFO 13148 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 20:25:19.629  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 20:25:19.630  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 20:25:19.631  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 20:25:19.638  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 20:25:19.638  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 20:25:19.645  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 20:25:19.647  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 20:25:19.648  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 20:25:19.657  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 20:25:19.659  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 20:25:19.661  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 20:25:19.662  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 20:25:19.674  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 20:25:19.676  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 20:25:19.678  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 20:25:19.686  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 20:25:19.688  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 20:25:19.688  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 20:25:19.689  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 20:25:19.692  INFO 13148 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 20:25:19.709  INFO 13148 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 4.768 seconds (JVM running for 5.403)
+2023-06-01 20:25:24.724  INFO 13148 --- [http-nio-9090-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 20:25:24.724  INFO 13148 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 20:25:24.726  INFO 13148 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-06-01 20:25:27.026 ERROR 13148 --- [http-nio-9090-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is com.stripe.exception.InvalidRequestException: Invalid integer: 25500.0; code: parameter_invalid_integer; request-id: req_fjMn7dGwPUxoac] with root cause
+
+com.stripe.exception.InvalidRequestException: Invalid integer: 25500.0; code: parameter_invalid_integer; request-id: req_fjMn7dGwPUxoac
+	at com.stripe.net.LiveStripeResponseGetter.handleApiError(LiveStripeResponseGetter.java:792) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.net.LiveStripeResponseGetter.staticRequest(LiveStripeResponseGetter.java:553) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.net.LiveStripeResponseGetter.request(LiveStripeResponseGetter.java:78) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.net.ApiResource.request(ApiResource.java:228) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.model.Charge.create(Charge.java:590) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.stripe.model.Charge.create(Charge.java:578) ~[stripe-java-11.3.0.jar:11.3.0]
+	at com.example.onlineStore.service.impl.PaymentServiceImpl.stripePayment(PaymentServiceImpl.java:221) ~[classes/:na]
+	at com.example.onlineStore.controller.PaymentController.stripePayment(PaymentController.java:33) ~[classes/:na]
+	at com.example.onlineStore.controller.PaymentController$$FastClassBySpringCGLIB$$e5e9ccc1.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.validation.beanvalidation.MethodValidationInterceptor.invoke(MethodValidationInterceptor.java:123) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763) ~[spring-aop-5.3.27.jar:5.3.27]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708) ~[spring-aop-5.3.27.jar:5.3.27]
+	at com.example.onlineStore.controller.PaymentController$$EnhancerBySpringCGLIB$$1124fe48.stripePayment(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529) ~[tomcat-embed-core-9.0.74.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623) ~[tomcat-embed-core-9.0.74.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.servlet.resource.ResourceUrlEncodingFilter.doFilter(ResourceUrlEncodingFilter.java:67) ~[spring-webmvc-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.74.jar:9.0.74]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2023-06-01 20:26:31.025  INFO 13148 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:26:31.026  INFO 13148 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 20:26:31.029  INFO 13148 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-06-01 20:28:05.151  INFO 2456 --- [main] c.e.onlineStore.OnlineStoreApplication   : Starting OnlineStoreApplication using Java 17.0.4.1 on DESKTOP-D58JHSD with PID 2456 (C:\Users\USER\Desktop\ja\EcoClothesShop\target\classes started by USER in C:\Users\USER\Desktop\ja\EcoClothesShop)
+2023-06-01 20:28:05.154  INFO 2456 --- [main] c.e.onlineStore.OnlineStoreApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-06-01 20:28:05.914  INFO 2456 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-06-01 20:28:05.976  INFO 2456 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 8 JPA repository interfaces.
+2023-06-01 20:28:06.403  INFO 2456 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2023-06-01 20:28:06.410  INFO 2456 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-06-01 20:28:06.410  INFO 2456 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.74]
+2023-06-01 20:28:06.504  INFO 2456 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-06-01 20:28:06.505  INFO 2456 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1289 ms
+2023-06-01 20:28:06.630  INFO 2456 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-06-01 20:28:06.676  INFO 2456 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-06-01 20:28:06.801  INFO 2456 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-06-01 20:28:06.912  INFO 2456 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-06-01 20:28:07.031  INFO 2456 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-06-01 20:28:07.056  INFO 2456 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2023-06-01 20:28:07.867  INFO 2456 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-06-01 20:28:07.875  INFO 2456 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:28:08.533  WARN 2456 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-01 20:28:08.683  INFO 2456 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-06-01 20:28:09.197  WARN 2456 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-06-01 20:28:09.373  INFO 2456 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2023-06-01 20:28:09.374  INFO 2456 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-06-01 20:28:09.389  INFO 2456 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-06-01 20:28:09.409  INFO 2456 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-06-01 20:28:09.524  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_1
+2023-06-01 20:28:09.525  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_1
+2023-06-01 20:28:09.526  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_1
+2023-06-01 20:28:09.533  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_2
+2023-06-01 20:28:09.534  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_2
+2023-06-01 20:28:09.539  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_2
+2023-06-01 20:28:09.540  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_3
+2023-06-01 20:28:09.542  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_3
+2023-06-01 20:28:09.550  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_3
+2023-06-01 20:28:09.552  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_4
+2023-06-01 20:28:09.554  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_4
+2023-06-01 20:28:09.555  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateCategoryUsingPUT_1
+2023-06-01 20:28:09.568  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_4
+2023-06-01 20:28:09.570  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_5
+2023-06-01 20:28:09.572  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_5
+2023-06-01 20:28:09.580  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteByIdUsingDELETE_5
+2023-06-01 20:28:09.582  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getAllUsingGET_6
+2023-06-01 20:28:09.583  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getByIdUsingGET_6
+2023-06-01 20:28:09.584  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: getImageByIdUsingGET_1
+2023-06-01 20:28:09.587  INFO 2456 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: uploadImageUsingPOST_1
+2023-06-01 20:28:09.605  INFO 2456 --- [main] c.e.onlineStore.OnlineStoreApplication   : Started OnlineStoreApplication in 4.839 seconds (JVM running for 5.504)
+2023-06-01 20:28:12.670  INFO 2456 --- [http-nio-9090-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-06-01 20:28:12.671  INFO 2456 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-06-01 20:28:12.672  INFO 2456 --- [http-nio-9090-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-06-01 20:28:22.961  INFO 2456 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-06-01 20:28:22.965  INFO 2456 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-06-01 20:28:22.973  INFO 2456 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

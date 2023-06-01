@@ -9,4 +9,6 @@ public interface PaymentRepository extends JpaRepository<Payment,Long> {
     Payment findByIdAndRdtIsNull(Long id);
 
     List<Payment> findAllByRdtIsNull();
+
+
 }
