@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,13 +38,15 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     private DefaultEmailService defaultEmailService;
+    private PasswordEncoder passwordEncoder;
 
     private UserDto mapToDto(User user) {
         return UserDto.builder()
                 .id(user.getId())
                 .name(user.getName())
-                .surname(user.getSurname())
+                .login(user.getLogin())
                 .password(user.getPassword())
+                .photo(user.getPhoto())
                 .email(user.getEmail())
                 .role(user.getRole())
                 .gender(user.getGender())
@@ -91,8 +94,8 @@ public class UserServiceImpl implements UserService {
                 .name(dto.getName())
                 .email(dto.getEmail())
                 .phone(dto.getPhone())
-                .password(dto.getPassword())
-                .surname(dto.getSurname())
+                .password(passwordEncoder.encode(dto.getPassword()))
+                .login(dto.getLogin())
                 .gender(dto.getGender())
                 .paymentCard(dto.getPaymentCard())
                 .role(Roles.USER)
@@ -127,8 +130,8 @@ public class UserServiceImpl implements UserService {
             if (dto.getName() != null) {
                 user.setName(dto.getName());
             }
-            if (dto.getSurname() != null) {
-                user.setSurname(dto.getSurname());
+            if (dto.getLogin() != null) {
+                user.setLogin(dto.getLogin());
             }
             if (dto.getEmail() != null) {
                 user.setEmail(dto.getEmail());
@@ -184,7 +187,7 @@ public class UserServiceImpl implements UserService {
                 return user.getName()+ ": ваш пароль обновлен.";
             }
             else
-                return "Неверные данные.";
+                return "Время действия токена истекло.";
         }catch (NullPointerException e){
             log.error("Метод setNewPassword(user), Exception: Пользователь с id " +id+" не найден.");
             throw new UserNotFoundException("Пользователь с id " +id+" не найден.");
@@ -205,7 +208,7 @@ public class UserServiceImpl implements UserService {
             user.setTokenExpiry(LocalDateTime.now());
             defaultEmailService.sendSimpleEmail(email,
                     "Link for new password.",
-                    "http://localhost:8082/user/newPassword/"+id+"/"+token);
+                    "http://localhost:9090/user/newPassword/"+id+"/"+token);
             return "Ссылка на изменение пароля была отправлена на адрес: "+email;
         }catch (NullPointerException e){
             log.error("Метод resetPassword(user), Exception: Пользователь с email "+email+" не найден.");
@@ -314,7 +317,7 @@ public class UserServiceImpl implements UserService {
 
 
             Request request = new Request.Builder()
-                    .url("https://emailserviceforeco.herokuapp.com/email/model")
+                    .url("http://localhost:8080/email/model")
                     .post(requestBody)
                     .build();
 

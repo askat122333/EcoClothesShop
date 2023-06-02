@@ -2,9 +2,19 @@ package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.UserDto;
 import com.example.onlineStore.exceptions.UserNotFoundException;
+import com.example.onlineStore.jwtUtil.JWTUtil;
+import com.example.onlineStore.security.AuthenticationRequest;
+import com.example.onlineStore.security.AuthneticationResponse;
 import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +28,26 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserDetailsService userDetailsService;
+    @Autowired
+    private JWTUtil jwtUtil;
+    @PostMapping(value = "/authenticate")
+    public ResponseEntity<?> createAuthneticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword())
+            );
+        } catch (BadCredentialsException e) {
+            throw new Exception("Incorrect user or password");
+        }
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUserName());
+        final String jwt = jwtUtil.generateToken(userDetails);
+        return ResponseEntity.ok(new AuthneticationResponse(jwt));
+    }
     @GetMapping("/{id}")
     public UserDto getById(@PathVariable @Min(1) Long id) throws UserNotFoundException {
         return userService.getById(id);
@@ -64,5 +94,13 @@ public class UserController {
     @PutMapping("/resetPasswordThruService")
     public String resetPasswordThru(@RequestParam("email") String email) throws UserNotFoundException, IOException {
         return userService.sendEmailToService(email);
+    }
+    @GetMapping("/oauthSuccess")
+    public String oauthSuccess(){
+        return "Авторизация GOOGLE для Eco Clothes Shop прошла успешно.";
+    }
+    @GetMapping("/oauth2-failure")
+    public String oauthFailure(){
+        return "Вход не выполнен.";
     }
 }

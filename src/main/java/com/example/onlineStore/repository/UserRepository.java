@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
     List<User> findAllByRdtIsNull();
     User findByEmail(String email);
 
+    User findByLogin(String login);
+
 }

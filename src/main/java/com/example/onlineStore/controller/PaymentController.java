@@ -27,12 +27,12 @@ public class PaymentController {
         return paymentService.makePayment(orderId);
     }
 
-    @GetMapping("/stripe/{id}")
+    @PostMapping("/stripe/{id}")
     public String stripePayment(@PathVariable Long id,
                                 @RequestBody StripeDto dto) throws StripeException {
         return paymentService.stripePayment(id,dto);
     }
-    @PostMapping("/addStripeCustomer")
+    @PutMapping("/addStripeCustomer")
     public String addStripeCustomer(@RequestBody CreateStripeCustomerDto dto) throws StripeException {
         return paymentService.addCustomerAndCard(dto);
     }

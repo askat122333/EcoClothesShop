@@ -32,7 +32,7 @@ public class User {
     @NotBlank(message = "Не может быть пустым.")
     private String name;
     @NotBlank(message = "Не может быть пустым.")
-    private String surname;
+    private String login;
     @Email(message = "Не соответствует формату email.")
     private String email;
     @NotBlank(message = "Не может быть пустым.")
