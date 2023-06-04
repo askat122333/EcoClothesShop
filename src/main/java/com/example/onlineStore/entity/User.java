@@ -33,6 +33,7 @@ public class User {
     private String name;
     @NotBlank(message = "Не может быть пустым.")
     private String login;
+    @Column(unique = true)
     @Email(message = "Не соответствует формату email.")
     private String email;
     @NotBlank(message = "Не может быть пустым.")

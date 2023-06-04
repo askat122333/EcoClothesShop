@@ -152,16 +152,25 @@ public class CartServiceImpl implements CartService {
        Cart cart = cartRepository.findByUserAndRdtIsNull(user);
 
        Product product = productRepository.findByIdAndRdtIsNull(productId);
+        ArrayList<Product> products = new ArrayList<>();
         if (cart == null) {
             Cart newCart = new Cart();
+            ArrayList<Product> products2 = new ArrayList<>();
             newCart.setUser(user);
-            newCart.setProducts(List.of(product));
-            newCart.setSum(getSum(List.of(product)));
+//            newCart.setProducts(List.of(product));
+            products2.add(product);
+            newCart.setProducts(products2);
+//            newCart.setSum(getSum(List.of(product)));
+            newCart.setSum(getSum(products2));
             cartRepository.save(newCart);
             return mapToDto(newCart);
         }else
-            cart.getProducts().add(product);
-        cart.setSum(getSum(cart.getProducts()));
+             products = new ArrayList<>(cart.getProducts());
+        products.add(product);
+        cart.setProducts(products);
+        cart.setSum(getSum(products));
+//            cart.getProducts().add(product);
+//        cart.setSum(getSum(cart.getProducts()));
         cartRepository.save(cart);
         return mapToDto(cart);
     }

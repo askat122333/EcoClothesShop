@@ -56,13 +56,25 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-
-//                .antMatchers("/product").permitAll()
-                .antMatchers("/user/authenticate").permitAll()
-                .antMatchers(HttpMethod.GET,"/product/**").hasAuthority(Permission.ADMIN_READ.getPermission())
-                .antMatchers(HttpMethod.POST,"/product/create").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
-                .antMatchers(HttpMethod.DELETE,"/product/delete/**").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
-                .antMatchers(HttpMethod.PUT,"/product/update/**").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
+                .antMatchers("/user/authenticate","/product/category/{categoryId}",
+                        "/user/resetPassword","/user/newPassword/{id}/{token}","/order/byUserId/{id}",
+                        "/cart/findByUser/{id}","/user/create").permitAll()
+                .antMatchers("/payment/makePayment","/payment/stripe/{id}," +
+                        "/payment/addStripeCustomer",
+                        "/paymentCard/create/{userId}","/paymentCard/update/{id}","/paymentCard/delete/{id}",
+                        "/order/create","/order/update/{id}","/order/delete/{id}",
+                        "/cart/update/**","/cart/addNewProduct","/cart/removeProduct",
+                        "/cart/delete/{id}","/order/quickCreate").hasAuthority(Permission.ADMIN_READ.getPermission())
+                .antMatchers(HttpMethod.GET,"/order/{id}","/category/**",
+                        "/cart/{id}","/product/**").hasAuthority(Permission.ADMIN_READ.getPermission())
+                .antMatchers(HttpMethod.GET,"/user/**","/paymentCard/{id}","/paymentCard/all",
+                        "/order/all","/discount/**","/cart/all").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
+                .antMatchers(HttpMethod.POST,"/discount/create",
+                        "/category/create","/product/create","/product/*").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
+                .antMatchers(HttpMethod.DELETE,"/product/delete/**","/user/delete/**","/discount/delete/**",
+                        "/category/delete/**").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
+                .antMatchers(HttpMethod.PUT,"/product/update/**","/user/update/**","/discount/update/**",
+                        "/category/update/**").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()

@@ -4,6 +4,7 @@ import com.example.onlineStore.dto.OrderDto;
 import com.example.onlineStore.dto.PayPalDto;
 import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.OrderNotFoundException;
+import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -47,5 +48,11 @@ public class OrderController {
     @GetMapping("/byUserId/{id}")
     public PayPalDto getByUserId(@PathVariable Long id){
         return orderService.findByUserId(id);
+    }
+    @PostMapping("/quickCreate")
+    public OrderDto quickCreate(@RequestParam("userId") Long userId,
+                                @RequestParam("productId") Long productId,
+                                @RequestParam("address") String address) throws ProductNotFoundException {
+        return orderService.quickCreate(userId,productId,address);
     }
 }
