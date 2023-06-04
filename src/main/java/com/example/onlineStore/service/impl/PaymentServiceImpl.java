@@ -1,7 +1,6 @@
 package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.PaymentDto;
-import com.example.onlineStore.dto.StripeDto;
 import com.example.onlineStore.entity.*;
 import com.example.onlineStore.enums.PaymentStatus;
 import com.example.onlineStore.exceptions.*;
@@ -15,7 +14,9 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.*;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
