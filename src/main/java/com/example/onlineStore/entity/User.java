@@ -37,7 +37,7 @@ public class User {
     private String email;
     @NotBlank(message = "Не может быть пустым.")
     private String password;
-    private Byte[] photo;
+    private byte[] photo;
     @Enumerated(EnumType.STRING)
     private Roles role;
     @Enumerated(EnumType.STRING)

@@ -1,5 +1,6 @@
 package com.example.onlineStore.service.impl;
 
+import com.example.onlineStore.dto.MvcDto.UserMvcDto;
 import com.example.onlineStore.dto.UserDto;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.enums.Roles;
@@ -40,6 +41,17 @@ public class UserServiceImpl implements UserService {
                 .gender(user.getGender())
                 .phone(user.getPhone())
                 .paymentCard(user.getPaymentCard())
+                .build();
+    }
+    private UserMvcDto mapToDtoWithImage(User user) {
+        return UserMvcDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .surname(user.getSurname())
+                .image(user.getPhoto())
+                .email(user.getEmail())
+                .gender(user.getGender())
+                .phone(user.getPhone())
                 .build();
     }
 
@@ -203,5 +215,19 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("Пользователь с email "+email+" не найден.");
         }
 
+    }
+
+    @Override
+    public List<UserMvcDto> getAllMvc() throws UserNotFoundException {
+        List<User> userList = userRepository.findAllByRdtIsNull();
+        if (userList.isEmpty()) {
+            log.error("Метод getAll(users) Exception: В базе нет пользователей.");
+            throw new UserNotFoundException("В базе нет пользователей.");
+        }
+        List<UserMvcDto> userDtoList = new ArrayList<>();
+        for (User user:userList) {
+            userDtoList.add(mapToDtoWithImage(user));
+        }
+        return userDtoList;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.onlineStore.entity;
 
+import com.example.onlineStore.enums.CartStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,10 +28,10 @@ public class Cart {
     private User user;
     @Min(value = 1,message = "Должно быть положительным.")
     private Double sum;
-    @JsonIgnore
-    @OneToMany
-    @JoinColumn(name = "cart_id", referencedColumnName = "id")
+    @ManyToMany
     private List<Product> products;
+    @Enumerated(value = EnumType.STRING)
+    private CartStatus cartStatus;
 
     private LocalDate rdt;
 }

@@ -2,6 +2,7 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.OrderDto;
 import com.example.onlineStore.entity.*;
+import com.example.onlineStore.enums.CartStatus;
 import com.example.onlineStore.enums.PaymentStatus;
 import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.OrderNotFoundException;
@@ -86,6 +87,8 @@ public class OrderServiceImpl implements OrderService {
         products.addAll(cart.getProducts());
         order.setProducts(products);
         order.setAddress(address);
+        cart.setCartStatus(CartStatus.FINISHED);
+        cart.setRdt(LocalDate.now());
         order.setSum(cart.getSum());
         Payment payment = new Payment();
         payment.setStatus(PaymentStatus.PENDING);

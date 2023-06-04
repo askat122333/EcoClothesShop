@@ -1,5 +1,6 @@
 package com.example.onlineStore.service;
 
+import com.example.onlineStore.dto.DtoForBalance;
 import com.example.onlineStore.dto.PaymentCardDto;
 import com.example.onlineStore.entity.PaymentCard;
 import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
@@ -11,6 +12,7 @@ import java.util.List;
 @Component
 public interface PaymentCardService {
     PaymentCardDto getById(Long id) throws PaymentCardNotFoundException;
+    DtoForBalance getUserBalance(Long userId) throws PaymentCardNotFoundException;
 
     PaymentCard getByIdEntity(Long id);
 

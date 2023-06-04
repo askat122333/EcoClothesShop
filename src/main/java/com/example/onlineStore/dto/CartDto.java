@@ -2,6 +2,7 @@ package com.example.onlineStore.dto;
 
 import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.entity.User;
+import com.example.onlineStore.enums.CartStatus;
 import lombok.*;
 
 import javax.validation.constraints.Min;
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class CartDto {
 
     private Long id;
@@ -22,6 +24,7 @@ public class CartDto {
     private Double sum;
 
     private List<Product> products;
+    private CartStatus cartStatus;
 
     private LocalDate rdt;
 

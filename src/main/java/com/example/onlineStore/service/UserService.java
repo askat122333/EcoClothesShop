@@ -1,5 +1,6 @@
 package com.example.onlineStore.service;
 
+import com.example.onlineStore.dto.MvcDto.UserMvcDto;
 import com.example.onlineStore.dto.UserDto;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.exceptions.UserNotFoundException;
@@ -22,5 +23,6 @@ public interface UserService {
     String deleteById(Long id) throws UserNotFoundException;
     String setNewPassword(Long id,String token, String password) throws UserNotFoundException;
     String resetPassword(String email) throws UserNotFoundException;
+    List<UserMvcDto> getAllMvc() throws UserNotFoundException;
 
 }

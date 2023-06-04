@@ -178,8 +178,9 @@ public class PaymentServiceImpl implements PaymentService {
             payment.setStatus(PaymentStatus.PAID);
             String num = paymentCard.getCardNum().substring(8);
             payment.setCardNum(num);
+            order.setRdt(LocalDate.now());
             paymentRepository.save(payment);
-            return "Оплата прошла успешно!";
+            return "Оплата прошла успешно!"+"\nВаш баланс : " + paymentCard.getBalance();
 
         } else if ( !payment.getCardNum().isEmpty()) {
 
