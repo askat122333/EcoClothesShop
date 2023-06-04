@@ -178,9 +178,11 @@ public class PaymentServiceImpl implements PaymentService {
             payment.setStatus(PaymentStatus.PAID);
             String num = paymentCard.getCardNum().substring(8);
             payment.setCardNum(num);
+            payment.setReceipt(receiptRecording(order.getProducts()));
             order.setRdt(LocalDate.now());
             paymentRepository.save(payment);
-            return "Оплата прошла успешно!"+"\nВаш баланс : " + paymentCard.getBalance();
+            return "Оплата прошла успешно!"+"\nЧек : \n"+payment.getReceipt()+
+                    "\nВаш баланс : " + paymentCard.getBalance();
 
         } else if ( !payment.getCardNum().isEmpty()) {
 
@@ -192,6 +194,18 @@ public class PaymentServiceImpl implements PaymentService {
 
         }
     }
+
+    public String receiptRecording(List<Product> products){
+        List<String> stringList = new ArrayList<>();
+        Double sum = 0d;
+        for (Product product:products) {
+            stringList.add(product.getName());
+            sum += product.getPrice();
+        }
+        return "Продукты : "+stringList.toString()+
+                "\nОбщая сумма : "+sum;
+    }
+
 
 /*    public void stripePayment(Long userId , StripeDto dto){
         *//*Stripe.apiKey*//*

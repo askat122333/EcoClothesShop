@@ -33,5 +33,6 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
+    private String receipt;
     private LocalDate rdt;
 }

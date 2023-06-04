@@ -164,10 +164,15 @@ public class OrderServiceImpl implements OrderService {
             log.error("Метод quickCreate(Order), Exception: Продукт с таким id "+productId+" не найден в базе.");
             throw new ProductNotFoundException("Продукт с таким id "+productId+" не найден в базе.");
         }
+
         order.setProducts(List.of(product));
         order.setAddress(address);
         order.setSum(product.getPrice());
         order.setOrderTime(LocalDate.now());
+        Payment payment = new Payment();
+        payment.setStatus(PaymentStatus.PENDING);
+        paymentRepository.save(payment);
+        order.setPayment(payment);
         orderRepository.save(order);
         return mapToDto(order);
     }
