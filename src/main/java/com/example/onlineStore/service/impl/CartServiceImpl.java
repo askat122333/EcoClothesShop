@@ -4,6 +4,7 @@ import com.example.onlineStore.dto.CartDto;
 import com.example.onlineStore.entity.Cart;
 import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.entity.User;
+import com.example.onlineStore.enums.CartStatus;
 import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.exceptions.ValidException;
@@ -29,24 +30,24 @@ public class CartServiceImpl implements CartService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
 
-    public CartDto mapToDto(Cart cart){
-        return new CartDto(
-                cart.getId(),
-                cart.getUser(),
-                cart.getSum(),
-                cart.getProducts(),
-                cart.getRdt()
-        );
+    public CartDto mapToDto(Cart cart) {
+        return CartDto.builder().id(cart.getId())
+                .user(cart.getUser())
+                .cartStatus(cart.getCartStatus())
+                .sum(cart.getSum())
+                .products(cart.getProducts())
+                .rdt(cart.getRdt())
+                .build();
     }
 
     @Override
     public CartDto getById(Long id) throws CartNotFoundException {
-        try{
+        try {
             Cart cart = cartRepository.findByIdAndRdtIsNull(id);
             return mapToDto(cart);
-        }catch (NullPointerException e){
-            log.error("Метод getById(Cart), Exception: Корзина с id "+id+" не найдена.");
-            throw new CartNotFoundException("Корзина с id "+id+" не найдена.");
+        } catch (NullPointerException e) {
+            log.error("Метод getById(Cart), Exception: Корзина с id " + id + " не найдена.");
+            throw new CartNotFoundException("Корзина с id " + id + " не найдена.");
         }
 
     }
@@ -59,12 +60,12 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartDto> getAll() throws CartNotFoundException {
         List<Cart> cartList = cartRepository.findAllByRdtIsNull();
-        if(cartList.isEmpty()){
+        if (cartList.isEmpty()) {
             log.error("Метод getAll(Cart), Exception: В базе нет корзин.");
             throw new CartNotFoundException("В базе нет корзин.");
         }
         List<CartDto> cartDtoList = new ArrayList<>();
-        for (Cart cart:cartList) {
+        for (Cart cart : cartList) {
             cartDtoList.add(mapToDto(cart));
         }
         return cartDtoList;
@@ -87,7 +88,7 @@ public class CartServiceImpl implements CartService {
             List<String> errorMessages = new ArrayList<>();
             for (ConstraintViolation<Cart> violation : violations) {
                 errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
-                log.warn("Метод create(Cart): "+errorMessages);
+                log.warn("Метод create(Cart): " + errorMessages);
             }
             throw new ValidException(errorMessages);
         }
@@ -95,19 +96,19 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto update(Long id,@Valid CartDto dto) throws CartNotFoundException {
+    public CartDto update(Long id, @Valid CartDto dto) throws CartNotFoundException {
         Cart cart = getByIdEntity(id);
-        if(cart == null){
-            log.error("Метод update(Cart), Exception: Корзина с id "+id+" не найдена.");
-            throw new CartNotFoundException("Корзина с id "+id+" не найдена.");
+        if (cart == null) {
+            log.error("Метод update(Cart), Exception: Корзина с id " + id + " не найдена.");
+            throw new CartNotFoundException("Корзина с id " + id + " не найдена.");
         }
-        if(dto.getUser()!=null){
+        if (dto.getUser() != null) {
             cart.setUser(dto.getUser());
         }
-        if(cart.getSum()!=null){
+        if (cart.getSum() != null) {
             cart.setSum(dto.getSum());
         }
-        if(dto.getProducts()!=null){
+        if (dto.getProducts() != null) {
             cart.setProducts(dto.getProducts());
         }
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -119,7 +120,7 @@ public class CartServiceImpl implements CartService {
             List<String> errorMessages = new ArrayList<>();
             for (ConstraintViolation<Cart> violation : violations) {
                 errorMessages.add("Поле: " + violation.getPropertyPath() + " - " + violation.getMessage());
-                log.warn("Метод update(Cart): "+errorMessages);
+                log.warn("Метод update(Cart): " + errorMessages);
             }
             throw new ValidException(errorMessages);
         }
@@ -133,50 +134,51 @@ public class CartServiceImpl implements CartService {
             Cart cart = getByIdEntity(id);
             cart.setRdt(LocalDate.now());
             cartRepository.save(cart);
-            return "Корзина с id: "+id+" была удалена.";
-        }catch (NullPointerException e){
-            log.error("Метод deleteById(Cart), Exception: Корзина с id "+id+" не найдена.");
-            throw new CartNotFoundException("Корзина с id "+id+" не найдена.");
+            return "Корзина с id: " + id + " была удалена.";
+        } catch (NullPointerException e) {
+            log.error("Метод deleteById(Cart), Exception: Корзина с id " + id + " не найдена.");
+            throw new CartNotFoundException("Корзина с id " + id + " не найдена.");
         }
 
     }
 
 
     @Override
-    public CartDto addNewProduct(Long userId,Long productId) throws UserNotFoundException, CartNotFoundException {
-        User user  = userRepository.findByIdAndRdtIsNull(userId);
-        if(user==null){
-            log.error("Метод addNewProduct(Cart), Exception: Пользователь с id "+userId+" не найден.");
-            throw new UserNotFoundException("Пользователь с id "+userId+" не найден.");
+    public CartDto addNewProduct(Long userId, Long productId) throws UserNotFoundException, CartNotFoundException {
+        User user = userRepository.findByIdAndRdtIsNull(userId);
+        if (user == null) {
+            log.error("Метод addNewProduct(Cart), Exception: Пользователь с id " + userId + " не найден.");
+            throw new UserNotFoundException("Пользователь с id " + userId + " не найден.");
         }
-       Cart cart = cartRepository.findByUserAndRdtIsNull(user);
-
-       Product product = productRepository.findByIdAndRdtIsNull(productId);
-        ArrayList<Product> products = new ArrayList<>();
+        Cart cart = cartRepository.findByUserAndRdtIsNull(user);
+        Product product = productRepository.findByIdAndRdtIsNull(productId);
         if (cart == null) {
             Cart newCart = new Cart();
-            ArrayList<Product> products2 = new ArrayList<>();
             newCart.setUser(user);
-//            newCart.setProducts(List.of(product));
-            products2.add(product);
-            newCart.setProducts(products2);
-//            newCart.setSum(getSum(List.of(product)));
-            newCart.setSum(getSum(products2));
+            List<Product> products = new ArrayList<>();
+            products.add(product);
+            newCart.setProducts(products);
+            newCart.setCartStatus(CartStatus.PROCESS);
+            newCart.setSum(getSum(products));
             cartRepository.save(newCart);
             return mapToDto(newCart);
-        }else
-             products = new ArrayList<>(cart.getProducts());
-        products.add(product);
-        cart.setProducts(products);
-        cart.setSum(getSum(products));
-//            cart.getProducts().add(product);
-//        cart.setSum(getSum(cart.getProducts()));
-        cartRepository.save(cart);
-        return mapToDto(cart);
+        } else if (cart.getCartStatus() == CartStatus.FINISHED) {
+            System.out.println("Изменения не могут быть выполнены.\nКарзина уже в заказе");
+            return mapToDto(cart);
+        } else {
+            List<Product> products = cart.getProducts();
+            products.add(product);
+            cart.setProducts(products);
+            cart.setSum(getSum(products));
+            cartRepository.save(cart);
+            return mapToDto(cart);
+        }
+
     }
-    private Double getSum(List<Product> products){
+
+    private Double getSum(List<Product> products) {
         Double sum = 0d;
-        for (int i = 0; i <products.size() ; i++) {
+        for (int i = 0; i < products.size(); i++) {
             sum += products.get(i).getPrice();
         }
         return sum;
@@ -185,16 +187,26 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartDto removeProduct(Long userId, Long productId) throws CartNotFoundException {
         Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
-        if(cart==null){
+        if (cart == null) {
             log.error("Метод removeProduct(Cart), Exception: У данного пользователя нет корзины с заказами.");
             throw new CartNotFoundException("У данного пользователя нет корзины с заказами.");
+        } else if (cart.getCartStatus() == CartStatus.FINISHED) {
+            System.out.println("Изменения не могут быть выполнены.\nКарзина уже в заказе");
+            return mapToDto(cart);
+        } else {
+            // cart.getProducts().removeIf(product -> product.getId() == productId);
+            List<Product> products = new ArrayList<>();
+            products.addAll(cart.getProducts());
+            for (int i = 0; i < products.size(); i++) {
+                if (products.get(i).getId() == productId) {
+                    products.remove(products.get(i));
+                    break;
+                }
+            }
+            cart.setProducts(products);
+            cart.setSum(getSum(cart.getProducts()));
+            cartRepository.save(cart);
+            return mapToDto(cart);
         }
-       cart.getProducts().removeIf(product -> product.getId() == productId);
-       cart.setSum(getSum(cart.getProducts()));
-        cartRepository.save(cart);
-        return mapToDto(cart);
-    }
-    public CartDto findByUser(Long id){
-        return mapToDto(cartRepository.findByUserId(id)) ;
     }
 }

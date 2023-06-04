@@ -1,7 +1,7 @@
 package com.example.onlineStore.service.impl;
 
+import com.example.onlineStore.dto.DtoForBalance;
 import com.example.onlineStore.dto.PaymentCardDto;
-import com.example.onlineStore.dto.UserDto;
 import com.example.onlineStore.entity.PaymentCard;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
@@ -10,7 +10,6 @@ import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.PaymentCardRepository;
 import com.example.onlineStore.repository.UserRepository;
 import com.example.onlineStore.service.PaymentCardService;
-import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -35,6 +34,7 @@ public class PaymentCardServiceImpl implements PaymentCardService {
                 paymentCard.getRdt(),
                 paymentCard.getUser()
         );
+
     }
     @Override
     public PaymentCardDto getById(Long id) throws PaymentCardNotFoundException {
@@ -46,6 +46,21 @@ public class PaymentCardServiceImpl implements PaymentCardService {
             throw new PaymentCardNotFoundException("Карта с id "+id+" не найдена.");
         }
 
+    }
+
+    @Override
+    public DtoForBalance getUserBalance(Long userId) throws PaymentCardNotFoundException {
+        try {
+            PaymentCard paymentCard = paymentCardRepository.findByUserAndRdtIsNull(userId);
+            return DtoForBalance.builder()
+                    .balance(paymentCard.getBalance())
+                    .cardNum(paymentCard.getCardNum().substring(8))
+                    .user(paymentCard.getUser().getId())
+                    .build();
+        }catch (NullPointerException e){
+            log.error("Метод getById(PaymentCard), Exception: Карта с user_id "+userId+" не найдена.");
+            throw new PaymentCardNotFoundException("Карта с user_id "+userId+" не найдена.");
+        }
     }
 
     @Override

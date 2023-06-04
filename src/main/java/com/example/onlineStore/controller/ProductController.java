@@ -1,5 +1,6 @@
 package com.example.onlineStore.controller;
 
+import com.example.onlineStore.dto.MvcDto.ProductMvcDto;
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.service.ProductService;
@@ -27,6 +28,12 @@ public class ProductController {
     public List<ProductDto> getAll() throws ProductNotFoundException {
         return productService.getAll();
     }
+
+    @GetMapping("/allWithImage")
+    public List<ProductMvcDto> getAllMvc() throws ProductNotFoundException {
+        return productService.getAllMvc();
+    }
+
     @GetMapping("/getNew")
     public List<ProductDto> getAllByType() throws ProductNotFoundException{
         return productService.getAllByType();

@@ -1,10 +1,10 @@
 package com.example.onlineStore.service.impl;
 
+import com.example.onlineStore.dto.MvcDto.UserMvcDto;
 import com.example.onlineStore.dto.EmailDto;
 import com.example.onlineStore.dto.UserDto;
 import com.example.onlineStore.entity.User;
 import com.example.onlineStore.enums.Roles;
-
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.UserRepository;
@@ -34,7 +34,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Slf4j
 public class UserServiceImpl implements UserService {
-    @Autowired
     private final UserRepository userRepository;
 
     private DefaultEmailService defaultEmailService;
@@ -46,12 +45,22 @@ public class UserServiceImpl implements UserService {
                 .name(user.getName())
                 .login(user.getLogin())
                 .password(user.getPassword())
-                .photo(user.getPhoto())
                 .email(user.getEmail())
                 .role(user.getRole())
                 .gender(user.getGender())
                 .phone(user.getPhone())
                 .paymentCard(user.getPaymentCard())
+                .build();
+    }
+    private UserMvcDto mapToDtoWithImage(User user) {
+        return UserMvcDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .surname(user.getSurname())
+                .image(user.getPhoto())
+                .email(user.getEmail())
+                .gender(user.getGender())
+                .phone(user.getPhone())
                 .build();
     }
 
@@ -246,6 +255,19 @@ public class UserServiceImpl implements UserService {
 
     }
     @Override
+    public List<UserMvcDto> getAllMvc() throws UserNotFoundException {
+        List<User> userList = userRepository.findAllByRdtIsNull();
+        if (userList.isEmpty()) {
+            log.error("Метод getAll(users) Exception: В базе нет пользователей.");
+            throw new UserNotFoundException("В базе нет пользователей.");
+        }
+        List<UserMvcDto> userDtoList = new ArrayList<>();
+        for (User user:userList) {
+            userDtoList.add(mapToDtoWithImage(user));
+        }
+        return userDtoList;
+    }
+    @Override
     public String sendEmailToService(String email) throws IOException, UserNotFoundException {
 
         try {
@@ -291,52 +313,5 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("Пользователь с email "+email+" не найден.");
         }
 
-    }
-    //Только для проверки микросервиса
-    public static String sendEmailToServicetry(String email) throws IOException, UserNotFoundException {
-
-//
-//            User user = userRepository.findByEmail(email);
-            String token = UUID.randomUUID().toString();
-//            user.setToken(token);
-//            Long id = user.getId();
-//
-//            user.setTokenExpiry(LocalDateTime.now());
-        Long id = 1L;
-        EmailDto emailDto = EmailDto.builder()
-                .email(email)
-                .subject("Link for new password.")
-                .message("http://localhost:9090/user/newPassword/"+id+"/"+token)
-                .build();
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonBody = objectMapper.writeValueAsString(emailDto);
-
-            okhttp3.MediaType JSON = MediaType.get("application/json; charset=utf-8");
-            RequestBody requestBody = RequestBody.create(jsonBody, JSON);
-
-
-            Request request = new Request.Builder()
-                    .url("http://localhost:8080/email/model")
-                    .post(requestBody)
-                    .build();
-
-            OkHttpClient client = new OkHttpClient();
-            Response response = client.newCall(request).execute();
-
-
-            if (response.isSuccessful()) {
-
-                String responseBody = response.body().string();
-                System.out.println("Response: " + responseBody);
-            } else {
-                System.out.println("Request failed: " + response.code());
-            }
-
-        return token;
-    }
-    public static void main(String[] args) throws IOException, UserNotFoundException {
-
-        sendEmailToServicetry("azamatomurkulov01@gmail.com");
     }
 }

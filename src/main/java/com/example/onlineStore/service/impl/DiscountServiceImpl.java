@@ -2,7 +2,6 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.DiscountDto;
 import com.example.onlineStore.entity.Discount;
-import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.exceptions.DiscountNotFoundException;
 import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.DiscountRepository;

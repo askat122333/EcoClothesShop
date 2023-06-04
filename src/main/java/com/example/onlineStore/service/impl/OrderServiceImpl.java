@@ -3,6 +3,7 @@ package com.example.onlineStore.service.impl;
 import com.example.onlineStore.dto.OrderDto;
 import com.example.onlineStore.dto.PayPalDto;
 import com.example.onlineStore.entity.*;
+import com.example.onlineStore.enums.CartStatus;
 import com.example.onlineStore.enums.PaymentStatus;
 import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.OrderNotFoundException;
@@ -87,6 +88,8 @@ public class OrderServiceImpl implements OrderService {
         products.addAll(cart.getProducts());
         order.setProducts(products);
         order.setAddress(address);
+        cart.setCartStatus(CartStatus.FINISHED);
+        cart.setRdt(LocalDate.now());
         order.setSum(cart.getSum());
         Payment payment = new Payment();
         payment.setStatus(PaymentStatus.PENDING);
@@ -162,10 +165,15 @@ public class OrderServiceImpl implements OrderService {
             log.error("Метод quickCreate(Order), Exception: Продукт с таким id "+productId+" не найден в базе.");
             throw new ProductNotFoundException("Продукт с таким id "+productId+" не найден в базе.");
         }
+
         order.setProducts(List.of(product));
         order.setAddress(address);
         order.setSum(product.getPrice());
         order.setOrderTime(LocalDate.now());
+        Payment payment = new Payment();
+        payment.setStatus(PaymentStatus.PENDING);
+        paymentRepository.save(payment);
+        order.setPayment(payment);
         orderRepository.save(order);
         return mapToDto(order);
     }

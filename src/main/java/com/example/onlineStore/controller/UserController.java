@@ -1,5 +1,6 @@
 package com.example.onlineStore.controller;
 
+import com.example.onlineStore.dto.MvcDto.UserMvcDto;
 import com.example.onlineStore.dto.UserDto;
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.jwtUtil.JWTUtil;
@@ -55,6 +56,11 @@ public class UserController {
     @GetMapping("/all")
     public List<UserDto> getAll() throws UserNotFoundException {
         return userService.getAll();
+    }
+
+    @GetMapping("/allWithImage")
+    public List<UserMvcDto> getAllWithImage() throws UserNotFoundException {
+        return userService.getAllMvc();
     }
     @PostMapping("/create")
     public UserDto addNewUser(@RequestBody UserDto dto) throws UserNotFoundException {

@@ -10,13 +10,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PaymentCardDto {
-
-    private Long id;
-
+public class DtoForBalance {
     private String cardNum;
     private Double balance;
-    private LocalDate rdt;
-
-    private User user;
+    private Long user;
 }

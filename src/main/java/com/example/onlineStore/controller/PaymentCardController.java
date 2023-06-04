@@ -1,5 +1,6 @@
 package com.example.onlineStore.controller;
 
+import com.example.onlineStore.dto.DtoForBalance;
 import com.example.onlineStore.dto.PaymentCardDto;
 import com.example.onlineStore.exceptions.PaymentCardNotFoundException;
 import com.example.onlineStore.exceptions.UserNotFoundException;
@@ -18,6 +19,10 @@ public class PaymentCardController {
     @GetMapping("/{id}")
     public PaymentCardDto getById(@PathVariable @Min(1) Long id) throws PaymentCardNotFoundException {
         return paymentCardService.getById(id);
+    }
+    @GetMapping("/balance/{userId}")
+    public DtoForBalance getUserBalance(@PathVariable @Min(1) Long userId) throws PaymentCardNotFoundException {
+        return paymentCardService.getUserBalance(userId);
     }
     @GetMapping("/all")
     public List<PaymentCardDto> getAll() throws PaymentCardNotFoundException {

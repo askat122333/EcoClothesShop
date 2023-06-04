@@ -1,11 +1,14 @@
 package com.example.onlineStore.service.impl;
 
+import com.example.onlineStore.dto.MvcDto.ProductMvcDto;
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.enums.ProductType;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.ProductRepository;
+import com.example.onlineStore.service.CategoryService;
+import com.example.onlineStore.service.DiscountService;
 import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +28,8 @@ import java.util.Set;
 @Slf4j
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final DiscountService discountService;
+    private final CategoryService categoryService;
 
     private ProductDto mapToDto(Product product) {
         return ProductDto.builder()
@@ -38,6 +43,18 @@ public class ProductServiceImpl implements ProductService {
                 .dateAdded(product.getDateAdded())
                 .discount(product.getDiscount())
                 .category(product.getCategory())
+                .build();
+    }
+    private ProductMvcDto mapToDtoWithImage(Product product) {
+        return ProductMvcDto.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .image(product.getImage())
+                .size(product.getSize())
+                .price(product.getPrice())
+                .material(product.getMaterial())
+                .productType(product.getProductType())
+                .dateAdded(product.getDateAdded())
                 .build();
     }
 
@@ -78,8 +95,6 @@ public class ProductServiceImpl implements ProductService {
 public ProductDto create(@Valid ProductDto dto) {
     Product product = Product.builder()
             .name(dto.getName())
-            .discount(dto.getDiscount())
-            .category(dto.getCategory())
             .price(dto.getPrice())
             .dateAdded(LocalDate.now())
             .productType(ProductType.NEW)
@@ -117,6 +132,20 @@ public ProductDto create(@Valid ProductDto dto) {
         return productDtoList;
     }
 
+    @Override
+    public List<ProductMvcDto> getAllMvc() throws ProductNotFoundException {
+        List<Product> productList = productRepository.findAllByRdtIsNull();
+        if (productList.isEmpty()) {
+            log.error("Метод getAll(Product), Exception: В базе нет товаров.");
+            throw new ProductNotFoundException("В базе нет товаров.");
+        }
+        List<ProductMvcDto> productDtoList = new ArrayList<>();
+        for (Product product:productList) {
+            productDtoList.add(mapToDtoWithImage(product));
+        }
+        return productDtoList;
+    }
+
 
     @Override
     @Transactional
@@ -141,10 +170,10 @@ public ProductDto create(@Valid ProductDto dto) {
             product.setMaterial(dto.getMaterial());
         }
         if(dto.getCategory()!=null){
-            product.setCategory(dto.getCategory());
+            product.setCategory(categoryService.getByIdEntity(dto.getCategory().getId()));
         }
         if (dto.getDiscount()!=null){
-            product.setDiscount(dto.getDiscount());
+            product.setDiscount(discountService.getByIdEntity(dto.getDiscount().getId()));
         }
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

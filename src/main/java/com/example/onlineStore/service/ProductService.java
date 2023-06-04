@@ -1,5 +1,6 @@
 package com.example.onlineStore.service;
 
+import com.example.onlineStore.dto.MvcDto.ProductMvcDto;
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
@@ -28,4 +29,6 @@ public interface ProductService {
     String uploadImage(Long productId, MultipartFile file) throws IOException, ProductNotFoundException;
     byte[] getImageById(Long id) throws Exception;
     List<ProductDto> getAllByType() throws ProductNotFoundException;
+
+    List<ProductMvcDto>getAllMvc() throws ProductNotFoundException;
 }
