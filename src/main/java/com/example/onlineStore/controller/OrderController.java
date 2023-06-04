@@ -58,10 +58,4 @@ public class OrderController {
     public PayPalDto getByUserId(@PathVariable Long id){
         return orderService.findByUserId(id);
     }
-    @PostMapping("/quickCreate")
-    public OrderDto quickCreate(@RequestParam("userId") Long userId,
-                                @RequestParam("productId") Long productId,
-                                @RequestParam("address") String address) throws ProductNotFoundException {
-        return orderService.quickCreate(userId,productId,address);
-    }
 }

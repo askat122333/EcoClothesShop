@@ -180,7 +180,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public PayPalDto findByUserId(Long id) {
-        Order order = orderRepository.findByUserId(id);
+        Order order = orderRepository.findByUserIdAndRdtIsNull(id);
         return PayPalDto.builder()
                 .user(order.getUser().getName())
                 .sum(order.getSum())

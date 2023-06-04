@@ -27,7 +27,7 @@ public interface PaymentService {
 
     String deleteById(Long id) throws PaymentNotFoundException;
     String makePayment(Long orderId) throws OrderNotFoundException, UserNotFoundException, PaymentCardNotFoundException;
-    String stripePayment(Long userId , StripeDto dto) throws StripeException;
+    String stripePayment(Long userId , StripeDto dto) throws StripeException, OrderNotFoundException, UserNotFoundException;
     public String addCustomerAndCard(CreateStripeCustomerDto dto) throws StripeException;
 
 }

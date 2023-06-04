@@ -29,5 +29,6 @@ public interface UserService {
     byte[] getImageById(Long id) throws UserNotFoundException;
     String sendEmailToService(String email) throws IOException, UserNotFoundException;
     List<UserMvcDto> getAllMvc() throws UserNotFoundException;
+    com.example.onlineStore.dto.MvcDto.UserMvcDto getByIdWithPhoto(Long id) throws UserNotFoundException;
 
 }

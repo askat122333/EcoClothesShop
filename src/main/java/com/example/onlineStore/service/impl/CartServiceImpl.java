@@ -12,6 +12,7 @@ import com.example.onlineStore.repository.CartRepository;
 import com.example.onlineStore.repository.ProductRepository;
 import com.example.onlineStore.repository.UserRepository;
 import com.example.onlineStore.service.CartService;
+import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final ProductService productService;
 
     public CartDto mapToDto(Cart cart) {
         return CartDto.builder().id(cart.getId())
@@ -208,5 +210,11 @@ public class CartServiceImpl implements CartService {
             cartRepository.save(cart);
             return mapToDto(cart);
         }
+    }
+
+    @Override
+    public CartDto findByUser(Long id) {
+        Cart cart = cartRepository.findByUserId(id);
+        return mapToDto(cart);
     }
 }

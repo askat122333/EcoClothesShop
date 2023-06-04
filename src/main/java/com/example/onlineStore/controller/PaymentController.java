@@ -31,10 +31,10 @@ public class PaymentController {
         return paymentService.makePayment(orderId);
     }
 
-    @PostMapping("/stripe/{id}")
-    public String stripePayment(@PathVariable Long id,
-                                @RequestBody StripeDto dto) throws StripeException {
-        return paymentService.stripePayment(id,dto);
+    @PostMapping("/stripe/{orderId}")
+    public String stripePayment(@PathVariable Long orderId,
+                                @RequestBody StripeDto dto) throws StripeException, OrderNotFoundException, UserNotFoundException {
+        return paymentService.stripePayment(orderId,dto);
     }
     @PutMapping("/addStripeCustomer")
     public String addStripeCustomer(@RequestBody CreateStripeCustomerDto dto) throws StripeException {

@@ -12,7 +12,7 @@ public class UserMvcDto {
     private Long id;
     private String name;
     private String surname;
-    private byte[] image;
+    private byte[] photo;
     private String email;
 
     private Gender gender;

@@ -28,9 +28,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -211,9 +209,23 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-   public String stripePayment(Long userId , StripeDto dto) throws StripeException {
+   public String stripePayment(Long orderId , StripeDto dto) throws StripeException, OrderNotFoundException, UserNotFoundException {
         Stripe.apiKey = "sk_test_51NDXxjGOVlOOV4yQONVbA1UvZMDnrwrSWaTdAAyfXyPNFcdXOywDnmTYUXRF6sEXjDhZl9H7LlFECq5fIiR4g3ec009HqtR6L9";
-        Double orderSum = orderRepository.getOrderSumByUSerId(userId)*100;
+
+        Order order = orderRepository.findByIdAndRdtIsNull(orderId);
+        if(order==null){
+            log.error("Метод makePayment(Payment), Exception: Заказ с id "+orderId+" не найден.");
+            throw new OrderNotFoundException("Заказ с id "+orderId+" не найден.");
+        }
+        User user = order.getUser();
+        if(user==null){
+            log.error("Метод makePayment(Payment), Exception: У данного заказа отсутствует пользователь.");
+            throw new UserNotFoundException("У данного заказа отсутствует пользователь.");
+        }
+
+        Payment payment = order.getPayment();
+
+        Double orderSum = order.getSum()*100;
 
         Integer sum = Double.valueOf(orderSum).intValue();
 
@@ -244,6 +256,16 @@ public class PaymentServiceImpl implements PaymentService {
                     "\nНомер карты: "+last4+
                     "\nСумма: "+(amount/100)+" "+currency+
                     "\nEmail клиента: "+email;
+
+        payment.setSum((double) (sum / 100));
+        payment.setUser(user);
+        payment.setPaymentTime(LocalDate.now());
+        payment.setStatus(PaymentStatus.PAID);
+        payment.setCardNum(last4);
+        payment.setReceipt(response);
+        order.setRdt(LocalDate.now());
+        paymentRepository.save(payment);
+        orderRepository.save(order);
 
             return response;
 

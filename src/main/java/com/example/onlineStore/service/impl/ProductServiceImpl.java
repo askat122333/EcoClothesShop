@@ -37,7 +37,6 @@ public class ProductServiceImpl implements ProductService {
                 .name(product.getName())
                 .size(product.getSize())
                 .price(product.getPrice())
-                .image(product.getImage()) //нужно добавить для фронта
                 .material(product.getMaterial())
                 .productType(product.getProductType())
                 .dateAdded(product.getDateAdded())
@@ -45,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
                 .category(product.getCategory())
                 .build();
     }
-    private ProductMvcDto mapToDtoWithImage(Product product) {
+    public ProductMvcDto mapToDtoWithImage(Product product) {
         return ProductMvcDto.builder()
                 .id(product.getId())
                 .name(product.getName())

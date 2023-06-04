@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService {
         return UserMvcDto.builder()
                 .id(user.getId())
                 .name(user.getName())
-                .surname(user.getSurname())
-                .image(user.getPhoto())
+                .surname(user.getLogin())
+                .photo(user.getPhoto())
                 .email(user.getEmail())
                 .gender(user.getGender())
                 .phone(user.getPhone())
@@ -69,6 +69,17 @@ public class UserServiceImpl implements UserService {
         try {
             User user = userRepository.findByIdAndRdtIsNull(id);
             return mapToDto(user);
+        }catch (NullPointerException e){
+            log.error("Метод getById(user), exception: Пользователь с id "+id+" не найден.");
+            throw new UserNotFoundException("Пользователь с id "+id+" не найден.");
+        }
+
+    }
+    @Override
+    public com.example.onlineStore.dto.MvcDto.UserMvcDto getByIdWithPhoto(Long id) throws UserNotFoundException {
+        try {
+            User user = userRepository.findByIdAndRdtIsNull(id);
+            return mapToDtoWithImage(user);
         }catch (NullPointerException e){
             log.error("Метод getById(user), exception: Пользователь с id "+id+" не найден.");
             throw new UserNotFoundException("Пользователь с id "+id+" не найден.");

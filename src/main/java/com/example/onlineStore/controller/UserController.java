@@ -53,6 +53,11 @@ public class UserController {
     public UserDto getById(@PathVariable @Min(1) Long id) throws UserNotFoundException {
         return userService.getById(id);
     }
+    @GetMapping("/photo/{id}")
+    public UserMvcDto getByIdWithPhoto(@PathVariable Long id) throws UserNotFoundException {
+        return userService.getByIdWithPhoto(id);
+    }
+
     @GetMapping("/all")
     public List<UserDto> getAll() throws UserNotFoundException {
         return userService.getAll();
@@ -87,7 +92,7 @@ public class UserController {
         return userService.resetPassword(email);
     }
     @PostMapping("/upload")
-    public String uploadImage(@RequestParam("productId") Long productId,
+    public String uploadImage(@RequestParam("userId") Long productId,
                               @RequestParam("imageFile") MultipartFile file) throws UserNotFoundException {
         return userService.uploadImage(productId, file);
     }

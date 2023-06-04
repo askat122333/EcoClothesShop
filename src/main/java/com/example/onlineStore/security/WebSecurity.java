@@ -58,15 +58,17 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/user/authenticate","/product/category/{categoryId}",
                         "/user/resetPassword","/user/newPassword/{id}/{token}","/order/byUserId/{id}",
-                        "/cart/findByUser/{id}","/user/create").permitAll()
+                        "/cart/findByUser/{id}","/user/create","/product/allWithImage",
+                        "/user/photo/{id}","/category/{id}","/category/all",
+                        "/user/oauthSuccess","/product/{id}","/product/all").permitAll()
                 .antMatchers("/payment/makePayment","/payment/stripe/{id}," +
                         "/payment/addStripeCustomer",
                         "/paymentCard/create/{userId}","/paymentCard/update/{id}","/paymentCard/delete/{id}",
                         "/order/create","/order/update/{id}","/order/delete/{id}",
                         "/cart/update/**","/cart/addNewProduct","/cart/removeProduct",
                         "/cart/delete/{id}","/order/quickCreate").hasAuthority(Permission.ADMIN_READ.getPermission())
-                .antMatchers(HttpMethod.GET,"/order/{id}","/category/**",
-                        "/cart/{id}","/product/**").hasAuthority(Permission.ADMIN_READ.getPermission())
+                .antMatchers(HttpMethod.GET,"/order/{id}",
+                        "/cart/{id}").hasAuthority(Permission.ADMIN_READ.getPermission())
                 .antMatchers(HttpMethod.GET,"/user/**","/paymentCard/{id}","/paymentCard/all",
                         "/order/all","/discount/**","/cart/all").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
                 .antMatchers(HttpMethod.POST,"/discount/create",

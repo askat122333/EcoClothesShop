@@ -31,4 +31,5 @@ public interface ProductService {
     List<ProductDto> getAllByType() throws ProductNotFoundException;
 
     List<ProductMvcDto>getAllMvc() throws ProductNotFoundException;
+    ProductMvcDto mapToDtoWithImage(Product product);
 }
