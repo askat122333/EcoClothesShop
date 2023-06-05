@@ -3,6 +3,8 @@ package com.example.onlineStore.service;
 import com.example.onlineStore.dto.MvcDto.ProductMvcDto;
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.entity.Product;
+import com.example.onlineStore.exceptions.CategoryNotFoundException;
+import com.example.onlineStore.exceptions.DiscountNotFoundException;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +22,8 @@ public interface ProductService {
 
     ProductDto create(ProductDto dto);
 
-    ProductDto update(Long id,ProductDto dto) throws ProductNotFoundException;
+    ProductDto update(Long id,ProductDto dto/* , Long discountId,Long categoryId*/)
+            throws ProductNotFoundException/*, CategoryNotFoundException, DiscountNotFoundException*/;
 
     String deleteById(Long id) throws ProductNotFoundException;
 
@@ -31,4 +34,6 @@ public interface ProductService {
     List<ProductDto> getAllByType() throws ProductNotFoundException;
 
     List<ProductMvcDto>getAllMvc() throws ProductNotFoundException;
+    ProductDto addCategory(Long productId,Long categoryId);
+    ProductDto addDiscount(Long productId,Long discountId);
 }

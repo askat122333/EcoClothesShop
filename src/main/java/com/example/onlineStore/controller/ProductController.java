@@ -44,9 +44,11 @@ public class ProductController {
         return productService.create(dto);
     }
 
-    @PutMapping("/update/{id}")
-    public ProductDto updateProduct(@PathVariable Long id,
-                                 @RequestBody ProductDto dto) throws ProductNotFoundException {
+    @PutMapping("/update")
+    public ProductDto updateProduct(@RequestParam("productId")@Min(1) Long id,
+                                    @RequestBody ProductDto dto
+                                    /*@RequestParam("discountId")@Min(1) Long discountId,
+                                    @RequestParam("categoryId")@Min(1) Long categoryId*/) throws ProductNotFoundException {
         return productService.update(id,dto);
     }
 
@@ -66,8 +68,21 @@ public class ProductController {
     }
 
 
+
     @GetMapping(value = "/image/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
     public @ResponseBody byte[] getImageById(@PathVariable("id") Long id) throws Exception {
         return productService.getImageById(id);
+    }
+
+    @PostMapping("/addCategory")
+    public ProductDto addCategory(@RequestParam("productId") Long productId,
+                                  @RequestParam("categoryId") Long categoryId){
+        return productService.addCategory(productId,categoryId);
+    }
+
+    @PostMapping("/addDiscount")
+    public ProductDto addDiscount(@RequestParam("productId") Long productId,
+                                  @RequestParam("discountId")Long discountId){
+        return productService.addDiscount(productId,discountId);
     }
 }

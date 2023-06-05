@@ -2,6 +2,8 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.MvcDto.ProductMvcDto;
 import com.example.onlineStore.dto.ProductDto;
+import com.example.onlineStore.entity.Category;
+import com.example.onlineStore.entity.Discount;
 import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.enums.ProductType;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
@@ -145,10 +147,29 @@ public ProductDto create(@Valid ProductDto dto) {
         return productDtoList;
     }
 
+    @Override
+    public ProductDto addCategory(Long productId,Long categoryId){
+        Category category = categoryService.getByIdEntity(categoryId);
+        Product product = getByIdEntity(productId);
+        product.setCategory(category);
+        productRepository.save(product);
+        return mapToDto(product);
+    }
+
+    @Override
+    public ProductDto addDiscount(Long productId,Long discountId) {
+        Discount discount = discountService.getByIdEntity(discountId);
+        Product product = getByIdEntity(productId);
+        product.setDiscount(discount);
+        productRepository.save(product);
+        return mapToDto(product);
+    }
+
 
     @Override
     @Transactional
-    public ProductDto update(Long id,@Valid ProductDto dto) throws ProductNotFoundException {
+    public ProductDto update(Long id,@Valid ProductDto dto/*,Long discountId,Long categoryId*/)
+            throws ProductNotFoundException/*, CategoryNotFoundException, DiscountNotFoundException */{
 
             Product  product = getByIdEntity(id);
             if(product==null){
@@ -169,10 +190,10 @@ public ProductDto create(@Valid ProductDto dto) {
             product.setMaterial(dto.getMaterial());
         }
         if(dto.getCategory()!=null){
-            product.setCategory(categoryService.getByIdEntity(dto.getCategory().getId()));
+            product.setCategory(dto.getCategory());
         }
         if (dto.getDiscount()!=null){
-            product.setDiscount(discountService.getByIdEntity(dto.getDiscount().getId()));
+            product.setDiscount(dto.getDiscount());
         }
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
