@@ -2,9 +2,13 @@ package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.MvcDto.ProductMvcDto;
 import com.example.onlineStore.dto.ProductDto;
+import com.example.onlineStore.dto.SearchDto;
+import com.example.onlineStore.enums.ProductType;
+import com.example.onlineStore.enums.Size;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
+import ognl.ListPropertyAccessor;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +36,10 @@ public class ProductController {
     @GetMapping("/allWithImage")
     public List<ProductMvcDto> getAllMvc() throws ProductNotFoundException {
         return productService.getAllMvc();
+    }
+    @GetMapping("/search")
+    public List<ProductDto> search(@RequestBody SearchDto searchDto){
+       return productService.dynamicSearch(searchDto);
     }
 
     @GetMapping("/getNew")
@@ -74,13 +82,13 @@ public class ProductController {
         return productService.getImageById(id);
     }
 
-    @PostMapping("/addCategory")
+    @PutMapping("/addCategory")
     public ProductDto addCategory(@RequestParam("productId") Long productId,
                                   @RequestParam("categoryId") Long categoryId){
         return productService.addCategory(productId,categoryId);
     }
 
-    @PostMapping("/addDiscount")
+    @PutMapping("/addDiscount")
     public ProductDto addDiscount(@RequestParam("productId") Long productId,
                                   @RequestParam("discountId")Long discountId){
         return productService.addDiscount(productId,discountId);
