@@ -3,7 +3,6 @@ package com.example.onlineStore.service;
 import com.example.onlineStore.dto.OrderDto;
 import com.example.onlineStore.dto.PayPalDto;
 import com.example.onlineStore.entity.Order;
-import com.example.onlineStore.entity.Payment;
 import com.example.onlineStore.exceptions.CartNotFoundException;
 import com.example.onlineStore.exceptions.OrderNotFoundException;
 import com.example.onlineStore.exceptions.ProductNotFoundException;

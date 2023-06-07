@@ -2,7 +2,6 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.CategoryDto;
 import com.example.onlineStore.entity.Category;
-import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.exceptions.CategoryNotFoundException;
 import com.example.onlineStore.exceptions.ValidException;
 import com.example.onlineStore.repository.CategoryRepository;

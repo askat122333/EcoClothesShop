@@ -1,13 +1,13 @@
 package com.example.onlineStore.security;
 
-public class AuthneticationResponse {
+public class AuthenticationResponse {
     private final String jwt;
 
     public String getJwt() {
         return jwt;
     }
 
-    public AuthneticationResponse(String jwt) {
+    public AuthenticationResponse(String jwt) {
         this.jwt = jwt;
     }
 }

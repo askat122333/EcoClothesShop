@@ -4,11 +4,8 @@ import com.example.onlineStore.entity.Category;
 import com.example.onlineStore.entity.Discount;
 import com.example.onlineStore.enums.ProductType;
 import com.example.onlineStore.enums.Size;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.*;
-import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 
 @Getter

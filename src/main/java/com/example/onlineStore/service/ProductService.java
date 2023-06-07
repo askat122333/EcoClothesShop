@@ -4,12 +4,7 @@ import com.example.onlineStore.dto.MvcDto.ProductMvcDto;
 import com.example.onlineStore.dto.ProductDto;
 import com.example.onlineStore.dto.SearchDto;
 import com.example.onlineStore.entity.Product;
-import com.example.onlineStore.enums.ProductType;
-import com.example.onlineStore.enums.Size;
-import com.example.onlineStore.exceptions.CategoryNotFoundException;
-import com.example.onlineStore.exceptions.DiscountNotFoundException;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 

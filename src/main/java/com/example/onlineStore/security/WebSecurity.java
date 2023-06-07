@@ -1,14 +1,12 @@
 package com.example.onlineStore.security;
 
 
-import com.example.onlineStore.enums.Permission;
 import com.example.onlineStore.jwtUtil.JwtRequestFilter;
 import com.example.onlineStore.userDetails.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -62,7 +60,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                         "/user/resetPassword","/user/newPassword/{id}/{token}","/order/byUserId/{id}",
                         "/cart/findByUser/{id}","/user/create","/product/allWithImage",
                         "/user/photo/{id}","/category/{id}","/category/all",
-                        "/user/oauthSuccess","/product/category/{categoryId}","/discount/all","/swagger-ui.html").permitAll()
+                        "/user/oauthSuccess","/product/category/{categoryId}","/discount/all","/swagger-ui.html",
+                        "/product/search").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
@@ -72,7 +71,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/user/logout")
-//                .logoutSuccessUrl("/user/loggedOut") // Specify the URL to redirect to after successful logout
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .and()

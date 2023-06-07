@@ -1,9 +1,8 @@
 package com.example.onlineStore.dto;
 
-import com.example.onlineStore.entity.User;
 import lombok.*;
 
-import java.time.LocalDate;
+
 
 @Getter
 @Setter

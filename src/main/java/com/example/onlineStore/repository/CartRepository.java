@@ -2,7 +2,6 @@ package com.example.onlineStore.repository;
 
 import com.example.onlineStore.entity.Cart;
 import com.example.onlineStore.entity.User;
-import org.apache.catalina.LifecycleState;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

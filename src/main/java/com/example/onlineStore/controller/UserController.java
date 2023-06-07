@@ -5,7 +5,7 @@ import com.example.onlineStore.dto.UserDto;
 import com.example.onlineStore.exceptions.UserNotFoundException;
 import com.example.onlineStore.jwtUtil.JWTUtil;
 import com.example.onlineStore.security.AuthenticationRequest;
-import com.example.onlineStore.security.AuthneticationResponse;
+import com.example.onlineStore.security.AuthenticationResponse;
 import com.example.onlineStore.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class UserController {
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUserName());
         final String jwt = jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthneticationResponse(jwt));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
     @GetMapping("/logout")
     public String logout(){
