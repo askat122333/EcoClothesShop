@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -49,7 +50,16 @@ public class UserController {
         final String jwt = jwtUtil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthneticationResponse(jwt));
     }
+    @GetMapping("/logout")
+    public String logout(){
+        return "logged out";
+    }
+    @GetMapping("/loggedOut")
+    public String loggedOut(){
+        return "logged out";
+    }
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
     public UserDto getById(@PathVariable @Min(1) Long id) throws UserNotFoundException {
         return userService.getById(id);
     }
@@ -59,6 +69,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('admin:update')")
     public List<UserDto> getAll() throws UserNotFoundException {
         return userService.getAll();
     }
@@ -72,11 +83,13 @@ public class UserController {
         return userService.create(dto);
     }
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('admin:read')")
     public UserDto updateUser(@PathVariable Long id,
                               @RequestBody UserDto dto) throws UserNotFoundException {
         return userService.update(id,dto);
     }
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
     public String deleteById(@PathVariable Long id) throws UserNotFoundException {
         return userService.deleteById(id);
     }

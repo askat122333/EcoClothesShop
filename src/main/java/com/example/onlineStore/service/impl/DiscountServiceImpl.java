@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -83,6 +84,7 @@ public class DiscountServiceImpl implements DiscountService {
         return mapToDto(discountRepository.save(discount));
     }
 
+    @Transactional
     @Override
     public DiscountDto update(Long id,@Valid DiscountDto dto) throws DiscountNotFoundException {
         Discount discount = getByIdEntity(id);

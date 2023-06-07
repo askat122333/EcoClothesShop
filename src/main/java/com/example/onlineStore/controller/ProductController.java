@@ -6,10 +6,13 @@ import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.security.PermitAll;
 import javax.validation.constraints.Min;
 import java.io.*;
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
     @GetMapping("/{id}")
+    @PreAuthorize("permitAll()")
     public ProductDto getById(@PathVariable @Min(1) Long id) throws ProductNotFoundException {
         return productService.getById(id);
     }
@@ -40,11 +44,13 @@ public class ProductController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('admin:update')")
     public ProductDto addNewProduct(@RequestBody ProductDto dto){
         return productService.create(dto);
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
     public ProductDto updateProduct(@PathVariable Long id,
                                  @RequestBody ProductDto dto) throws ProductNotFoundException {
         return productService.update(id,dto);
@@ -55,6 +61,7 @@ public class ProductController {
         return productService.getAllByCategory(categoryId);
     }
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
     public String deleteById(@PathVariable Long id) throws ProductNotFoundException {
         return productService.deleteById(id);
     }

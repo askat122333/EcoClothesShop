@@ -4,6 +4,7 @@ import com.example.onlineStore.dto.CategoryDto;
 import com.example.onlineStore.exceptions.CategoryNotFoundException;
 import com.example.onlineStore.service.CategoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,17 +28,20 @@ public class CategoryController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('admin:update')")
     public CategoryDto addNewCategory(@RequestBody CategoryDto dto){
         return categoryService.create(dto);
     }
 
     @PutMapping("/update/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
     public CategoryDto updateCategory(@PathVariable Long id,
                                 @RequestBody CategoryDto dto) throws CategoryNotFoundException {
         return categoryService.update(id,dto);
     }
 
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('admin:update')")
     public String deleteById(@PathVariable Long id) throws CategoryNotFoundException {
         return categoryService.deleteById(id);
     }

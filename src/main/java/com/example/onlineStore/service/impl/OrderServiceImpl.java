@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -100,6 +101,7 @@ public class OrderServiceImpl implements OrderService {
         return mapToDto(order);
     }
 
+    @Transactional
     @Override
     public OrderDto update(Long id,@Valid OrderDto dto) throws OrderNotFoundException {
         Order order = getByIdEntity(id);
@@ -156,6 +158,7 @@ public class OrderServiceImpl implements OrderService {
 
     }
 
+    @Transactional
     @Override
     public OrderDto quickCreate(Long userId, Long productId, String address) throws ProductNotFoundException {
         Order order = new Order();

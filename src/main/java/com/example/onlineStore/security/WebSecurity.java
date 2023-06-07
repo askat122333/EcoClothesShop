@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private UserDetailsServiceImpl userDetailsService;
@@ -56,33 +58,25 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/user/authenticate","/product/category/{categoryId}",
+                .antMatchers("/user/authenticate","/product/all","/product/{id}",
                         "/user/resetPassword","/user/newPassword/{id}/{token}","/order/byUserId/{id}",
                         "/cart/findByUser/{id}","/user/create","/product/allWithImage",
                         "/user/photo/{id}","/category/{id}","/category/all",
-                        "/user/oauthSuccess","/product/{id}","/product/all").permitAll()
-                .antMatchers("/payment/makePayment","/payment/stripe/{id}," +
-                        "/payment/addStripeCustomer",
-                        "/paymentCard/create/{userId}","/paymentCard/update/{id}","/paymentCard/delete/{id}",
-                        "/order/create","/order/update/{id}","/order/delete/{id}",
-                        "/cart/update/**","/cart/addNewProduct","/cart/removeProduct",
-                        "/cart/delete/{id}","/order/quickCreate").hasAuthority(Permission.ADMIN_READ.getPermission())
-                .antMatchers(HttpMethod.GET,"/order/{id}",
-                        "/cart/{id}").hasAuthority(Permission.ADMIN_READ.getPermission())
-                .antMatchers(HttpMethod.GET,"/user/**","/paymentCard/{id}","/paymentCard/all",
-                        "/order/all","/discount/**","/cart/all").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
-                .antMatchers(HttpMethod.POST,"/discount/create",
-                        "/category/create","/product/create","/product/*").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
-                .antMatchers(HttpMethod.DELETE,"/product/delete/**","/user/delete/**","/discount/delete/**",
-                        "/category/delete/**").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
-                .antMatchers(HttpMethod.PUT,"/product/update/**","/user/update/**","/discount/update/**",
-                        "/category/update/**").hasAuthority(Permission.ADMIN_UPDATE.getPermission())
+                        "/user/oauthSuccess","/product/category/{categoryId}","/discount/all","/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
+
                 .and()
                 .oauth2Login()
                 .successHandler(oAuth2AuthenticationSuccessHandler)
                 .failureHandler(oAuth2AuthenticationFailureHandler)
-                .and().httpBasic();
+                .and()
+                .logout()
+                .logoutUrl("/user/logout")
+//                .logoutSuccessUrl("/user/loggedOut") // Specify the URL to redirect to after successful logout
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .and()
+                .httpBasic();
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

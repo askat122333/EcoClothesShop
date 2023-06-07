@@ -26,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.*;
 import java.time.LocalDate;
 import java.util.*;
@@ -162,6 +163,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     }
 
+    @Transactional
     @Override
     public String makePayment( Long orderId) throws OrderNotFoundException, UserNotFoundException, PaymentCardNotFoundException {
         Order order = orderRepository.findByIdAndRdtIsNull(orderId);
@@ -209,6 +211,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
+    @Transactional
    public String stripePayment(Long orderId , StripeDto dto) throws StripeException, OrderNotFoundException, UserNotFoundException {
         Stripe.apiKey = "sk_test_51NDXxjGOVlOOV4yQONVbA1UvZMDnrwrSWaTdAAyfXyPNFcdXOywDnmTYUXRF6sEXjDhZl9H7LlFECq5fIiR4g3ec009HqtR6L9";
 

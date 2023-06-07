@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -81,7 +82,7 @@ public class PaymentCardServiceImpl implements PaymentCardService {
         }
         return paymentCardDtoList;
     }
-
+    @Transactional
     @Override
     public String create(@Valid PaymentCardDto dto, Long userId) throws UserNotFoundException {
         User user = userRepository.findByIdAndRdtIsNull(userId);
@@ -117,6 +118,7 @@ public class PaymentCardServiceImpl implements PaymentCardService {
         }
     }
 
+    @Transactional
     @Override
     public PaymentCardDto update(Long id,@Valid PaymentCardDto dto) throws PaymentCardNotFoundException {
         PaymentCard paymentCard = getByIdEntity(id);

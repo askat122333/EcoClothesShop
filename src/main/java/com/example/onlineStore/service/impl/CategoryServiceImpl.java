@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -85,6 +86,7 @@ public class CategoryServiceImpl implements CategoryService {
        return mapToDto(categoryRepository.save(category));
     }
 
+    @Transactional
     @Override
     public CategoryDto update(Long id,@Valid CategoryDto dto) throws CategoryNotFoundException {
         Category category = getByIdEntity(id);

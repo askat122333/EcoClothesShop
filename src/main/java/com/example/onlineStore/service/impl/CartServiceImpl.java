@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class CartServiceImpl implements CartService {
         }
         return mapToDto(cartRepository.save(cart));
     }
-
+    @Transactional
     @Override
     public CartDto update(Long id, @Valid CartDto dto) throws CartNotFoundException {
         Cart cart = getByIdEntity(id);
@@ -144,7 +145,7 @@ public class CartServiceImpl implements CartService {
 
     }
 
-
+    @Transactional
     @Override
     public CartDto addNewProduct(Long userId, Long productId) throws UserNotFoundException, CartNotFoundException {
         User user = userRepository.findByIdAndRdtIsNull(userId);
@@ -186,6 +187,7 @@ public class CartServiceImpl implements CartService {
         return sum;
     }
 
+    @Transactional
     @Override
     public CartDto removeProduct(Long userId, Long productId) throws CartNotFoundException {
         Cart cart = cartRepository.findByUserAndRdtIsNull(userRepository.findByIdAndRdtIsNull(userId));
