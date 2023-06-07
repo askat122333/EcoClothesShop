@@ -2,6 +2,9 @@ package com.example.onlineStore.service.impl;
 
 import com.example.onlineStore.dto.MvcDto.ProductMvcDto;
 import com.example.onlineStore.dto.ProductDto;
+import com.example.onlineStore.dto.SearchDto;
+import com.example.onlineStore.entity.Category;
+import com.example.onlineStore.entity.Discount;
 import com.example.onlineStore.entity.Product;
 import com.example.onlineStore.enums.ProductType;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
@@ -15,6 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import javax.validation.*;
 import java.io.IOException;
@@ -28,6 +37,8 @@ import java.util.Set;
 @Slf4j
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+
+    private final EntityManager entityManager;
     private final DiscountService discountService;
     private final CategoryService categoryService;
 
@@ -145,10 +156,72 @@ public ProductDto create(@Valid ProductDto dto) {
         return productDtoList;
     }
 
+    @Override
+    public ProductDto addCategory(Long productId,Long categoryId){
+        Category category = categoryService.getByIdEntity(categoryId);
+        Product product = getByIdEntity(productId);
+        product.setCategory(category);
+        productRepository.save(product);
+        return mapToDto(product);
+    }
+
+    @Override
+    public ProductDto addDiscount(Long productId,Long discountId) {
+        Discount discount = discountService.getByIdEntity(discountId);
+        Product product = getByIdEntity(productId);
+        product.setDiscount(discount);
+        productRepository.save(product);
+        return mapToDto(product);
+    }
+
+    @Override
+    public List<ProductDto> dynamicSearch(SearchDto searchDto) {
+
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Product> query = cb.createQuery(Product.class);
+        Root<Product> root = query.from(Product.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (searchDto.getMaterial() != null) {
+            predicates.add(cb.equal(root.get("material"), searchDto.getMaterial()));
+        }
+
+        if (searchDto.getName() != null) {
+            predicates.add(cb.equal(root.get("name"), searchDto.getName()));
+        }
+
+        if (searchDto.getPrice() != null) {
+            predicates.add(cb.equal(root.get("price"), searchDto.getPrice()));
+        }
+
+        if (searchDto.getSize() != null) {
+            predicates.add(cb.equal(root.get("size"), searchDto.getSize()));
+        }
+
+        if (searchDto.getCategoryId() != null) {
+            predicates.add(cb.equal(root.get("category"), categoryService.getByIdEntity(searchDto.getCategoryId())));
+        }
+
+        if (searchDto.getDiscountId() != null) {
+            predicates.add(cb.equal(root.get("discount"), discountService.getByIdEntity(searchDto.getDiscountId())));
+        }
+
+        query.where(predicates.toArray(new Predicate[0]));
+
+        TypedQuery<Product> typedQuery = entityManager.createQuery(query);
+        List<ProductDto> productDtoList = new ArrayList<>();
+        for (Product product:typedQuery.getResultList()) {
+            productDtoList.add(mapToDto(product));
+        }
+        return productDtoList;
+    }
+
 
     @Override
     @Transactional
-    public ProductDto update(Long id,@Valid ProductDto dto) throws ProductNotFoundException {
+    public ProductDto update(Long id,@Valid ProductDto dto)
+            throws ProductNotFoundException{
 
             Product  product = getByIdEntity(id);
             if(product==null){
@@ -169,10 +242,10 @@ public ProductDto create(@Valid ProductDto dto) {
             product.setMaterial(dto.getMaterial());
         }
         if(dto.getCategory()!=null){
-            product.setCategory(categoryService.getByIdEntity(dto.getCategory().getId()));
+            product.setCategory(dto.getCategory());
         }
         if (dto.getDiscount()!=null){
-            product.setDiscount(discountService.getByIdEntity(dto.getDiscount().getId()));
+            product.setDiscount(dto.getDiscount());
         }
 
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

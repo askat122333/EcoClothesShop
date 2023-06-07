@@ -2,9 +2,13 @@ package com.example.onlineStore.controller;
 
 import com.example.onlineStore.dto.MvcDto.ProductMvcDto;
 import com.example.onlineStore.dto.ProductDto;
+import com.example.onlineStore.dto.SearchDto;
+import com.example.onlineStore.enums.ProductType;
+import com.example.onlineStore.enums.Size;
 import com.example.onlineStore.exceptions.ProductNotFoundException;
 import com.example.onlineStore.service.ProductService;
 import lombok.AllArgsConstructor;
+import ognl.ListPropertyAccessor;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +27,6 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
     @GetMapping("/{id}")
-    @PreAuthorize("permitAll()")
     public ProductDto getById(@PathVariable @Min(1) Long id) throws ProductNotFoundException {
         return productService.getById(id);
     }
@@ -36,6 +39,10 @@ public class ProductController {
     @GetMapping("/allWithImage")
     public List<ProductMvcDto> getAllMvc() throws ProductNotFoundException {
         return productService.getAllMvc();
+    }
+    @GetMapping("/search")
+    public List<ProductDto> search(@RequestBody SearchDto searchDto){
+       return productService.dynamicSearch(searchDto);
     }
 
     @GetMapping("/getNew")
@@ -76,5 +83,17 @@ public class ProductController {
     @GetMapping(value = "/image/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
     public @ResponseBody byte[] getImageById(@PathVariable("id") Long id) throws Exception {
         return productService.getImageById(id);
+    }
+
+    @PutMapping("/addCategory")
+    public ProductDto addCategory(@RequestParam("productId") Long productId,
+                                  @RequestParam("categoryId") Long categoryId){
+        return productService.addCategory(productId,categoryId);
+    }
+
+    @PutMapping("/addDiscount")
+    public ProductDto addDiscount(@RequestParam("productId") Long productId,
+                                  @RequestParam("discountId")Long discountId){
+        return productService.addDiscount(productId,discountId);
     }
 }
